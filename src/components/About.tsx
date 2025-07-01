@@ -20,12 +20,12 @@ const About = () => {
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-16">
             {/* Top Row - Image and Bio Text Side by Side */}
-            <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left - Profile Image */}
-              <div className="flex justify-center">
-                <div className="bg-gradient-to-br from-emerald-500 to-blue-500 rounded-2xl p-1 w-full max-w-sm">
+              <div className="flex justify-center lg:justify-end">
+                <div className="bg-gradient-to-br from-emerald-500 to-blue-500 rounded-2xl p-1 w-full max-w-md">
                   <div className="bg-gray-800 rounded-2xl p-8 h-full flex flex-col justify-center">
                     <img
                       src="/1738873701763.jpeg"
@@ -44,8 +44,8 @@ const About = () => {
               </div>
 
               {/* Right - Bio Text */}
-              <div className="flex justify-center">
-                <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-sm h-full flex items-center">
+              <div className="flex justify-center lg:justify-start">
+                <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
                     I'm a passionate software engineering student studying Computer Science and Economics, combining   
                     technical skills with economic insight to solve real-world problems. With experience in full-stack 
@@ -58,10 +58,10 @@ const About = () => {
 
             {/* Bottom Row - Stats Grid (Full Width) */}
             <div className="flex justify-center">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl w-full">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full">
                 {stats.map((stat, index) => (
-                  <div key={index} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 text-center hover:from-gray-700 hover:to-gray-800 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl group aspect-square flex flex-col justify-center">
-                    <div className="text-3xl font-bold text-emerald-400 mb-2 group-hover:text-emerald-300 transition-colors duration-200">
+                  <div key={index} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 text-center hover:from-gray-700 hover:to-gray-800 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl group aspect-square flex flex-col justify-center">
+                    <div className="text-3xl font-bold text-emerald-400 mb-3 group-hover:text-emerald-300 transition-colors duration-200">
                       {stat.value}
                     </div>
                     <div className="text-sm text-gray-400 font-medium">
