@@ -16,7 +16,7 @@ const About = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Passionate about transforming ideas into impactful solutions ☻
+              I love smiley faces :) 
             </p>
           </div>
 
