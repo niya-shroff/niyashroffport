@@ -49,9 +49,10 @@ const About = () => {
                   <p className="text-gray-300 leading-relaxed text-lg">
                     My academic background in Computer Science and Economics has given me the skills to analyze 
                     complex problems and develop practical, tech-driven solutions. I’m driven by a desire to learn, 
-                    adapt, and create meaningful impact, whether by improving systems, driving efficiency, or helping 
-                    others. With a strong belief in the power of innovation, I’m committed to using my knowledge to 
-                    make a lasting difference in the world.
+                    adapt, and make a meaningful impact—whether through improving systems, boosting efficiency, or 
+                    helping others. Outside of my studies, I enjoy writing poetry and making films, which allows me to 
+                    express my creativity and think outside the box. With a deep belief in the power of innovation, 
+                    I’m dedicated to using my skills to make a lasting difference
                   </p>
                 </div>
               </div>
