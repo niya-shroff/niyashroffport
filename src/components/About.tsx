@@ -44,7 +44,7 @@ const About = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
-I recently graduated with two Bachelor's degrees in Computer Science and Economics, equipping me with the skills to tackle practical problems through tech-driven solutions. Beyond my studies, writing poetry and making films nurture my creativity, allowing me to think beyond conventional boundaries. This unique blend of technical expertise and artistic vision empowers me to drive innovation and create a lasting impact.       
+I recently graduated with two Bachelor's degrees in Computer Science and Economics from UMass Amherst. Besides coding and following the market, I love writing poetry, photography, and filmmaking. My unique blend of technical expertise and artistic vision empowers me to drive innovation and create a lasting impact. P.S. I love all smiley faces! ☻        
                   </p>
                 </div>
               </div>
