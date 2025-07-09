@@ -47,12 +47,11 @@ const About = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
-                    As a recent graduate in Economics and Computer Science, I approach every challenge with curiosity, 
-                    optimism, and determination. My academic background has given me the skills to analyze complex 
-                    problems and develop practical, tech-driven solutions. I’m driven by a desire to learn, adapt, and 
-                    create meaningful impact, whether by improving systems, driving efficiency, or helping others. 
-                    With a strong belief in the power of innovation, I’m committed to using my knowledge to make a 
-                    lasting difference in the world.
+                    My academic background in Computer Science and Economics has given me the skills to analyze 
+                    complex problems and develop practical, tech-driven solutions. I’m driven by a desire to learn, 
+                    adapt, and create meaningful impact, whether by improving systems, driving efficiency, or helping 
+                    others. With a strong belief in the power of innovation, I’m committed to using my knowledge to 
+                    make a lasting difference in the world.
                   </p>
                 </div>
               </div>
