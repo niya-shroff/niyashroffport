@@ -82,7 +82,7 @@ const Hero = () => {
           
           {/* Title */}
           <h2 className="text-2xl md:text-3xl text-gray-300 mb-6 animate-slide-up-delayed">
-            Software Engineer ☻ 
+            Software Engineer 
           </h2>
           
           {/* Description */}
