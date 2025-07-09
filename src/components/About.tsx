@@ -15,9 +15,6 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              I love smiley faces ☻ 
-            </p>
           </div>
 
           <div className="space-y-16">
