@@ -126,7 +126,7 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Let's Connect ☻ </h3>
+                <h3 className="text-2xl font-bold text-white mb-6">Let's Connect </h3>
                 <p className="text-gray-300 leading-relaxed mb-8">
                   Whether you have a project in mind, want to collaborate, or just want to say hello, 
                   I'd love to hear from you. Feel free to reach out through any of the channels below.
