@@ -4,6 +4,20 @@ import { Calendar, MapPin, Building, GraduationCap, Award, Users, ExternalLink, 
 const Experience = () => {
   const experiences = [
     {
+      title: 'Software Engineer',
+      company: 'JPMorgan Chase & Co.',
+      location: 'Jersey City, NJ',
+      period: 'Jul 2025 - Present',
+      type: 'Full-time',
+      description: 'Full-stack software engineer within the Asset & Wealth Management Line of Business, developing enterprise-level financial applications and contributing to critical business systems.',
+      achievements: [
+        'Developing scalable full-stack applications using modern technologies',
+        'Contributing to enterprise-level financial software solutions',
+        'Collaborating with cross-functional teams on high-impact projects'
+      ],
+      technologies: ['Fullstack Development', 'GraphQL', 'Java', 'React', 'Python']
+    },
+    {
       title: 'Sales Specialist',
       company: 'Apple',
       location: 'Holyoke, MA',
