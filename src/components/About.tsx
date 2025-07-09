@@ -48,9 +48,8 @@ const About = () => {
                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
                     My academic background in Computer Science and Economics has given me the skills to analyze 
-                    complex problems and develop practical, tech-driven solutions. I’m driven by a desire to learn, 
-                    adapt, and make a meaningful impact—whether through improving systems, boosting efficiency, or 
-                    helping others. Outside of my studies, I enjoy writing poetry and making films, which allows me to 
+                    complex problems and develop practical, tech-driven solutions. Outside of my studies, I enjoy 
+                    writing poetry and making films, which allows me to 
                     express my creativity and think outside the box. With a deep belief in the power of innovation, 
                     I’m dedicated to using my skills to make a lasting difference
                   </p>
