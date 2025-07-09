@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             {/* Brand */}
             <div>
-              <h3 className="text-2xl font-bold text-emerald-400 mb-4">Niya Shroff</h3>
+              <h3 className="text-2xl font-bold text-emerald-400 mb-4">Niya Shroff ☻ </h3>
               <p className="text-gray-400 leading-relaxed">
                 Software Engineer specializing in full-stack development 
                 and innovative technology solutions.
