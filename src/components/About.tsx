@@ -47,10 +47,7 @@ const About = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
-
-                    My academic background in Computer Science and Economics has equipped me with the ability 
-                    to analyze complex problems and devise practical, tech-driven solutions. Beyond coding, I have a deep passion for writing poetry and filmmaking, which allow me to channel my creativity and approach challenges from unique perspectives. This blend of technical expertise and artistic expression makes me a multifaceted individual, poised to drive innovation, create meaningful change, and leave a lasting impact.
-                  </p>
+I recently graduated with degrees in Computer Science and Economics, equipping me with the skills to tackle complex problems through tech-driven solutions. My passion for poetry and filmmaking nurtures my creativity, allowing me to think beyond conventional boundaries. This unique blend of technical expertise and artistic vision empowers me to drive innovation and create lasting impact.
                 </div>
               </div>
             </div>
