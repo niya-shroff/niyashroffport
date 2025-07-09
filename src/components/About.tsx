@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Coffee, Heart, MapPin, GraduationCap, Brain, TrendingUp, Lightbulb, BookOpen, Calculator, Users, BarChart } from 'lucide-react';
+import { Code, Coffee, Heart, MapPin, , Brain, TrendingUp, Lightbulb, BookOpen, Calculator, Users, BarChart } from 'lucide-react';
 
 const About = () => {
   const stats = [
