@@ -1,11 +1,12 @@
 import React from 'react';
-import { Code, Coffee, Heart, MapPin, , Brain, TrendingUp, Lightbulb, BookOpen, Calculator, Users, BarChart } from 'lucide-react';
+import { Code, Coffee, Heart, MapPin, GraduationCap, Brain, TrendingUp, Lightbulb, BookOpen, Calculator, Users, BarChart } from 'lucide-react';
 
 const About = () => {
   const stats = [
     { label: 'Years Experience', value: '1+' },
     { label: 'Projects Completed', value: '5+' },
     { label: 'Technologies', value: '15+' },
+    { label: 'Ideas Implemented', value: '20+' },
   ];
 
   return (
