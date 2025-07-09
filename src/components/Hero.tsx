@@ -98,7 +98,7 @@ const Hero = () => {
               href="#projects"
               className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
             >
-              View My Work ☻ 
+              View My Work 
             </a>
           </div>
 
