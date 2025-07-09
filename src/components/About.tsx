@@ -6,7 +6,6 @@ const About = () => {
     { label: 'Years Experience', value: '1+' },
     { label: 'Projects Completed', value: '5+' },
     { label: 'Technologies', value: '15+' },
-    { label: 'Ideas Implemented', value: '20+' },
   ];
 
   return (
