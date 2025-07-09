@@ -14,7 +14,7 @@ const About = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">About Me ☻ </h2>
           </div>
 
           <div className="space-y-16">
@@ -30,7 +30,7 @@ const About = () => {
                       className="w-48 h-48 rounded-full mx-auto object-cover mb-6 shadow-2xl"
                     />
                     <div className="text-center">
-                      <h3 className="text-xl font-semibold text-white mb-2">Niya Shroff</h3>
+                      <h3 className="text-xl font-semibold text-white mb-2">Niya Shroff ☻ </h3>
                       <p className="text-emerald-400 mb-4 flex items-center justify-center gap-2">
                         <MapPin size={16} />
                         New York, NY
