@@ -77,12 +77,12 @@ const Hero = () => {
           
           {/* Name */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-slide-up">
-            Niya Shroff
+            Niya Shroff ☻ 
           </h1>
           
           {/* Title */}
           <h2 className="text-2xl md:text-3xl text-gray-300 mb-6 animate-slide-up-delayed">
-            Software Engineer
+            Software Engineer ☻ 
           </h2>
           
           {/* Description */}
