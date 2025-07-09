@@ -29,7 +29,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="text-2xl font-bold text-emerald-400">
-            Niya Shroff
+            Niya Shroff ☻ 
           </div>
 
           {/* Desktop Navigation */}
