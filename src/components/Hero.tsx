@@ -88,7 +88,7 @@ const Hero = () => {
           {/* Description */}
           <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
             I transform ideas into reality through code, blending technical expertise with creative problem-solving. 
-            Specializing in full-stack development, AI innovation, and strategic thinking, I craft solutions that 
+            Specializing in full-stack development, project management, and strategic thinking, I craft solutions that 
             don't just work—they inspire and revolutionize how we interact with technology.
           </p>
           
