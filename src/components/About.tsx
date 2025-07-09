@@ -47,10 +47,8 @@ const About = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
-                    I studied Computer Science and Economics at UMass Amherst and graduated in December 2024. I
-                    aim to combine my technical skills with economic insights to solve real-world problems. I approach 
-                    every challenge with curiosity, optimism, and determination in order to help others and truly make 
-                    a lasting impact.
+                    I approach every challenge with curiosity, optimism, and determination in order to help others and 
+                    truly make a lasting impact.
                   </p>
                 </div>
               </div>
