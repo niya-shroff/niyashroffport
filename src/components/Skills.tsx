@@ -95,9 +95,9 @@ const Skills = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Skills & Expertise</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">Technical Skills ☻ </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              A comprehensive overview of my technical skills and proficiency levels
+              A comprehensive overview of my technical abilities and proficiency levels
             </p>
           </div>
 

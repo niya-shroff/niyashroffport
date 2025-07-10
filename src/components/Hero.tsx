@@ -77,18 +77,18 @@ const Hero = () => {
           
           {/* Name */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-slide-up">
-            Niya Shroff
+            Niya Shroff ☻ 
           </h1>
           
           {/* Title */}
           <h2 className="text-2xl md:text-3xl text-gray-300 mb-6 animate-slide-up-delayed">
-            Software Developer & Thinking Enthusiast
+            Software Engineer 
           </h2>
           
           {/* Description */}
           <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
             I transform ideas into reality through code, blending technical expertise with creative problem-solving. 
-            Specializing in full-stack development, AI innovation, and strategic thinking, I craft solutions that 
+            Specializing in full-stack development, project management, and strategic thinking, I craft solutions that 
             don't just work—they inspire and revolutionize how we interact with technology.
           </p>
           
@@ -98,7 +98,7 @@ const Hero = () => {
               href="#projects"
               className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
             >
-              View My Work
+              View My Work 
             </a>
           </div>
 

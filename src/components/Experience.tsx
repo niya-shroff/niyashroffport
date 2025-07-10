@@ -4,6 +4,20 @@ import { Calendar, MapPin, Building, GraduationCap, Award, Users, ExternalLink, 
 const Experience = () => {
   const experiences = [
     {
+      title: 'Software Engineer',
+      company: 'JPMorgan Chase & Co.',
+      location: 'Jersey City, NJ',
+      period: 'Jul 2025 - Present',
+      type: 'Full-time',
+      description: 'Full-stack software engineer within the Asset & Wealth Management Line of Business, developing enterprise-level financial applications and contributing to critical business systems.',
+      achievements: [
+        'Developing scalable full-stack applications using modern technologies',
+        'Contributing to enterprise-level financial software solutions',
+        'Collaborating with cross-functional teams on high-impact projects'
+      ],
+      technologies: ['Fullstack Development', 'GraphQL', 'Java', 'React', 'Python']
+    },
+    {
       title: 'Sales Specialist',
       company: 'Apple',
       location: 'Holyoke, MA',
@@ -188,7 +202,7 @@ const Experience = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Experience</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">Experience ☻ </h2>
             <p className="text-gray-400 text-lg">
               My professional journey and educational background
             </p>

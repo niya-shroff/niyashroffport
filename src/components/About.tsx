@@ -14,10 +14,7 @@ const About = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Passionate about transforming ideas into impactful solutions ☻
-            </p>
+            <h2 className="text-4xl font-bold text-white mb-4">About Me ☻ </h2>
           </div>
 
           <div className="space-y-16">
@@ -33,7 +30,7 @@ const About = () => {
                       className="w-48 h-48 rounded-full mx-auto object-cover mb-6 shadow-2xl"
                     />
                     <div className="text-center">
-                      <h3 className="text-xl font-semibold text-white mb-2">Niya Shroff</h3>
+                      <h3 className="text-xl font-semibold text-white mb-2">Niya Shroff ☻ </h3>
                       <p className="text-emerald-400 mb-4 flex items-center justify-center gap-2">
                         <MapPin size={16} />
                         New York, NY
@@ -47,10 +44,7 @@ const About = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
-                    I'm a passionate software engineering student studying Computer Science and Economics, combining   
-                    technical skills with economic insight to solve real-world problems. With experience in full-stack 
-                    development, AI, and business analytics, I approach every challenge with curiosity, optimism ☻, and a 
-                    drive to grow, learn, and make a lasting impact.
+I recently graduated with two Bachelor's degrees in Computer Science and Economics from UMass Amherst. Besides coding and following the market, I love writing poetry, photography, and filmmaking, which I aim to share through my creaive venture SmileWithMeProductions. My unique blend of technical expertise and artistic vision empowers me to drive innovation and create a lasting impact. Btw, I adore smiley faces! ☻        
                   </p>
                 </div>
               </div>
