@@ -44,7 +44,7 @@ const About = () => {
               <div className="flex justify-center lg:justify-start">
                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                   <p className="text-gray-300 leading-relaxed text-lg">
-I recently graduated with two Bachelor's degrees in Computer Science and Economics from UMass Amherst. Besides coding and following the market, I love writing poetry, photography, and filmmaking, which I aim to share through my creaive venture SmileWithMeProductions. My unique blend of technical expertise and artistic vision empowers me to drive innovation and create a lasting impact. Btw, I adore smiley faces! ☻        
+I recently graduated with two Bachelor's degrees in Computer Science and Economics from UMass Amherst. Beyond coding and market analysis, I'm passionate about visual storytelling through my creative venture <span className="text-yellow-400 font-medium">SmileWithMeProductions</span> — combining poetry, photography, and filmmaking. This unique blend of technical expertise and artistic vision empowers me to create solutions that don't just function, but inspire and connect. Btw, I adore smiley faces! ☻        
                   </p>
                 </div>
               </div>

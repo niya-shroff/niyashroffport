@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import CreativeProjects from './components/CreativeProjects';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -40,12 +41,13 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-white film-grain">
       <Header />
       <Hero />
       <About />
       <Skills />
       <Projects />
+      <CreativeProjects />
       <Experience />
       <Contact />
       <Footer />

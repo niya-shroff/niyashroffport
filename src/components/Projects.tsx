@@ -81,13 +81,16 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gray-800">
+    <section id="projects" className="py-20 bg-gray-800 relative">
+      {/* Cinematic lighting effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-500/5 to-transparent"></div>
+      
       <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Featured Projects ☻ </h2>
+            <h2 className="text-4xl font-bold text-white mb-4">Technical Projects ☻</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              A showcase of my recent work and contributions to various projects
+              A showcase of my technical work and software development projects
             </p>
           </div>
 

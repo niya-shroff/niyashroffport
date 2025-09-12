@@ -36,6 +36,11 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
+                  <a href="#creative" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                    Creative
+                  </a>
+                </li>
+                <li>
                   <a href="#experience" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
                     Experience
                   </a>
@@ -53,10 +58,11 @@ const Footer = () => {
               <h4 className="text-white font-medium mb-4">Expertise</h4>
               <ul className="space-y-2 text-gray-400">
                 <li>Full Stack Development</li>
+                <li>Creative Direction</li>
                 <li>Data Analysis</li>
-                <li>Web Applications</li>
+                <li>Photography & Film</li>
                 <li>Project Management</li>
-                <li>Technical Consulting</li>
+                <li>Visual Storytelling</li>
               </ul>
             </div>
           </div>

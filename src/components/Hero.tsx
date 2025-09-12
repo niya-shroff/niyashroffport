@@ -53,7 +53,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative cinematic-vignette spotlight">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-blue-500" 
@@ -87,9 +87,9 @@ const Hero = () => {
           
           {/* Description */}
           <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
-            I transform ideas into reality through code, blending technical expertise with creative problem-solving. 
-            Specializing in full-stack development, project management, and strategic thinking, I craft solutions that 
-            don't just work—they inspire and revolutionize how we interact with technology.
+            I transform ideas into reality through code and creativity, blending technical expertise with artistic vision. 
+            From full-stack development to filmmaking through <span className="text-yellow-400 font-medium">SmileWithMeProductions</span>, 
+            I craft solutions and stories that don't just work—they inspire and connect.
           </p>
           
           {/* CTA */}
