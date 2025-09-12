@@ -127,7 +127,7 @@ const Experience = () => {
 
   const education = [
     {
-      degree: 'BS in Computer Science & BA in Economics (Dual Degree)',
+      degree: 'B.S. in Computer Science & B.A. in Economics (Dual Degree)',
       school: 'University of Massachusetts Amherst',
       location: 'Amherst, MA',
       period: 'December 2024',
