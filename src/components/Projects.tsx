@@ -140,7 +140,6 @@ const Projects = () => {
                       <GitFork size={16} />
                       <span>{project.forks}</span>
                     </div>
-                    <span className="text-gray-500">Click to view code</span>
                   </div>
                 </div>
               </a>
