@@ -138,6 +138,8 @@ const Experience = () => {
         'Project Management', 
         'Game Theory',
         'Econometrics',
+        'Project Management',
+        'Software Engineering',
         'Algorithms',
         'Data Structures',
         'Programming Methods'
@@ -145,13 +147,13 @@ const Experience = () => {
       activities: [
         {
           title: 'Philosophy & Open Thought Club Vice-President',
-          description: 'Working with the E-Board to plan events for 60+ club members',
+          description: 'Worked with the E-Board to plan events for 60+ club members',
           details: 'Treasurer → Vice President: Managing club funds and running club meetings'
         },
         {
           title: 'Zoola Women\'s Ultimate Frisbee Team',
-          description: 'Playing on the team and part of the fundraising group',
-          details: 'Active team member contributing to both athletic performance and financial sustainability'
+          description: 'Played on the team and was a part of the fundraising group',
+          details: 'Met a lot lovely people and developed a newfound appreciation for the sport'
         }
       ]
     },
@@ -160,26 +162,31 @@ const Experience = () => {
       school: 'Chelmsford High School',
       location: 'Chelmsford, MA',
       period: 'June 2021',
-      description: 'Graduated with excellence while maintaining active involvement in leadership roles, athletics, and academic clubs.',
+      description: 'Took numerous Honors and AP classes which meant lots of late nights studying and working on projects. Graduated with high honors though, so maybe it was worth it?! Find out in the next chapter above.',
       activities: [
         {
+          title: 'Founder of Care Cardz',
+          description: 'Founded a nonprofit organization to spread joy in the community through handwritten cards',
+          details: 'Worked with 6 major sponsors to send out 1k+ cards to healthcare workers, first responders, and more'
+        },
+        {
           title: 'Co-Founder/Co-President of Philosophy Club',
-          description: 'Founded and led philosophical discussions and debates',
-          details: 'Established club from inception and grew membership through engaging programming'
+          description: 'Led philosophical discussions and organized events for club members',
+          details: 'Established club from inception and grew membership through engaging discussions'
         },
         {
           title: 'Varsity Track & Field Athlete',
-          description: 'Competed at varsity level while maintaining academic excellence',
-          details: 'Balanced rigorous training schedule with academic commitments'
+          description: 'Competed at varsity level while balancing schoolwork',
+          details: 'Ran at state-level meets and contributed to team success'
         },
         {
           title: 'Co-Treasurer of Student Council',
           description: 'Managed student government finances and budget allocation',
-          details: 'Responsible for financial oversight and budget planning for school events'
+          details: 'Responsible for financial oversight and budget planning for events'
         },
         {
           title: 'TED-Ed Club Member',
-          description: 'Participated in educational discussions and presentations',
+          description: 'Delivered a Ted-Ed style talk on the American Education System',
           details: 'Engaged with innovative ideas and educational content'
         }
       ]
