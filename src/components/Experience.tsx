@@ -127,33 +127,29 @@ const Experience = () => {
 
   const education = [
     {
-      degree: 'Bachelor of Science in Computer Science & Bachelor of Arts in Economics',
+      degree: 'BS in Computer Science & BA in Economics (Dual Degree)',
       school: 'University of Massachusetts Amherst',
       location: 'Amherst, MA',
       period: 'December 2024',
       honors: 'Magna Cum Laude',
-      description: 'Dual degree program combining computer science fundamentals with economic theory and analysis. Comprehensive coursework in both technical and analytical disciplines.',
+      description: 'Completed two Bachelor\'s degrees simultaneously, combining technical computer science expertise with economic analysis and theory.',
       courses: [
         'Artificial Intelligence',
-        'Project Management', 
+        'Software Engineering',
+        'Algorithms & Data Structures',
         'Game Theory',
         'Econometrics',
-        'Project Management',
-        'Software Engineering',
-        'Algorithms',
-        'Data Structures',
-        'Programming Methods'
+        'Programming Methods',
+        'Project Management'
       ],
       activities: [
         {
           title: 'Philosophy & Open Thought Club Vice-President',
-          description: 'Worked with the E-Board to plan events for 60+ club members',
-          details: 'Treasurer → Vice President: Managing club funds and running club meetings'
+          description: 'Led E-Board planning events for 60+ members, progressed from Treasurer to Vice President'
         },
         {
           title: 'Zoola Women\'s Ultimate Frisbee Team',
-          description: 'Played on the team and was a part of the fundraising group',
-          details: 'Met a lot lovely people and developed a newfound appreciation for the sport'
+          description: 'Team member and fundraising coordinator'
         }
       ]
     },
@@ -162,32 +158,27 @@ const Experience = () => {
       school: 'Chelmsford High School',
       location: 'Chelmsford, MA',
       period: 'June 2021',
-      description: 'Took numerous Honors and AP classes which meant lots of late nights studying and working on projects. Graduated with high honors though, so maybe it was worth it?! Find out in the next chapter above.',
+      description: 'Graduated with high honors after completing numerous Honors and AP courses.',
       activities: [
         {
           title: 'Founder of Care Cardz',
-          description: 'Founded a nonprofit organization to spread joy in the community through handwritten cards',
-          details: 'Worked with 6 major sponsors to send out 1k+ cards to healthcare workers, first responders, and more'
+          description: 'Founded nonprofit organization, partnered with 6 sponsors to distribute 1,000+ cards to healthcare workers and first responders'
         },
         {
           title: 'Co-Founder/Co-President of Philosophy Club',
-          description: 'Led philosophical discussions and organized events for club members',
-          details: 'Established club from inception and grew membership through engaging discussions'
+          description: 'Established club from inception, led discussions and grew membership'
         },
         {
           title: 'Varsity Track & Field Athlete',
-          description: 'Competed at varsity level while balancing schoolwork',
-          details: 'Ran at state-level meets and contributed to team success'
+          description: 'Competed at state-level meets while maintaining academic excellence'
         },
         {
           title: 'Co-Treasurer of Student Council',
-          description: 'Managed student government finances and budget allocation',
-          details: 'Responsible for financial oversight and budget planning for events'
+          description: 'Managed student government finances and event budget planning'
         },
         {
           title: 'TED-Ed Club Member',
-          description: 'Delivered a Ted-Ed style talk on the American Education System',
-          details: 'Engaged with innovative ideas and educational content'
+          description: 'Delivered TED-Ed style talk on the American Education System'
         }
       ]
     }
@@ -377,8 +368,7 @@ const Experience = () => {
                         {edu.activities.map((activity, actIndex) => (
                           <div key={actIndex} className="bg-gray-700/50 rounded-lg p-4">
                             <h6 className="text-emerald-400 font-medium mb-1">{activity.title}</h6>
-                            <p className="text-gray-300 text-sm mb-1">{activity.description}</p>
-                            <p className="text-gray-400 text-xs">{activity.details}</p>
+                            <p className="text-gray-300 text-sm">{activity.description}</p>
                           </div>
                         ))}
                       </div>
