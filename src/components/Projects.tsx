@@ -94,9 +94,12 @@ const Projects = () => {
           {/* Featured Projects */}
           <div className="grid lg:grid-cols-2 gap-8 mb-16">
             {featuredProjects.map((project, index) => (
-              <div
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 key={index}
-                className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105"
+                className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 block cursor-pointer"
               >
                 <div className="relative">
                   <img
@@ -128,39 +131,19 @@ const Projects = () => {
                     ))}
                   </div>
                   
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 text-sm text-gray-400">
-                      <div className="flex items-center gap-1">
-                        <Star size={16} />
-                        <span>{project.stars}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <GitFork size={16} />
-                        <span>{project.forks}</span>
-                      </div>
+                  <div className="flex items-center space-x-4 text-sm text-gray-400">
+                    <div className="flex items-center gap-1">
+                      <Star size={16} />
+                      <span>{project.stars}</span>
                     </div>
-                    
-                    <div className="flex space-x-3">
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-white transition-colors duration-200"
-                      >
-                        <Github size={20} />
-                      </a>
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
-                      >
-                        <ExternalLink size={20} />
-                      </a>
+                    <div className="flex items-center gap-1">
+                      <GitFork size={16} />
+                      <span>{project.forks}</span>
                     </div>
+                    <span className="text-gray-500">Click to view code</span>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
