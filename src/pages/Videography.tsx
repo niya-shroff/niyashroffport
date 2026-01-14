@@ -1,10 +1,39 @@
-import { useState } from 'react';
-import { Play, X } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { Play, X, Search, Filter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { videos } from '../data/videography';
 
 const Videography = () => {
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedPlatform, setSelectedPlatform] = useState('All');
+    const location = useLocation();
+
+    // Scroll to hash on mount
+    useEffect(() => {
+        if (location.hash) {
+            const id = location.hash.replace('#', '');
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    element.classList.add('ring-4', 'ring-primary', 'ring-offset-4', 'ring-offset-gray-900');
+                    setTimeout(() => element.classList.remove('ring-4', 'ring-primary', 'ring-offset-4', 'ring-offset-gray-900'), 2000);
+                }
+            }, 500);
+        }
+    }, [location]);
+
+    const platforms = useMemo(() => ['All', ...Array.from(new Set(videos.map(v => v.platform)))], []);
+
+    const filteredVideos = useMemo(() => {
+        return videos.filter(video => {
+            const matchesSearch = video.title.toLowerCase().includes(searchQuery.toLowerCase());
+            const matchesPlatform = selectedPlatform === 'All' || video.platform === selectedPlatform;
+            return matchesSearch && matchesPlatform;
+        });
+    }, [searchQuery, selectedPlatform]);
 
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
@@ -16,82 +45,112 @@ const Videography = () => {
                     className="mb-12"
                 >
                     <h2 className="text-4xl font-bold mb-4 text-primary">Videography</h2>
-                    <p className="text-gray-400 text-lg max-w-2xl">
-                        Visual storytelling through motion and sound.
+                    <p className="text-gray-400 text-lg max-w-2xl mb-8">
+                        Visual storytelling through motion. Selected works from commercial and personal projects.
                     </p>
+
+                    {/* Controls */}
+                    <div className="flex flex-col md:flex-row gap-4 bg-gray-800/50 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm max-w-4xl">
+                        <div className="relative flex-grow">
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                            <input
+                                type="text"
+                                placeholder="Search videos..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full bg-gray-900/50 border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                            />
+                        </div>
+
+                        <div className="relative min-w-[200px]">
+                            <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                            <select
+                                value={selectedPlatform}
+                                onChange={(e) => setSelectedPlatform(e.target.value)}
+                                className="w-full bg-gray-900/50 border border-gray-700 rounded-lg pl-10 pr-8 py-2.5 text-white appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                            >
+                                {platforms.map(platform => (
+                                    <option key={platform} value={platform}>{platform}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {videos.map((video, index) => (
-                        <motion.div
-                            key={video.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-primary/50 transition-all duration-300 group"
-                        >
-                            <div className="relative aspect-video bg-gray-900 group cursor-pointer" onClick={() => setSelectedVideo(video.videoUrl)}>
-                                <img
-                                    src={video.thumbnail}
-                                    alt={video.title}
-                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-16 h-16 bg-primary-hover/90 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-lg group-hover:bg-primary">
-                                        <Play fill="white" className="text-white ml-1" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {filteredVideos.length > 0 ? (
+                        filteredVideos.map((video, index) => (
+                            <motion.div
+                                key={video.id}
+                                id={`video-${video.id}`}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                className="group cursor-pointer"
+                                onClick={() => setSelectedVideo(video.url)}
+                            >
+                                <div className="relative aspect-video rounded-xl overflow-hidden mb-4 bg-gray-800">
+                                    <img
+                                        src={video.thumbnail}
+                                        alt={video.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                                    />
+                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                        <div className="w-12 h-12 bg-primary/90 rounded-full flex items-center justify-center text-white transform group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/20">
+                                            <Play size={20} fill="currentColor" className="ml-1" />
+                                        </div>
+                                    </div>
+                                    <div className="absolute bottom-3 right-3 bg-black/80 px-2 py-1 rounded text-xs text-white font-medium">
+                                        {video.duration}
                                     </div>
                                 </div>
-                                <div className="absolute top-4 right-4 bg-black/70 px-3 py-1 rounded-full text-xs font-medium text-primary border border-primary/30">
-                                    {video.platform}
+                                <h3 className="text-xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{video.title}</h3>
+                                <div className="flex items-center gap-2 text-sm text-gray-400">
+                                    <span className="bg-gray-800 px-2 py-0.5 rounded text-xs border border-gray-700">{video.platform}</span>
+                                    <span>•</span>
+                                    <span>{video.views}</span>
                                 </div>
-                            </div>
-
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{video.title}</h3>
-                                <p className="text-gray-400 text-sm">
-                                    Video description placeholder. Click thumbnail to watch.
-                                </p>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        ))
+                    ) : (
+                        <div className="col-span-full text-center py-12 text-gray-500">
+                            <p className="text-lg">No videos found matching your criteria.</p>
+                        </div>
+                    )}
                 </div>
-            </div>
 
-            {/* Video Modal */}
-            <AnimatePresence>
-                {selectedVideo && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
-                        onClick={() => setSelectedVideo(null)}
-                    >
-                        <button
-                            className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors"
+                <AnimatePresence>
+                    {selectedVideo && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm"
                             onClick={() => setSelectedVideo(null)}
                         >
-                            <X size={32} />
-                        </button>
-
-                        <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            className="relative w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            <iframe
-                                src={`${selectedVideo}?autoplay=1`}
-                                title="Video Player"
-                                className="w-full h-full border-0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
+                            <div className="absolute top-4 right-4 z-50">
+                                <button
+                                    className="p-2 text-gray-400 hover:text-white rounded-full hover:bg-white/10 transition-colors"
+                                    onClick={() => setSelectedVideo(null)}
+                                >
+                                    <X size={32} />
+                                </button>
+                            </div>
+                            <div className="w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl">
+                                <iframe
+                                    width="100%"
+                                    height="100%"
+                                    src={selectedVideo}
+                                    title="Video Player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
                         </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>
+            </div>
         </div>
     );
 };

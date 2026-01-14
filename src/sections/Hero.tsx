@@ -94,7 +94,7 @@ const Hero = () => {
           {/* CTA */}
           <div className="flex justify-center animate-fade-in-delayed mb-8">
             <a
-              href="#projects"
+              href="technical"
               className="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-primary/25"
             >
               View My Work

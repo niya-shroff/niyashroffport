@@ -1,20 +1,21 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Image, Video, PenTool, Code, Loader } from 'lucide-react';
+import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Image, Video, PenTool, Code, Loader, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { experiences } from '../../data/experience';
 import { education } from '../../data/education';
 import { photos } from '../../data/photography';
 import { videos } from '../../data/videography';
-import { poems } from '../../data/writing';
+import { poems, substackPosts } from '../../data/writing';
 
 interface SearchResult {
     id: string | number;
     title: string;
     description?: string;
-    category: 'Experience' | 'Education' | 'Projects' | 'Photography' | 'Videography' | 'Writing';
+    category: 'Experience' | 'Education' | 'Projects' | 'Photography' | 'Videography' | 'Writing' | 'Substack';
     path: string;
     icon: any;
+    url?: string;
 }
 
 interface GlobalSearchProps {
@@ -136,7 +137,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
             }
         });
 
-        // Writing
+        // Writing (Poems)
         poems.forEach(poem => {
             if (poem.title.toLowerCase().includes(searchLower) ||
                 poem.content.toLowerCase().includes(searchLower)) {
@@ -151,11 +152,43 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
             }
         });
 
+        // Writing (Substack)
+        substackPosts.forEach(post => {
+            if (post.title.toLowerCase().includes(searchLower) ||
+                post.excerpt.toLowerCase().includes(searchLower)) {
+                allResults.push({
+                    id: `substack-${post.id}`,
+                    title: post.title,
+                    description: 'Substack Article',
+                    category: 'Substack',
+                    path: '/writing',
+                    icon: ExternalLink,
+                    url: post.url
+                });
+            }
+        });
+
         return allResults;
     }, [query, projects]);
 
-    const handleSelect = (path: string) => {
-        navigate(path);
+    const handleSelect = (result: SearchResult) => {
+        if (result.category === 'Substack' && result.url) {
+            window.open(result.url, '_blank');
+        } else {
+            // Navigate to path with hash for deep linking
+            navigate(`${result.path}#${result.id}`);
+
+            // Dispatch a custom event to notify components to scroll
+            // This is helpful if we are already on the page
+            setTimeout(() => {
+                const element = document.getElementById(result.id as string);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    element.classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-gray-900');
+                    setTimeout(() => element.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-gray-900'), 2000);
+                }
+            }, 100);
+        }
         onClose();
     };
 
@@ -210,7 +243,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                                     {results.map((result) => (
                                         <div
                                             key={result.id}
-                                            onClick={() => handleSelect(result.path)}
+                                            onClick={() => handleSelect(result)}
                                             className="group flex items-center p-4 rounded-xl hover:bg-gray-700/50 cursor-pointer transition-colors border border-transparent hover:border-primary/20"
                                         >
                                             <div className="p-3 bg-gray-800 rounded-lg group-hover:bg-primary/10 group-hover:text-primary transition-colors text-gray-400">

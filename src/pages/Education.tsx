@@ -1,8 +1,26 @@
+import { useEffect } from 'react';
 import { GraduationCap, Award, Calendar, MapPin, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { education } from '../data/education';
 
 const Education = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash) {
+            const id = location.hash.replace('#', '');
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    element.classList.add('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-gray-900');
+                    setTimeout(() => element.classList.remove('ring-2', 'ring-primary', 'ring-offset-2', 'ring-offset-gray-900'), 2000);
+                }
+            }, 500);
+        }
+    }, [location]);
+
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
             <div className="container mx-auto px-6">
@@ -12,9 +30,9 @@ const Education = () => {
                     transition={{ duration: 0.5 }}
                     className="mb-12"
                 >
-                    <h2 className="text-4xl font-bold mb-4 text-primary">Education</h2>
+                    <h2 className="text-4xl font-bold mb-4 text-primary">Education & Activities</h2>
                     <p className="text-gray-400 text-lg max-w-2xl">
-                        Academic background and achievements.
+                        My academic background and extracurricular involvement.
                     </p>
                 </motion.div>
 
@@ -22,6 +40,7 @@ const Education = () => {
                     {education.map((edu, index) => (
                         <motion.div
                             key={index}
+                            id={`edu-${index}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}

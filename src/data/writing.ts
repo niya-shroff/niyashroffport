@@ -42,3 +42,30 @@ For better, strange, or maybe worse,
 To make the fragments whole.`
     }
 ];
+
+export const substackPosts = [
+    {
+        id: 1,
+        title: 'New Year, Same Thoughts',
+        excerpt: 'Reflecting on the nature of improved thinking vs new resolutions.',
+        url: 'https://newniyas.substack.com/p/what-is-substack-new-year-same-thoughts',
+        date: 'Jan 2025',
+        readTime: '4 min read'
+    },
+    {
+        id: 2,
+        title: 'The Art of Documentation',
+        excerpt: 'Why writing things down is the highest form of respect for your future self.',
+        url: 'https://newniyas.substack.com',
+        date: 'Dec 2024',
+        readTime: '3 min read'
+    },
+    {
+        id: 3,
+        title: 'Coding as Craft',
+        excerpt: 'Moving beyond syntax to understand the philosophy of software creation.',
+        url: 'https://newniyas.substack.com',
+        date: 'Nov 2024',
+        readTime: '5 min read'
+    }
+];
