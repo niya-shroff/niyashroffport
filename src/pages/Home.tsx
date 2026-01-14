@@ -1,6 +1,6 @@
-import Hero from './Hero';
+import Hero from '../sections/Hero';
 import About from './About';
-import Skills from './Skills';
+import Skills from '../sections/Skills';
 // The user asked for "Technical Projects" as a separate page.
 // Maybe Home should just have Hero, About, Skills, and maybe a CTA to projects.
 // The original Projects component might be redundant now. The user said "Merge all technical projects into a single 'Technical Projects' section".

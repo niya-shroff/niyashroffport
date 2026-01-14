@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-background text-white font-sans antialiased;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply px-6 py-2 bg-primary text-background font-semibold rounded-lg hover:bg-primary-hover transition-colors duration-200;
+    }
+
+    .card {
+        @apply bg-surface rounded-xl p-6 border border-gray-700/50 hover:border-primary/50 transition-all duration-300;
+    }
+}

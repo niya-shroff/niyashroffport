@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { Heart, Code } from 'lucide-react';
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
             <div>
               <h3 className="text-2xl font-bold text-emerald-400 mb-4">Niya Shroff ☻ </h3>
               <p className="text-gray-400 leading-relaxed">
-                Software Engineer specializing in full-stack development 
+                Software Engineer specializing in full-stack development
                 and innovative technology solutions.
               </p>
             </div>
@@ -21,34 +21,29 @@ const Footer = () => {
               <h4 className="text-white font-medium mb-4">Quick Links</h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#about" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                  <Link to="/about" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
                     About
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#skills" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
-                    Skills
-                  </a>
-                </li>
-                <li>
-                  <a href="#projects" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                  <Link to="/technical" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
                     Projects
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#creative" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                  <Link to="/photography" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
                     Creative
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#experience" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                  <Link to="/experience" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
                     Experience
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#contact" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                  <Link to="/contact" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -77,7 +72,7 @@ const Footer = () => {
                 <Code size={16} className="text-emerald-400" />
                 <span>by Niya Shroff ☻ </span>
               </div>
-              
+
               <div className="text-gray-400 text-sm">
                 © {new Date().getFullYear()} Niya Shroff. All rights reserved.
               </div>
