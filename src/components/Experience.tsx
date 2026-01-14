@@ -1,5 +1,5 @@
-import React from 'react';
-import { Calendar, MapPin, Building, GraduationCap, Award, Users, ExternalLink, Code, Brain, TrendingUp } from 'lucide-react';
+import { Calendar, MapPin, Building, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Experience = () => {
   const experiences = [
@@ -125,65 +125,6 @@ const Experience = () => {
     }
   ];
 
-  const education = [
-    {
-      degree: 'B.S. in Computer Science & B.A. in Economics (Dual Degree)',
-      school: 'University of Massachusetts Amherst',
-      location: 'Amherst, MA',
-      period: 'December 2024',
-      honors: 'Magna Cum Laude',
-      description: 'Completed two Bachelor\'s degrees simultaneously, combining technical computer science expertise with economic analysis and theory.',
-      courses: [
-        'Artificial Intelligence',
-        'Software Engineering',
-        'Algorithms & Data Structures',
-        'Game Theory',
-        'Econometrics',
-        'Programming Methods',
-        'Project Management'
-      ],
-      activities: [
-        {
-          title: 'Philosophy & Open Thought Club Vice-President',
-          description: 'Led E-Board planning events for 60+ members, progressed from Treasurer to Vice President'
-        },
-        {
-          title: 'Zoola Women\'s Ultimate Frisbee Team',
-          description: 'Team member and fundraising coordinator'
-        }
-      ]
-    },
-    {
-      degree: 'High School Diploma',
-      school: 'Chelmsford High School',
-      location: 'Chelmsford, MA',
-      period: 'June 2021',
-      description: 'Graduated with high honors after completing numerous Honors and AP courses.',
-      activities: [
-        {
-          title: 'Founder of Care Cardz',
-          description: 'Founded nonprofit organization, partnered with 6 sponsors to distribute 1,000+ cards to healthcare workers and first responders'
-        },
-        {
-          title: 'Co-Founder/Co-President of Philosophy Club',
-          description: 'Established club from inception, led discussions and grew membership'
-        },
-        {
-          title: 'Varsity Track & Field Athlete',
-          description: 'Competed at state-level meets while maintaining academic excellence'
-        },
-        {
-          title: 'Co-Treasurer of Student Council',
-          description: 'Managed student government finances and event budget planning'
-        },
-        {
-          title: 'TED-Ed Club Member',
-          description: 'Delivered TED-Ed style talk on the American Education System'
-        }
-      ]
-    }
-  ];
-
   const getTypeColor = (type: string) => {
     const colors = {
       'Seasonal': 'bg-blue-900/30 text-blue-300 border-blue-700/30',
@@ -196,191 +137,107 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-20 bg-gray-900">
+    <div className="min-h-screen pt-24 pb-12 bg-gray-900">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Experience ☻ </h2>
-            <p className="text-gray-400 text-lg">
-              My professional journey and educational background
-            </p>
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+          <h2 className="text-4xl font-bold mb-4 text-emerald-400">Professional Experience</h2>
+          <p className="text-gray-400 text-lg max-w-2xl">
+            My professional journey and career highlights.
+          </p>
+        </motion.div>
 
-          {/* Professional Experience */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-              <Building className="text-emerald-400" size={24} />
-              Professional Experience
-            </h3>
-            
-            <div className="space-y-8">
-              {experiences.map((exp, index) => (
-                <div key={index} className="relative">
-                  {/* Timeline line */}
-                  {index !== experiences.length - 1 && (
-                    <div className="absolute left-6 top-16 w-0.5 h-full bg-gradient-to-b from-emerald-400 to-transparent"></div>
-                  )}
-                  
-                  <div className="flex gap-6">
-                    {/* Timeline dot */}
-                    <div className="flex-shrink-0 w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center">
-                      <div className="w-6 h-6 bg-white rounded-full"></div>
+        <div className="max-w-4xl mx-auto space-y-8">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="relative pl-8 border-l-2 border-gray-700/50 hover:border-emerald-500/50 transition-colors duration-300"
+            >
+              <div className="absolute -left-[9px] top-0 w-4 h-4 bg-gray-900 border-2 border-emerald-500 rounded-full"></div>
+
+              <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700/50 shadow-sm hover:shadow-lg transition-all">
+                <div className="flex flex-wrap items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-xl font-bold text-white">{exp.title}</h3>
+                      <span className={`px-2 py-0.5 rounded text-xs border ${getTypeColor(exp.type)}`}>
+                        {exp.type}
+                      </span>
                     </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1 bg-gray-800 rounded-2xl p-6">
-                      <div className="flex flex-wrap items-start justify-between mb-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h4 className="text-xl font-bold text-white">{exp.title}</h4>
-                            <span className={`px-2 py-1 rounded text-xs border ${getTypeColor(exp.type)}`}>
-                              {exp.type}
-                            </span>
-                          </div>
-                          <p className="text-emerald-400 font-medium mb-2">{exp.company}</p>
-                        </div>
-                        <div className="text-right text-sm text-gray-400">
-                          <div className="flex items-center gap-1 mb-1">
-                            <Calendar size={14} />
-                            <span>{exp.period}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin size={14} />
-                            <span>{exp.location}</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-300 mb-4 leading-relaxed">{exp.description}</p>
-                      
-                      <div className="mb-4">
-                        <h5 className="text-white font-medium mb-2">Key Achievements:</h5>
-                        <ul className="space-y-1">
-                          {exp.achievements.map((achievement, achIndex) => (
-                            <li key={achIndex} className="text-gray-400 text-sm flex items-start gap-2">
-                              <span className="text-emerald-400 mt-1">•</span>
-                              <span>{achievement}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      {/* Links */}
-                      {exp.links && (
-                        <div className="mb-4">
-                          <h5 className="text-white font-medium mb-2">Related Links:</h5>
-                          <div className="flex flex-wrap gap-2">
-                            {exp.links.map((link, linkIndex) => (
-                              <a
-                                key={linkIndex}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-sm transition-colors duration-200"
-                              >
-                                <ExternalLink size={14} />
-                                {link.title}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="bg-gray-700 text-gray-300 px-3 py-1 rounded-lg text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Building size={16} className="text-emerald-400" />
+                      <p className="text-emerald-400 font-medium">{exp.company}</p>
+                    </div>
+                  </div>
+                  <div className="text-right text-sm text-gray-400">
+                    <div className="flex items-center gap-1 mb-1 justify-end">
+                      <Calendar size={14} />
+                      <span>{exp.period}</span>
+                    </div>
+                    <div className="flex items-center gap-1 justify-end">
+                      <MapPin size={14} />
+                      <span>{exp.location}</span>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Education */}
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-              <GraduationCap className="text-blue-400" size={24} />
-              Education
-            </h3>
-            
-            <div className="space-y-8">
-              {education.map((edu, index) => (
-                <div key={index} className="bg-gray-800 rounded-2xl p-6">
-                  <div className="flex flex-wrap items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h4 className="text-xl font-bold text-white mb-2">{edu.degree}</h4>
-                      <p className="text-blue-400 font-medium mb-1">{edu.school}</p>
-                      {edu.location && (
-                        <div className="flex items-center gap-1 text-sm text-gray-400 mb-2">
-                          <MapPin size={14} />
-                          <span>{edu.location}</span>
-                        </div>
-                      )}
-                      <div className="flex flex-wrap gap-4 text-sm">
-                        <div className="flex items-center gap-1 text-gray-400">
-                          <Calendar size={14} />
-                          <span>{edu.period}</span>
-                        </div>
-                        {edu.honors && (
-                          <div className="flex items-center gap-1 text-yellow-400">
-                            <Award size={14} />
-                            <span>{edu.honors}</span>
-                          </div>
-                        )}
-                      </div>
+                <p className="text-gray-300 mb-6 leading-relaxed">{exp.description}</p>
+
+                <div className="mb-6">
+                  <h5 className="text-white font-medium mb-3">Key Achievements:</h5>
+                  <ul className="space-y-2">
+                    {exp.achievements.map((achievement, achIndex) => (
+                      <li key={achIndex} className="text-gray-400 text-sm flex items-start gap-2">
+                        <span className="text-emerald-400 mt-1.5 min-w-[6px] h-1.5 rounded-full bg-emerald-400"></span>
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Links */}
+                {exp.links && (
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2">
+                      {exp.links.map((link, linkIndex) => (
+                        <a
+                          key={linkIndex}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-3 py-1 bg-gray-700/50 hover:bg-emerald-900/30 text-emerald-400 hover:text-emerald-300 rounded-md text-sm transition-colors duration-200 border border-transparent hover:border-emerald-500/30"
+                        >
+                          <ExternalLink size={14} />
+                          {link.title}
+                        </a>
+                      ))}
                     </div>
                   </div>
-                  
-                  <p className="text-gray-300 mb-6 leading-relaxed">{edu.description}</p>
-                  
-                  {/* Relevant Courses */}
-                  {edu.courses && (
-                    <div className="mb-6">
-                      <h5 className="text-white font-medium mb-3">Relevant Courses:</h5>
-                      <div className="flex flex-wrap gap-2">
-                        {edu.courses.map((course, courseIndex) => (
-                          <span
-                            key={courseIndex}
-                            className="bg-blue-900/30 text-blue-300 px-3 py-1 rounded-lg text-sm border border-blue-700/30"
-                          >
-                            {course}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Activities and Leadership */}
-                  {edu.activities && (
-                    <div>
-                      <h5 className="text-white font-medium mb-3 flex items-center gap-2">
-                        <Users size={16} />
-                        Activities & Leadership:
-                      </h5>
-                      <div className="space-y-3">
-                        {edu.activities.map((activity, actIndex) => (
-                          <div key={actIndex} className="bg-gray-700/50 rounded-lg p-4">
-                            <h6 className="text-emerald-400 font-medium mb-1">{activity.title}</h6>
-                            <p className="text-gray-300 text-sm">{activity.description}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                )}
+
+                <div className="flex flex-wrap gap-2">
+                  {exp.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="bg-gray-700/50 text-gray-300 px-3 py-1 rounded-lg text-xs font-medium border border-gray-600/30"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

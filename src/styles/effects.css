@@ -1,0 +1,97 @@
+/* Cinematic Film Grain Effect */
+@keyframes film-grain {
+  0%, 100% { transform: translate(0, 0) }
+  10% { transform: translate(-5%, -5%) }
+  20% { transform: translate(-10%, 5%) }
+  30% { transform: translate(5%, -10%) }
+  40% { transform: translate(-5%, 15%) }
+  50% { transform: translate(-10%, 5%) }
+  60% { transform: translate(15%, 0%) }
+  70% { transform: translate(0%, 15%) }
+  80% { transform: translate(-15%, 10%) }
+  90% { transform: translate(10%, 5%) }
+}
+
+.film-grain::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    radial-gradient(circle, transparent 1px, rgba(255,255,255,0.15) 1px);
+  background-size: 4px 4px;
+  animation: film-grain 8s steps(10) infinite;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.03;
+}
+
+/* Cinematic Vignette Effect */
+.cinematic-vignette {
+  position: relative;
+}
+
+.cinematic-vignette::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Film Strip Border */
+.film-strip {
+  position: relative;
+  border-left: 8px solid #1a1a1a;
+  border-right: 8px solid #1a1a1a;
+}
+
+.film-strip::before,
+.film-strip::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  width: 8px;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #333 0px,
+    #333 10px,
+    #1a1a1a 10px,
+    #1a1a1a 20px
+  );
+}
+
+.film-strip::after {
+  left: auto;
+  right: -8px;
+}
+
+/* Spotlight Effect */
+@keyframes spotlight {
+  0%, 100% { opacity: 0.3; transform: translateX(-10px); }
+  50% { opacity: 0.6; transform: translateX(10px); }
+}
+
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,215,0,0.1) 50%, transparent 70%);
+  animation: spotlight 4s ease-in-out infinite;
+  pointer-events: none;
+}

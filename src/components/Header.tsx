@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,41 +15,51 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
   const navItems = [
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#creative', label: 'Creative' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#contact', label: 'Contact' },
+    { path: '/', label: 'Home' },
+    { path: '/technical', label: 'Projects' },
+    { path: '/photography', label: 'Photo' },
+    { path: '/videography', label: 'Video' },
+    { path: '/writing', label: 'Writing' },
+    { path: '/experience', label: 'Exp' },
+    { path: '/education', label: 'Edu' },
+    { path: '/contact', label: 'Contact' },
   ];
 
+  const linkClass = ({ isActive }: { isActive: boolean }) =>
+    `transition-colors duration-200 ${isActive ? 'text-emerald-400 font-medium' : 'text-gray-300 hover:text-emerald-400'
+    }`;
+
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-gray-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-    }`}>
+    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+      }`}>
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-2xl font-bold text-emerald-400">
-            Niya Shroff ☻ 
-          </div>
+          <NavLink to="/" className="text-2xl font-bold text-emerald-400">
+            Niya Shroff ☻
+          </NavLink>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={linkClass}
               >
                 {item.label}
-              </a>
+              </NavLink>
             ))}
           </div>
 
           {/* Social Links */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <a
               href="https://github.com/niya-shroff"
               target="_blank"
@@ -74,7 +86,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-300 hover:text-emerald-400"
+            className="lg:hidden text-gray-300 hover:text-emerald-400"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -83,19 +95,19 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
+          <div className="lg:hidden mt-4 pb-4 bg-gray-900 rounded-lg p-4 absolute left-4 right-4 shadow-xl border border-gray-800">
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={linkClass}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </NavLink>
               ))}
-              <div className="flex space-x-4 pt-4 border-t border-gray-700">
+              <div className="flex space-x-4 pt-4 border-t border-gray-700 justify-center">
                 <a
                   href="https://github.com/niya-shroff"
                   target="_blank"
