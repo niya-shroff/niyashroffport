@@ -1,11 +1,10 @@
-import React from 'react';
-import { 
-  Code, 
-  Database, 
-  Brain, 
-  Cloud, 
-  Palette, 
-  Settings 
+import {
+  Code,
+  Database,
+  Brain,
+  Cloud,
+  Palette,
+  Settings
 } from 'lucide-react';
 
 const Skills = () => {
@@ -80,7 +79,7 @@ const Skills = () => {
 
   const getColorClasses = (color: string) => {
     const colors = {
-      emerald: 'from-emerald-500 to-emerald-600 bg-emerald-500',
+      emerald: 'from-primary to-primary-hover bg-primary',
       blue: 'from-blue-500 to-blue-600 bg-blue-500',
       purple: 'from-purple-500 to-purple-600 bg-purple-500',
       amber: 'from-amber-500 to-amber-600 bg-amber-500',

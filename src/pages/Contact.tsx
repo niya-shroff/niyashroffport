@@ -40,7 +40,7 @@ const Contact = () => {
         templateParams,
         EMAIL_CONFIG.PUBLIC_KEY
       );
-      
+
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
@@ -56,10 +56,10 @@ const Contact = () => {
     const subject = encodeURIComponent('Hello from your portfolio');
     const body = encodeURIComponent('Hi Niya,\n\nI found your portfolio and would like to get in touch.\n\nBest regards');
     const mailtoUrl = `mailto:contact@niyashroff.me?subject=${subject}&body=${body}`;
-    
+
     // Try to open the mailto link
     window.location.href = mailtoUrl;
-    
+
     // Fallback: If mailto doesn't work, try opening Gmail compose
     setTimeout(() => {
       const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=contact@niyashroff.me&su=${subject}&body=${body}`;
@@ -111,13 +111,13 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-800">
+    <div className="min-h-screen pt-24 pb-12 bg-gray-900">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">Get In Touch ☻ </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              I'm always open to discussing new opportunities, interesting projects, 
+              I'm always open to discussing new opportunities, interesting projects,
               or just having a chat about technology and development.
             </p>
           </div>
@@ -128,7 +128,7 @@ const Contact = () => {
               <div>
                 <h3 className="text-2xl font-bold text-white mb-6">Let's Connect </h3>
                 <p className="text-gray-300 leading-relaxed mb-8">
-                  Whether you have a project in mind, want to collaborate, or just want to say hello, 
+                  Whether you have a project in mind, want to collaborate, or just want to say hello,
                   I'd love to hear from you. Feel free to reach out through any of the channels below.
                 </p>
               </div>
@@ -175,7 +175,7 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="bg-gray-900 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
-              
+
               {/* Status Messages */}
               {submitStatus === 'success' && (
                 <div className="mb-6 p-4 bg-green-900/50 border border-green-500 rounded-lg flex items-center gap-3">
@@ -183,14 +183,14 @@ const Contact = () => {
                   <span className="text-green-300">Message sent successfully! I'll get back to you soon.</span>
                 </div>
               )}
-              
+
               {submitStatus === 'error' && (
                 <div className="mb-6 p-4 bg-red-900/50 border border-red-500 rounded-lg flex items-center gap-3">
                   <AlertCircle className="text-red-400" size={20} />
                   <span className="text-red-300">Failed to send message. Please try again or email me directly.</span>
                 </div>
               )}
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -205,7 +205,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 transition-colors duration-200 disabled:opacity-50"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
                       placeholder=""
                     />
                   </div>
@@ -221,12 +221,12 @@ const Contact = () => {
                       onChange={handleInputChange}
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 transition-colors duration-200 disabled:opacity-50"
+                      className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
                       placeholder=""
                     />
                   </div>
                 </div>
-                
+
                 <div>
                   <label htmlFor="subject" className="block text-gray-300 font-medium mb-2">
                     Subject
@@ -239,11 +239,11 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 transition-colors duration-200 disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
                     placeholder=""
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-gray-300 font-medium mb-2">
                     Message
@@ -256,15 +256,15 @@ const Contact = () => {
                     required
                     rows={5}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-emerald-400 transition-colors duration-200 resize-none disabled:opacity-50"
+                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors duration-200 resize-none disabled:opacity-50"
                     placeholder=""
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 disabled:bg-emerald-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50"
+                  className="w-full bg-primary hover:bg-primary-hover disabled:bg-primary-hover/50 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 hover:scale-105 disabled:hover:scale-100 flex items-center justify-center gap-2 shadow-lg hover:shadow-primary/25 disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
@@ -283,7 +283,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
