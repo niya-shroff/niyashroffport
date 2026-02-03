@@ -70,7 +70,10 @@ const Footer = () => {
                 <Heart size={16} className="text-red-400" />
                 <span>and</span>
                 <Code size={16} className="text-emerald-400" />
-                <span>by Niya Shroff ☻ </span>
+                <span>by </span>
+                <Link to="/login" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                  Niya Shroff ☻
+                </Link>
               </div>
 
               <div className="text-gray-400 text-sm">

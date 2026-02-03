@@ -1,30 +1,83 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, X, Feather, Search, ExternalLink } from 'lucide-react';
-import { poems, substackPosts } from '../data/writing';
+import { BookOpen, X, Feather, Search, ExternalLink, Trash2, Plus, LogOut } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../context/AuthContext';
+import WritingUploadModal from '../components/admin/WritingUploadModal';
 
 const Writing = () => {
-    const [selectedPoem, setSelectedPoem] = useState<typeof poems[0] | null>(null);
+    const { user, signOut } = useAuth();
+    const [selectedPoem, setSelectedPoem] = useState<any>(null);
     const [activeTab, setActiveTab] = useState<'all' | 'poems' | 'substack'>('all');
     const [searchQuery, setSearchQuery] = useState('');
+    const [dbWritings, setDbWritings] = useState<any[]>([]);
+    const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
+    // Fetch writings from Supabase
+    useEffect(() => {
+        const fetchWritings = async () => {
+            const { data } = await supabase.from('writings').select('*');
+            if (data) {
+                setDbWritings(data);
+            }
+        };
+        fetchWritings();
+
+        // Realtime subscription
+        const channel = supabase
+            .channel('public:writings')
+            .on('postgres_changes', { event: '*', schema: 'supabase_schema', table: 'writings' }, (payload) => {
+                if (payload.eventType === 'INSERT') {
+                    setDbWritings(prev => [...prev, payload.new]);
+                } else if (payload.eventType === 'DELETE') {
+                    setDbWritings(prev => prev.filter(w => w.id !== payload.old.id));
+                }
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, []);
 
     const filteredContent = useMemo(() => {
         const query = searchQuery.toLowerCase();
 
-        const filteredPoems = poems.filter(poem =>
-            poem.title.toLowerCase().includes(query) ||
-            poem.content.toLowerCase().includes(query)
-        ).map(item => ({ ...item, type: 'poem' as const }));
+        const allItems = dbWritings.map(item => {
+            const isSubstack = item.category?.toLowerCase().includes('substack');
+            return {
+                id: item.id,
+                title: item.title,
+                excerpt: item.content.substring(0, 100) + '...',
+                content: item.content,
+                // Map category to type. If 'substack', type is substack.
+                type: (isSubstack ? 'substack' : 'poem') as 'substack' | 'poem',
+                date: item.published_date,
+                isStatic: false,
+                url: null // DB currently doesn't have URL column, so default to null
+            };
+        });
 
-        const filteredSubstack = substackPosts.filter(post =>
-            post.title.toLowerCase().includes(query) ||
-            post.excerpt.toLowerCase().includes(query)
-        ).map(item => ({ ...item, type: 'substack' as const }));
+        return allItems.filter(item => {
+            const matchesSearch = item.title.toLowerCase().includes(query) ||
+                item.excerpt.toLowerCase().includes(query);
 
-        if (activeTab === 'poems') return filteredPoems;
-        if (activeTab === 'substack') return filteredSubstack;
-        return [...filteredPoems, ...filteredSubstack];
-    }, [activeTab, searchQuery]);
+            if (activeTab === 'all') return matchesSearch;
+            if (activeTab === 'poems') return matchesSearch && item.type === 'poem';
+            if (activeTab === 'substack') return matchesSearch && item.type === 'substack';
+            return false;
+        });
+    }, [activeTab, searchQuery, dbWritings]);
+
+    const handleDelete = async (e: React.MouseEvent, id: number) => {
+        e.stopPropagation();
+        if (!confirm('Are you sure you want to delete this writing?')) return;
+
+        const { error } = await supabase.from('writings').delete().eq('id', id);
+        if (error) {
+            alert('Error deleting writing: ' + error.message);
+        }
+    };
 
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
@@ -35,7 +88,27 @@ const Writing = () => {
                     transition={{ duration: 0.5 }}
                     className="mb-12"
                 >
-                    <h2 className="text-4xl font-bold mb-4 text-primary">Writing</h2>
+                    <div className="flex justify-between items-start mb-4">
+                        <h2 className="text-4xl font-bold text-primary">Writing</h2>
+                        {user && (
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={() => setIsUploadModalOpen(true)}
+                                    className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center gap-2 shadow-lg shadow-green-500/25"
+                                >
+                                    <Plus size={20} />
+                                    <span>Add Writing</span>
+                                </button>
+                                <button
+                                    onClick={() => signOut()}
+                                    className="p-2 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500/20 transition-colors"
+                                    title="Sign Out"
+                                >
+                                    <LogOut size={20} />
+                                </button>
+                            </div>
+                        )}
+                    </div>
                     <p className="text-gray-400 text-lg max-w-2xl mb-8">
                         Thoughts put to paper. A collection of poems, short writings, and Substack articles.
                     </p>
@@ -77,14 +150,25 @@ const Writing = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}
-                            className="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-primary/50 hover:bg-gray-800/80 cursor-pointer transition-all duration-300 group flex flex-col h-full"
-                            onClick={() => item.type === 'poem' ? setSelectedPoem(item as typeof poems[0]) : window.open((item as typeof substackPosts[0]).url, '_blank')}
+                            className="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-primary/50 hover:bg-gray-800/80 cursor-pointer transition-all duration-300 group flex flex-col h-full relative"
+                            onClick={() => (item.type === 'poem' || !item.url) ? setSelectedPoem(item) : window.open(item.url, '_blank')}
                         >
                             <div className="flex items-start justify-between mb-6">
                                 <Feather className={`h-8 w-8 transition-colors ${item.type === 'poem' ? 'text-primary' : 'text-orange-400'}`} />
-                                {item.type === 'substack' && (
-                                    <ExternalLink size={20} className="text-gray-500 group-hover:text-white transition-colors" />
-                                )}
+                                <div className="flex items-center gap-2">
+                                    {item.type === 'substack' && (
+                                        <ExternalLink size={20} className="text-gray-500 group-hover:text-white transition-colors" />
+                                    )}
+                                    {user && (
+                                        <button
+                                            onClick={(e) => handleDelete(e, item.id)}
+                                            className="p-1.5 bg-red-500/80 text-white rounded-lg hover:bg-red-500 transition-colors z-20"
+                                            title="Delete"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    )}
+                                </div>
                             </div>
 
                             <h3 className="text-2xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
@@ -158,7 +242,7 @@ const Writing = () => {
                                 </div>
 
                                 <div className="space-y-4 text-center max-h-[60vh] overflow-y-auto custom-scrollbar pr-2">
-                                    {selectedPoem.content.split('\n\n').map((stanza, i) => (
+                                    {selectedPoem.content.split('\n\n').map((stanza: string, i: number) => (
                                         <p key={i} className="text-gray-300 text-lg font-serif leading-relaxed whitespace-pre-line">
                                             {stanza}
                                         </p>
@@ -168,6 +252,12 @@ const Writing = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                <WritingUploadModal
+                    isOpen={isUploadModalOpen}
+                    onClose={() => setIsUploadModalOpen(false)}
+                    onUploadSuccess={() => { }}
+                />
             </div>
         </div>
     );

@@ -1,14 +1,70 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Play, X, Search, Filter } from 'lucide-react';
+import { Play, X, Search, Filter, Trash2, Plus, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { videos } from '../data/videography';
+import { supabase } from '../lib/supabase';
+import { Video } from '../types';
+import { useAuth } from '../context/AuthContext';
+import VideoUploadModal from '../components/admin/VideoUploadModal';
 
 const Videography = () => {
+    const { user, signOut } = useAuth();
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedPlatform, setSelectedPlatform] = useState('All');
+    const [dbVideos, setDbVideos] = useState<Video[]>([]);
+    const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const location = useLocation();
+
+    // Fetch videos from Supabase
+    useEffect(() => {
+        const fetchVideos = async () => {
+            const { data } = await supabase.from('videos').select('*');
+            if (data) {
+                // Ensure the data matches the Video interface
+                const typedData = data.map(v => ({
+                    id: v.id,
+                    title: v.title,
+                    url: v.url,
+                    thumbnail: v.thumbnail_url || 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80', // Fallback
+                    duration: '0:00', // Placeholder as we don't store duration yet
+                    views: 'New', // Placeholder
+                    platform: v.category,
+                    category: v.category
+                }));
+                setDbVideos(typedData);
+            }
+        };
+        fetchVideos();
+
+        // Optional: Subscribe to realtime changes
+        const channel = supabase
+            .channel('public:videos')
+            .on('postgres_changes', { event: '*', schema: 'supabase_schema', table: 'videos' }, (payload) => {
+                if (payload.eventType === 'INSERT') {
+                    const newVideo = payload.new;
+                    setDbVideos(prev => [...prev, {
+                        id: newVideo.id,
+                        title: newVideo.title,
+                        url: newVideo.url,
+                        thumbnail: newVideo.thumbnail_url || 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80',
+                        duration: '0:00',
+                        views: 'New',
+                        platform: newVideo.category,
+                        category: newVideo.category
+                    }]);
+                } else if (payload.eventType === 'DELETE') {
+                    setDbVideos(prev => prev.filter(v => v.id !== payload.old.id));
+                }
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, []);
+
+    const allVideos = useMemo(() => dbVideos, [dbVideos]);
 
     // Scroll to hash on mount
     useEffect(() => {
@@ -25,15 +81,34 @@ const Videography = () => {
         }
     }, [location]);
 
-    const platforms = useMemo(() => ['All', ...Array.from(new Set(videos.map(v => v.platform)))], []);
+    const platforms = useMemo(() => ['All', ...Array.from(new Set(allVideos.map(v => v.platform)))], [allVideos]);
 
     const filteredVideos = useMemo(() => {
-        return videos.filter(video => {
+        return allVideos.filter(video => {
             const matchesSearch = video.title.toLowerCase().includes(searchQuery.toLowerCase());
             const matchesPlatform = selectedPlatform === 'All' || video.platform === selectedPlatform;
             return matchesSearch && matchesPlatform;
         });
     }, [searchQuery, selectedPlatform]);
+
+    const handleDelete = async (e: React.MouseEvent, videoId: number) => {
+        e.stopPropagation();
+        if (!confirm('Are you sure you want to delete this video?')) return;
+
+        const videoToDelete = dbVideos.find(v => v.id === videoId);
+        if (videoToDelete && videoToDelete.thumbnail && videoToDelete.thumbnail.includes('portfolio-assets')) {
+            const match = videoToDelete.thumbnail.match(/portfolio-assets\/(.*)/);
+            if (match) {
+                const filePath = match[1];
+                await supabase.storage.from('portfolio-assets').remove([filePath]);
+            }
+        }
+
+        const { error } = await supabase.from('videos').delete().eq('id', videoId);
+        if (error) {
+            alert('Error deleting video: ' + error.message);
+        }
+    };
 
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
@@ -44,7 +119,27 @@ const Videography = () => {
                     transition={{ duration: 0.5 }}
                     className="mb-12"
                 >
-                    <h2 className="text-4xl font-bold mb-4 text-primary">Videography</h2>
+                    <div className="flex justify-between items-start mb-4">
+                        <h2 className="text-4xl font-bold text-primary">Videography</h2>
+                        {user && (
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={() => setIsUploadModalOpen(true)}
+                                    className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors flex items-center gap-2 shadow-lg shadow-secondary/25"
+                                >
+                                    <Plus size={20} />
+                                    <span>Add Video</span>
+                                </button>
+                                <button
+                                    onClick={() => signOut()}
+                                    className="p-2 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500/20 transition-colors"
+                                    title="Sign Out"
+                                >
+                                    <LogOut size={20} />
+                                </button>
+                            </div>
+                        )}
+                    </div>
                     <p className="text-gray-400 text-lg max-w-2xl mb-8">
                         Visual storytelling through motion. Selected works from commercial and personal projects.
                     </p>
@@ -100,9 +195,22 @@ const Videography = () => {
                                             <Play size={20} fill="currentColor" className="ml-1" />
                                         </div>
                                     </div>
-                                    <div className="absolute bottom-3 right-3 bg-black/80 px-2 py-1 rounded text-xs text-white font-medium">
-                                        {video.duration}
-                                    </div>
+                                    {video.duration !== '0:00' && (
+                                        <div className="absolute bottom-3 right-3 bg-black/80 px-2 py-1 rounded text-xs text-white font-medium">
+                                            {video.duration}
+                                        </div>
+                                    )}
+                                    {user && (
+                                        <div className="absolute top-2 right-2 z-10">
+                                            <button
+                                                onClick={(e) => handleDelete(e, video.id)}
+                                                className="p-2 bg-red-500/80 text-white rounded-lg hover:bg-red-500 transition-colors transform hover:scale-105"
+                                                title="Delete Video"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                                 <h3 className="text-xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{video.title}</h3>
                                 <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -150,6 +258,12 @@ const Videography = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                <VideoUploadModal
+                    isOpen={isUploadModalOpen}
+                    onClose={() => setIsUploadModalOpen(false)}
+                    onUploadSuccess={() => { }}
+                />
             </div>
         </div>
     );

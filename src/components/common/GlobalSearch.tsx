@@ -1,12 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Image, Video, PenTool, Code, Loader, ExternalLink } from 'lucide-react';
+import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Image, Video as VideoIcon, PenTool, Code, Loader, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabase';
 import { experiences } from '../../data/experience';
 import { education } from '../../data/education';
-import { photos } from '../../data/photography';
-import { videos } from '../../data/videography';
-import { poems, substackPosts } from '../../data/writing';
+import { Photo, Video, Writing } from '../../types';
 
 interface SearchResult {
     id: string | number;
@@ -26,22 +25,43 @@ interface GlobalSearchProps {
 const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
     const [query, setQuery] = useState('');
     const [projects, setProjects] = useState<any[]>([]);
+    const [photos, setPhotos] = useState<Photo[]>([]);
+    const [videos, setVideos] = useState<Video[]>([]);
+    const [writings, setWritings] = useState<Writing[]>([]);
     const [loadingProjects, setLoadingProjects] = useState(false);
     const navigate = useNavigate();
 
-    // Fetch GitHub projects
+    // Fetch Content
     useEffect(() => {
-        if (isOpen && projects.length === 0) {
-            setLoadingProjects(true);
-            fetch('https://api.github.com/users/niya-shroff/repos')
-                .then(res => res.json())
-                .then(data => {
-                    if (Array.isArray(data)) {
-                        setProjects(data);
-                    }
-                })
-                .catch(err => console.error('Failed to fetch projects for search', err))
-                .finally(() => setLoadingProjects(false));
+        if (isOpen) {
+            // Fetch GitHub projects
+            if (projects.length === 0) {
+                setLoadingProjects(true);
+                fetch('https://api.github.com/users/niya-shroff/repos')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (Array.isArray(data)) setProjects(data);
+                    })
+                    .catch(err => console.error('Failed to fetch projects', err))
+                    .finally(() => setLoadingProjects(false));
+            }
+
+            // Fetch Supabase Content
+            const fetchContent = async () => {
+                const { data: photoData } = await supabase.from('photos').select('*');
+                if (photoData) setPhotos(photoData.map((p: any) => ({ ...p, id: p.id })));
+
+                const { data: videoData } = await supabase.from('videos').select('*');
+                if (videoData) setVideos(videoData.map((v: any) => ({
+                    ...v,
+                    thumbnail: v.thumbnail_url || '',
+                    platform: v.category // Mapping category to platform for search display
+                })));
+
+                const { data: writingData } = await supabase.from('writings').select('*');
+                if (writingData) setWritings(writingData);
+            };
+            fetchContent();
         }
     }, [isOpen]);
 
@@ -125,45 +145,33 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
         // Videography
         videos.forEach(video => {
             if (video.title.toLowerCase().includes(searchLower) ||
-                video.platform.toLowerCase().includes(searchLower)) {
+                video.category.toLowerCase().includes(searchLower)) {
                 allResults.push({
                     id: `video-${video.id}`,
                     title: video.title,
-                    description: video.platform,
+                    description: video.category,
                     category: 'Videography',
                     path: '/videography',
-                    icon: Video
+                    icon: VideoIcon
                 });
             }
         });
 
-        // Writing (Poems)
-        poems.forEach(poem => {
-            if (poem.title.toLowerCase().includes(searchLower) ||
-                poem.content.toLowerCase().includes(searchLower)) {
-                allResults.push({
-                    id: `poem-${poem.id}`,
-                    title: poem.title,
-                    description: 'Poem',
-                    category: 'Writing',
-                    path: '/writing',
-                    icon: PenTool
-                });
-            }
-        });
+        // Writing
+        writings.forEach(writing => {
+            const isSubstack = writing.category?.toLowerCase().includes('substack');
 
-        // Writing (Substack)
-        substackPosts.forEach(post => {
-            if (post.title.toLowerCase().includes(searchLower) ||
-                post.excerpt.toLowerCase().includes(searchLower)) {
+            if (writing.title.toLowerCase().includes(searchLower) ||
+                writing.content.toLowerCase().includes(searchLower)) {
                 allResults.push({
-                    id: `substack-${post.id}`,
-                    title: post.title,
-                    description: 'Substack Article',
-                    category: 'Substack',
+                    id: isSubstack ? `substack-${writing.id}` : `poem-${writing.id}`,
+                    title: writing.title,
+                    description: isSubstack ? 'Substack Article' : 'Writing',
+                    category: isSubstack ? 'Substack' : 'Writing', // Using 'Substack' category for icon logic in render if needed
                     path: '/writing',
-                    icon: ExternalLink,
-                    url: post.url
+                    icon: isSubstack ? ExternalLink : PenTool,
+                    // Note: DB writing currently doesn't store external URL for substack, logic might need adjustment if URL is required
+                    // For now, consistent with Writing.tsx
                 });
             }
         });
