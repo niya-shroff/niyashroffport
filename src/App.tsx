@@ -15,6 +15,9 @@ const Experience = lazy(() => import('./pages/Experience'));
 const Education = lazy(() => import('./pages/Education'));
 const Contact = lazy(() => import('./pages/Contact'));
 
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+// Dashboard removed in favor of in-page editing
+
 function AnimatedRoutes() {
   const location = useLocation();
 
@@ -30,6 +33,10 @@ function AnimatedRoutes() {
         <Route path="/experience" element={<Experience />} />
         <Route path="/education" element={<Education />} />
         <Route path="/contact" element={<Contact />} />
+
+        {/* Admin Routes */}
+        <Route path="/login" element={<AdminLogin />} />
+        {/* Dashboard removed in favor of in-page editing */}
       </Routes>
     </AnimatePresence>
   );

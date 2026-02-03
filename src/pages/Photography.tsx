@@ -1,14 +1,57 @@
 import { useState, useMemo, useEffect } from 'react';
-import { ZoomIn, X, ChevronLeft, ChevronRight, Search, Filter } from 'lucide-react';
+import { ZoomIn, X, ChevronLeft, ChevronRight, Search, Filter, Trash2, Plus, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { photos } from '../data/photography';
+import { supabase } from '../lib/supabase';
+import { Photo } from '../types';
+import { useAuth } from '../context/AuthContext';
+import PhotoUploadModal from '../components/admin/PhotoUploadModal';
 
 const Photography = () => {
+    const { user, signOut } = useAuth();
     const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [dbPhotos, setDbPhotos] = useState<Photo[]>([]);
+    const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const location = useLocation();
+
+    // Fetch photos from Supabase
+    useEffect(() => {
+        const fetchPhotos = async () => {
+            const { data } = await supabase.from('photos').select('*');
+            if (data) {
+                // Ensure the data matches the Photo interface
+                const typedData = data.map(p => ({
+                    id: p.id,
+                    url: p.url,
+                    title: p.title,
+                    category: p.category,
+                    location: p.location
+                }));
+                setDbPhotos(typedData);
+            }
+        };
+        fetchPhotos();
+
+        // Optional: Subscribe to realtime changes
+        const channel = supabase
+            .channel('public:photos')
+            .on('postgres_changes', { event: '*', schema: 'supabase_schema', table: 'photos' }, (payload) => {
+                if (payload.eventType === 'INSERT') {
+                    setDbPhotos(prev => [...prev, payload.new as Photo]);
+                } else if (payload.eventType === 'DELETE') {
+                    setDbPhotos(prev => prev.filter(p => p.id !== payload.old.id));
+                }
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, []);
+
+    const allPhotos = useMemo(() => dbPhotos, [dbPhotos]);
 
     // Scroll to hash on mount
     useEffect(() => {
@@ -26,10 +69,10 @@ const Photography = () => {
         }
     }, [location]);
 
-    const categories = useMemo(() => ['All', ...Array.from(new Set(photos.map(p => p.category)))], []);
+    const categories = useMemo(() => ['All', ...Array.from(new Set(allPhotos.map(p => p.category)))], [allPhotos]);
 
     const filteredPhotos = useMemo(() => {
-        return photos.filter(photo => {
+        return allPhotos.filter(photo => {
             const matchesSearch = photo.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 photo.location.toLowerCase().includes(searchQuery.toLowerCase());
             const matchesCategory = selectedCategory === 'All' || photo.category === selectedCategory;
@@ -51,6 +94,35 @@ const Photography = () => {
         }
     };
 
+    const handleDelete = async (e: React.MouseEvent, photoId: number) => {
+        e.stopPropagation();
+        if (!confirm('Are you sure you want to delete this photo?')) return;
+
+        const photoToDelete = dbPhotos.find(p => p.id === photoId);
+        if (photoToDelete) {
+            // Extract file path from public URL
+            // URL format: .../portfolio-assets/photos/filename
+            const match = photoToDelete.url.match(/portfolio-assets\/(.*)/);
+            if (match) {
+                const filePath = match[1];
+                const { error: storageError } = await supabase.storage
+                    .from('portfolio-assets')
+                    .remove([filePath]);
+
+                if (storageError) {
+                    console.error('Error deleting file from storage:', storageError);
+                    // Decide if we want to stop here or verify if user wants to force delete DB row anyway
+                    // For now, proceed to delete DB row but log error
+                }
+            }
+        }
+
+        const { error } = await supabase.from('photos').delete().eq('id', photoId);
+        if (error) {
+            alert('Error deleting photo: ' + error.message);
+        }
+    };
+
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
             <div className="container mx-auto px-6">
@@ -60,7 +132,27 @@ const Photography = () => {
                     transition={{ duration: 0.5 }}
                     className="mb-12"
                 >
-                    <h2 className="text-4xl font-bold mb-4 text-primary">Photography</h2>
+                    <div className="flex justify-between items-start mb-4">
+                        <h2 className="text-4xl font-bold text-primary">Photography</h2>
+                        {user && (
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={() => setIsUploadModalOpen(true)}
+                                    className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-lg shadow-primary/25"
+                                >
+                                    <Plus size={20} />
+                                    <span>Add Photo</span>
+                                </button>
+                                <button
+                                    onClick={() => signOut()}
+                                    className="p-2 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500/20 transition-colors"
+                                    title="Sign Out"
+                                >
+                                    <LogOut size={20} />
+                                </button>
+                            </div>
+                        )}
+                    </div>
                     <p className="text-gray-400 text-lg max-w-2xl mb-8">
                         Capturing moments in time. A collection of shots from my travels and daily life.
                     </p>
@@ -112,6 +204,17 @@ const Photography = () => {
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <div className="absolute top-2 right-2 flex gap-2">
+                                        {user && ( // Only show delete for logged in users
+                                            <button
+                                                onClick={(e) => handleDelete(e, photo.id)}
+                                                className="p-2 bg-red-500/80 text-white rounded-lg hover:bg-red-500 transition-colors transform hover:scale-105"
+                                                title="Delete Photo"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        )}
+                                    </div>
                                     <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                         <h3 className="text-xl font-bold text-white mb-1">{photo.title}</h3>
                                         <p className="text-sm text-primary font-medium mb-2">{photo.location}</p>
@@ -181,6 +284,12 @@ const Photography = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                <PhotoUploadModal
+                    isOpen={isUploadModalOpen}
+                    onClose={() => setIsUploadModalOpen(false)}
+                    onUploadSuccess={() => { }} // State updated via realtime subscription
+                />
             </div>
         </div>
     );
