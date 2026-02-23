@@ -1,11 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Image, Video as VideoIcon, PenTool, Code, Loader, ExternalLink } from 'lucide-react';
+import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Code, Loader } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
 import { experiences } from '../../data/experience';
 import { education } from '../../data/education';
-import { Photo, Video, Writing } from '../../types';
 
 interface SearchResult {
     id: string | number;
@@ -25,9 +23,6 @@ interface GlobalSearchProps {
 const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
     const [query, setQuery] = useState('');
     const [projects, setProjects] = useState<any[]>([]);
-    const [photos, setPhotos] = useState<Photo[]>([]);
-    const [videos, setVideos] = useState<Video[]>([]);
-    const [writings, setWritings] = useState<Writing[]>([]);
     const [loadingProjects, setLoadingProjects] = useState(false);
     const navigate = useNavigate();
 
@@ -46,22 +41,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                     .finally(() => setLoadingProjects(false));
             }
 
-            // Fetch Supabase Content
-            const fetchContent = async () => {
-                const { data: photoData } = await supabase.from('photos').select('*');
-                if (photoData) setPhotos(photoData.map((p: any) => ({ ...p, id: p.id })));
 
-                const { data: videoData } = await supabase.from('videos').select('*');
-                if (videoData) setVideos(videoData.map((v: any) => ({
-                    ...v,
-                    thumbnail: v.thumbnail_url || '',
-                    platform: v.category // Mapping category to platform for search display
-                })));
-
-                const { data: writingData } = await supabase.from('writings').select('*');
-                if (writingData) setWritings(writingData);
-            };
-            fetchContent();
         }
     }, [isOpen]);
 
@@ -127,54 +107,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
             }
         });
 
-        // Photography
-        photos.forEach(photo => {
-            if (photo.title.toLowerCase().includes(searchLower) ||
-                photo.category.toLowerCase().includes(searchLower)) {
-                allResults.push({
-                    id: `photo-${photo.id}`,
-                    title: photo.title,
-                    description: photo.category,
-                    category: 'Photography',
-                    path: '/photography',
-                    icon: Image
-                });
-            }
-        });
 
-        // Videography
-        videos.forEach(video => {
-            if (video.title.toLowerCase().includes(searchLower) ||
-                video.category.toLowerCase().includes(searchLower)) {
-                allResults.push({
-                    id: `video-${video.id}`,
-                    title: video.title,
-                    description: video.category,
-                    category: 'Videography',
-                    path: '/videography',
-                    icon: VideoIcon
-                });
-            }
-        });
-
-        // Writing
-        writings.forEach(writing => {
-            const isSubstack = writing.category?.toLowerCase().includes('substack');
-
-            if (writing.title.toLowerCase().includes(searchLower) ||
-                writing.content.toLowerCase().includes(searchLower)) {
-                allResults.push({
-                    id: isSubstack ? `substack-${writing.id}` : `poem-${writing.id}`,
-                    title: writing.title,
-                    description: isSubstack ? 'Substack Article' : 'Writing',
-                    category: isSubstack ? 'Substack' : 'Writing', // Using 'Substack' category for icon logic in render if needed
-                    path: '/writing',
-                    icon: isSubstack ? ExternalLink : PenTool,
-                    // Note: DB writing currently doesn't store external URL for substack, logic might need adjustment if URL is required
-                    // For now, consistent with Writing.tsx
-                });
-            }
-        });
 
         return allResults;
     }, [query, projects]);

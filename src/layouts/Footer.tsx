@@ -71,9 +71,9 @@ const Footer = () => {
                 <span>and</span>
                 <Code size={16} className="text-emerald-400" />
                 <span>by </span>
-                <Link to="/login" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
+                <span className="text-gray-400 hover:text-emerald-400 transition-colors duration-200 cursor-default">
                   Niya Shroff ☻
-                </Link>
+                </span>
               </div>
 
               <div className="text-gray-400 text-sm">
