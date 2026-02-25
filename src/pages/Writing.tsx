@@ -1,44 +1,29 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, X, Feather, Search, ExternalLink, Trash2, Plus, LogOut } from 'lucide-react';
-import { supabase } from '../lib/supabase';
-import { useAuth } from '../context/AuthContext';
-import WritingUploadModal from '../components/admin/WritingUploadModal';
+import { BookOpen, X, Feather, Search, ExternalLink } from 'lucide-react';
+const staticWritings = [
+    {
+        id: 1,
+        title: "The Ocean's Whisper",
+        content: "A gentle breeze carries the salt.\nThe waves crash, an eternal rhythm.\nTime stands still by the shore.",
+        category: "poem",
+        published_date: "2023-10-15"
+    },
+    {
+        id: 2,
+        title: "Thoughts on AI",
+        content: "We are at the precipice of a new era. Artificial intelligence is no longer just a buzzword, it represents a fundamental shift in how we interact with technology...",
+        category: "substack",
+        published_date: "2023-11-20",
+        url: "https://substack.com"
+    }
+];
 
 const Writing = () => {
-    const { user, signOut } = useAuth();
+    const [dbWritings] = useState<any[]>(staticWritings);
     const [selectedPoem, setSelectedPoem] = useState<any>(null);
     const [activeTab, setActiveTab] = useState<'all' | 'poems' | 'substack'>('all');
     const [searchQuery, setSearchQuery] = useState('');
-    const [dbWritings, setDbWritings] = useState<any[]>([]);
-    const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-
-    // Fetch writings from Supabase
-    useEffect(() => {
-        const fetchWritings = async () => {
-            const { data } = await supabase.from('writings').select('*');
-            if (data) {
-                setDbWritings(data);
-            }
-        };
-        fetchWritings();
-
-        // Realtime subscription
-        const channel = supabase
-            .channel('public:writings')
-            .on('postgres_changes', { event: '*', schema: 'supabase_schema', table: 'writings' }, (payload) => {
-                if (payload.eventType === 'INSERT') {
-                    setDbWritings(prev => [...prev, payload.new]);
-                } else if (payload.eventType === 'DELETE') {
-                    setDbWritings(prev => prev.filter(w => w.id !== payload.old.id));
-                }
-            })
-            .subscribe();
-
-        return () => {
-            supabase.removeChannel(channel);
-        };
-    }, []);
 
     const filteredContent = useMemo(() => {
         const query = searchQuery.toLowerCase();
@@ -69,16 +54,6 @@ const Writing = () => {
         });
     }, [activeTab, searchQuery, dbWritings]);
 
-    const handleDelete = async (e: React.MouseEvent, id: number) => {
-        e.stopPropagation();
-        if (!confirm('Are you sure you want to delete this writing?')) return;
-
-        const { error } = await supabase.from('writings').delete().eq('id', id);
-        if (error) {
-            alert('Error deleting writing: ' + error.message);
-        }
-    };
-
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
             <div className="container mx-auto px-6">
@@ -90,24 +65,7 @@ const Writing = () => {
                 >
                     <div className="flex justify-between items-start mb-4">
                         <h2 className="text-4xl font-bold text-primary">Writing</h2>
-                        {user && (
-                            <div className="flex items-center gap-4">
-                                <button
-                                    onClick={() => setIsUploadModalOpen(true)}
-                                    className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center gap-2 shadow-lg shadow-green-500/25"
-                                >
-                                    <Plus size={20} />
-                                    <span>Add Writing</span>
-                                </button>
-                                <button
-                                    onClick={() => signOut()}
-                                    className="p-2 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500/20 transition-colors"
-                                    title="Sign Out"
-                                >
-                                    <LogOut size={20} />
-                                </button>
-                            </div>
-                        )}
+
                     </div>
                     <p className="text-gray-400 text-lg max-w-2xl mb-8">
                         Thoughts put to paper. A collection of poems, short writings, and Substack articles.
@@ -159,15 +117,7 @@ const Writing = () => {
                                     {item.type === 'substack' && (
                                         <ExternalLink size={20} className="text-gray-500 group-hover:text-white transition-colors" />
                                     )}
-                                    {user && (
-                                        <button
-                                            onClick={(e) => handleDelete(e, item.id)}
-                                            className="p-1.5 bg-red-500/80 text-white rounded-lg hover:bg-red-500 transition-colors z-20"
-                                            title="Delete"
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
-                                    )}
+
                                 </div>
                             </div>
 
@@ -253,11 +203,7 @@ const Writing = () => {
                     )}
                 </AnimatePresence>
 
-                <WritingUploadModal
-                    isOpen={isUploadModalOpen}
-                    onClose={() => setIsUploadModalOpen(false)}
-                    onUploadSuccess={() => { }}
-                />
+
             </div>
         </div>
     );
