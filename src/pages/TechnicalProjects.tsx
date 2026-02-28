@@ -105,7 +105,7 @@ const TechnicalProjects = () => {
                 >
                     <h2 className="text-4xl font-bold mb-4 text-primary">Technical Projects</h2>
                     <p className="text-gray-400 text-lg max-w-2xl mb-8">
-                        A collection of my open-source contributions and personal projects, fetched directly from GitHub.
+                        A collection of some of my personal projects, which I'm eventually planning to refine and update.
                     </p>
 
                     {/* Controls */}
