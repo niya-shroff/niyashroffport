@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, X, Feather, Search, ExternalLink } from 'lucide-react';
+import { X, Feather, Search, ExternalLink } from 'lucide-react';
 
 import { staticWritings, WritingItem } from '../data/writing';
 
@@ -42,6 +42,7 @@ const Writing = () => {
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
             <div className="container mx-auto px-6">
+
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -76,10 +77,11 @@ const Writing = () => {
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all capitalize ${activeTab === tab
-                                        ? 'bg-primary text-background shadow-md'
-                                        : 'text-gray-400 hover:text-white hover:bg-gray-800'
-                                        }`}
+                                    className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all capitalize ${
+                                        activeTab === tab
+                                            ? 'bg-primary text-background shadow-md'
+                                            : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                                    }`}
                                 >
                                     {tab}
                                 </button>
@@ -107,10 +109,11 @@ const Writing = () => {
                         >
                             <div className="flex items-start justify-between mb-6">
                                 <Feather
-                                    className={`h-8 w-8 transition-colors ${item.type === 'poem'
-                                        ? 'text-primary'
-                                        : 'text-orange-400'
-                                        }`}
+                                    className={`h-8 w-8 transition-colors ${
+                                        item.type === 'poem'
+                                            ? 'text-primary'
+                                            : 'text-orange-400'
+                                    }`}
                                 />
 
                                 {item.type === 'substack' && (
@@ -129,27 +132,22 @@ const Writing = () => {
                                 "{item.excerpt}"
                             </p>
 
-                            <div className="pt-4 border-t border-gray-700/50 flex items-center justify-between mt-auto">
+                            {/* Metadata Row */}
+                            <div className="pt-4 border-t border-gray-700/50 flex items-center mt-auto">
                                 <div
-                                    className={`px-2 py-1 rounded text-xs font-medium uppercase tracking-wider ${item.type === 'poem'
-                                        ? 'bg-primary/10 text-primary'
-                                        : 'bg-orange-500/10 text-orange-400'
-                                        }`}
+                                    className={`px-2 py-1 rounded text-xs font-medium uppercase tracking-wider ${
+                                        item.type === 'poem'
+                                            ? 'bg-primary/10 text-primary'
+                                            : 'bg-orange-500/10 text-orange-400'
+                                    }`}
                                 >
                                     {item.type}
                                 </div>
 
-                                {item.type === 'substack' && item.date && (
-                                    <span className="text-xs text-gray-500 font-mono">
+                                {item.date && (
+                                    <span className="text-xs text-gray-500 font-mono ml-auto">
                                         {item.date}
                                     </span>
-                                )}
-
-                                {item.type === 'poem' && (
-                                    <div className="flex items-center text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
-                                        <BookOpen size={16} className="mr-2" />
-                                        Read
-                                    </div>
                                 )}
                             </div>
                         </motion.div>
