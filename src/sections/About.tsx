@@ -3,9 +3,9 @@ import { MapPin } from 'lucide-react';
 const About = () => {
     const stats = [
         { label: 'Years Experience', value: '1+' },
-        { label: 'Projects Completed', value: '5+' },
-        { label: 'Technologies', value: '15+' },
-        { label: 'Ideas Implemented', value: '20+' },
+        { label: 'Countries Visited', value: '20+' },
+        { label: 'Technologies Learnt', value: '15+' },
+        { label: 'Side Quests', value: '5+' },
     ];
 
     return (
@@ -13,7 +13,7 @@ const About = () => {
             <div className="container mx-auto px-6">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">About Me ☻ </h2>
+                        <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
                     </div>
 
                     <div className="space-y-16">
@@ -29,7 +29,7 @@ const About = () => {
                                             className="w-48 h-48 rounded-full mx-auto object-cover mb-6 shadow-2xl"
                                         />
                                         <div className="text-center">
-                                            <h3 className="text-xl font-semibold text-white mb-2">Niya Shroff ☻ </h3>
+                                            <h3 className="text-xl font-semibold text-white mb-2">Niya Shroff </h3>
                                             <p className="text-primary mb-4 flex items-center justify-center gap-2">
                                                 <MapPin size={16} />
                                                 New York, NY
@@ -43,7 +43,15 @@ const About = () => {
                             <div className="flex justify-center lg:justify-start">
                                 <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
                                     <p className="text-gray-300 leading-relaxed text-lg">
-                                        I recently graduated with two Bachelor's degrees in Computer Science and Economics from UMass Amherst. Beyond coding and market analysis, I'm passionate about visual storytelling through my creative venture — combining poetry, photography, and filmmaking. This unique blend of technical expertise and artistic vision empowers me to create solutions that don't just function, but inspire and connect. Btw, I adore smiley faces! ☻
+                                        Who am I? What a great question to ask, yet so hard to answer what defines me. What sets my soul on fire? 
+                                        Let's circle back to that next meeting. I'm still working on it... 
+                                        <br />
+                                        <br />
+                                        Anyways, I graduated in December 2024 with a B.S. 
+                                        in Computer Science and B.A. in Economics from UMass Amherst. 
+                                        Now I work at JPMorgan Chase & Co. as a Software Engineer... how cool is that?
+                                        I feel very lucky to be here and I'm excited for what the future holds.
+                                        Btw, I adore smiley faces! ☻
                                     </p>
                                 </div>
                             </div>

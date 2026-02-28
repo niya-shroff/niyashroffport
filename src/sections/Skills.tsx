@@ -10,46 +10,46 @@ import {
 const Skills = () => {
   const skillCategories = [
     {
-      icon: Code,
-      title: 'Frontend Development',
-      skills: [
-        { name: 'React/Next.js', level: 90 },
-        { name: 'JavaScript/TypeScript', level: 88 },
-        { name: 'HTML/CSS', level: 92 },
-        { name: 'Tailwind CSS', level: 85 },
-      ],
-      color: 'emerald'
-    },
-    {
       icon: Database,
       title: 'Backend Development',
       skills: [
-        { name: 'Node.js', level: 85 },
-        { name: 'Python', level: 90 },
+        { name: 'Python', level: 80 },
         { name: 'Java', level: 80 },
-        { name: 'PostgreSQL', level: 82 },
+        { name: 'Node.js', level: 70 },
+        { name: 'Databases', level: 70 },
       ],
       color: 'blue'
     },
     {
       icon: Brain,
-      title: 'Machine Learning',
+      title: 'Artificial Intelligence',
       skills: [
-        { name: 'TensorFlow/Keras', level: 85 },
-        { name: 'Scikit-learn', level: 88 },
-        { name: 'Pandas/NumPy', level: 90 },
-        { name: 'Data Analysis', level: 87 },
+        { name: 'RAG & LLMs', level: 70 },
+        { name: 'LangChain & LangGraph', level: 85 },
+        { name: 'Prompt Engineering', level: 90 },
+        { name: 'Pandas/NumPy', level: 60 }
       ],
       color: 'purple'
+    },
+    {
+      icon: Code,
+      title: 'Frontend Development',
+      skills: [
+        { name: 'React/Next.js', level: 65 },
+        { name: 'Angular', level: 50 },
+        { name: 'JavaScript/TypeScript', level: 65 },
+        { name: 'HTML/CSS', level: 65 },
+      ],
+      color: 'emerald'
     },
     {
       icon: Cloud,
       title: 'Cloud & DevOps',
       skills: [
         { name: 'AWS', level: 80 },
-        { name: 'Docker', level: 75 },
+        { name: 'Docker', level: 70 },
         { name: 'Git/GitHub', level: 90 },
-        { name: 'CI/CD', level: 70 },
+        { name: 'CI/CD', level: 80 },
       ],
       color: 'amber'
     },
@@ -57,20 +57,20 @@ const Skills = () => {
       icon: Palette,
       title: 'Design & Tools',
       skills: [
-        { name: 'Figma', level: 75 },
-        { name: 'UI/UX Design', level: 80 },
-        { name: 'Responsive Design', level: 88 },
-        { name: 'Prototyping', level: 75 },
+        { name: 'Figma', level: 60 },
+        { name: 'UI/UX Design', level: 70 },
+        { name: 'Responsive Design', level: 70 },
+        { name: 'Prototyping', level: 60 },
       ],
       color: 'pink'
     },
     {
       icon: Settings,
-      title: 'Other Technologies',
+      title: 'Other Frameworks',
       skills: [
         { name: 'REST APIs', level: 88 },
-        { name: 'GraphQL', level: 70 },
-        { name: 'Testing', level: 80 },
+        { name: 'GraphQL', level: 50 },
+        { name: 'End to End Testing', level: 90 },
         { name: 'Agile/Scrum', level: 85 },
       ],
       color: 'indigo'
@@ -94,9 +94,9 @@ const Skills = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Technical Skills ☻ </h2>
+            <h2 className="text-4xl font-bold text-white mb-4">Technical Skills</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              A comprehensive overview of my technical abilities and proficiency levels
+              A visual overview of my technical abilities, where there's always room to improve and grow
             </p>
           </div>
 

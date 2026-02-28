@@ -82,13 +82,14 @@ const Hero = () => {
 
           {/* Title */}
           <h2 className="text-2xl md:text-3xl text-gray-300 mb-6 animate-slide-up-delayed">
-            Software Engineer
+            Human Being
           </h2>
 
           {/* Description */}
           <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
             I transform ideas into reality through code and creativity, blending technical expertise with artistic vision.
-            From full-stack development to filmmaking, I craft solutions and stories that don't just work—they inspire and connect.
+            From full-stack development to my out of office adventures, I step out of my comfort zone and try new things...
+            sometimes solving real world problems, sometimes just framing the perfect photograph.
           </p>
 
           {/* CTA */}

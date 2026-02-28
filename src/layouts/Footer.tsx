@@ -9,10 +9,9 @@ const Footer = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             {/* Brand */}
             <div>
-              <h3 className="text-2xl font-bold text-emerald-400 mb-4">Niya Shroff ☻ </h3>
+              <h3 className="text-2xl font-bold text-emerald-400 mb-4">Niya Shroff</h3>
               <p className="text-gray-400 leading-relaxed">
-                Software Engineer specializing in full-stack development
-                and innovative technology solutions.
+                Just another human being on this beautiful planet, trying to make sense of it all.
               </p>
             </div>
 
@@ -31,11 +30,6 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/photography" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
-                    Creative
-                  </Link>
-                </li>
-                <li>
                   <Link to="/experience" className="text-gray-400 hover:text-emerald-400 transition-colors duration-200">
                     Experience
                   </Link>
@@ -50,14 +44,12 @@ const Footer = () => {
 
             {/* Services */}
             <div>
-              <h4 className="text-white font-medium mb-4">Expertise</h4>
+              <h4 className="text-white font-medium mb-4">I'm a/an...</h4>
               <ul className="space-y-2 text-gray-400">
-                <li>Full Stack Development</li>
-                <li>Creative Direction</li>
-                <li>Data Analysis</li>
-                <li>Photography & Film</li>
-                <li>Project Management</li>
-                <li>Visual Storytelling</li>
+                <li>Engineer</li>
+                <li>Writer</li>
+                <li>Photographer</li>
+                <li>Filmmaker</li>
               </ul>
             </div>
           </div>
@@ -71,12 +63,12 @@ const Footer = () => {
                 <span>and</span>
                 <Code size={16} className="text-emerald-400" />
                 <span>by </span>
-                <span className="text-gray-400 hover:text-emerald-400 transition-colors duration-200 cursor-default">
-                  Niya Shroff ☻
+                <span className="text-gray-400">
+                  Niya Shroff
                 </span>
               </div>
 
-              <div className="text-gray-400 text-sm">
+              <div className="text-gray-400">
                 © {new Date().getFullYear()} Niya Shroff. All rights reserved.
               </div>
             </div>

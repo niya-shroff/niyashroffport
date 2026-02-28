@@ -1,26 +1,11 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, X, Feather, Search, ExternalLink } from 'lucide-react';
-const staticWritings = [
-    {
-        id: 1,
-        title: "The Ocean's Whisper",
-        content: "A gentle breeze carries the salt.\nThe waves crash, an eternal rhythm.\nTime stands still by the shore.",
-        category: "poem",
-        published_date: "2023-10-15"
-    },
-    {
-        id: 2,
-        title: "Thoughts on AI",
-        content: "We are at the precipice of a new era. Artificial intelligence is no longer just a buzzword, it represents a fundamental shift in how we interact with technology...",
-        category: "substack",
-        published_date: "2023-11-20",
-        url: "https://substack.com"
-    }
-];
+
+import { staticWritings, WritingItem } from '../data/writing';
 
 const Writing = () => {
-    const [dbWritings] = useState<any[]>(staticWritings);
+    const [dbWritings] = useState<WritingItem[]>(staticWritings);
     const [selectedPoem, setSelectedPoem] = useState<any>(null);
     const [activeTab, setActiveTab] = useState<'all' | 'poems' | 'substack'>('all');
     const [searchQuery, setSearchQuery] = useState('');
@@ -30,21 +15,21 @@ const Writing = () => {
 
         const allItems = dbWritings.map(item => {
             const isSubstack = item.category?.toLowerCase().includes('substack');
+
             return {
                 id: item.id,
                 title: item.title,
-                excerpt: item.content.substring(0, 100) + '...',
+                excerpt: item.content.substring(0, 120) + '...',
                 content: item.content,
-                // Map category to type. If 'substack', type is substack.
                 type: (isSubstack ? 'substack' : 'poem') as 'substack' | 'poem',
                 date: item.published_date,
-                isStatic: false,
-                url: null // DB currently doesn't have URL column, so default to null
+                url: item.url ?? null
             };
         });
 
         return allItems.filter(item => {
-            const matchesSearch = item.title.toLowerCase().includes(query) ||
+            const matchesSearch =
+                item.title.toLowerCase().includes(query) ||
                 item.excerpt.toLowerCase().includes(query);
 
             if (activeTab === 'all') return matchesSearch;
@@ -57,24 +42,26 @@ const Writing = () => {
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
             <div className="container mx-auto px-6">
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     className="mb-12"
                 >
-                    <div className="flex justify-between items-start mb-4">
-                        <h2 className="text-4xl font-bold text-primary">Writing</h2>
+                    <h2 className="text-4xl font-bold text-primary mb-4">Writing</h2>
 
-                    </div>
                     <p className="text-gray-400 text-lg max-w-2xl mb-8">
-                        Thoughts put to paper. A collection of poems, short writings, and Substack articles.
+                        Thoughts put to paper. A collection of poems and substack posts.
                     </p>
 
-                    {/* Search and Filter Controls */}
+                    {/* Search + Tabs */}
                     <div className="flex flex-col md:flex-row gap-4 bg-gray-800/50 p-4 rounded-xl border border-gray-700/50 backdrop-blur-sm max-w-4xl">
                         <div className="relative flex-grow">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                            <Search
+                                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                                size={20}
+                            />
                             <input
                                 type="text"
                                 placeholder="Search writings..."
@@ -89,7 +76,7 @@ const Writing = () => {
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all duration-200 capitalize ${activeTab === tab
+                                    className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all capitalize ${activeTab === tab
                                         ? 'bg-primary text-background shadow-md'
                                         : 'text-gray-400 hover:text-white hover:bg-gray-800'
                                         }`}
@@ -101,24 +88,37 @@ const Writing = () => {
                     </div>
                 </motion.div>
 
+                {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredContent.map((item, index) => (
                         <motion.div
                             key={`${item.type}-${item.id}`}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            transition={{ delay: index * 0.05 }}
                             className="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-primary/50 hover:bg-gray-800/80 cursor-pointer transition-all duration-300 group flex flex-col h-full relative"
-                            onClick={() => (item.type === 'poem' || !item.url) ? setSelectedPoem(item) : window.open(item.url, '_blank')}
+                            onClick={() => {
+                                if (item.type === 'substack' && item.url) {
+                                    window.open(item.url, '_blank', 'noopener,noreferrer');
+                                } else {
+                                    setSelectedPoem(item);
+                                }
+                            }}
                         >
                             <div className="flex items-start justify-between mb-6">
-                                <Feather className={`h-8 w-8 transition-colors ${item.type === 'poem' ? 'text-primary' : 'text-orange-400'}`} />
-                                <div className="flex items-center gap-2">
-                                    {item.type === 'substack' && (
-                                        <ExternalLink size={20} className="text-gray-500 group-hover:text-white transition-colors" />
-                                    )}
+                                <Feather
+                                    className={`h-8 w-8 transition-colors ${item.type === 'poem'
+                                        ? 'text-primary'
+                                        : 'text-orange-400'
+                                        }`}
+                                />
 
-                                </div>
+                                {item.type === 'substack' && (
+                                    <ExternalLink
+                                        size={20}
+                                        className="text-gray-500 group-hover:text-white transition-colors"
+                                    />
+                                )}
                             </div>
 
                             <h3 className="text-2xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
@@ -130,21 +130,23 @@ const Writing = () => {
                             </p>
 
                             <div className="pt-4 border-t border-gray-700/50 flex items-center justify-between mt-auto">
-                                <div className={`px-2 py-1 rounded text-xs font-medium uppercase tracking-wider ${item.type === 'poem'
-                                    ? 'bg-primary/10 text-primary'
-                                    : 'bg-orange-500/10 text-orange-400'
-                                    }`}>
+                                <div
+                                    className={`px-2 py-1 rounded text-xs font-medium uppercase tracking-wider ${item.type === 'poem'
+                                        ? 'bg-primary/10 text-primary'
+                                        : 'bg-orange-500/10 text-orange-400'
+                                        }`}
+                                >
                                     {item.type}
                                 </div>
 
-                                {item.type === 'substack' && (item as any).date && (
+                                {item.type === 'substack' && item.date && (
                                     <span className="text-xs text-gray-500 font-mono">
-                                        {(item as any).date}
+                                        {item.date}
                                     </span>
                                 )}
 
                                 {item.type === 'poem' && (
-                                    <div className="flex items-center text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">
+                                    <div className="flex items-center text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-10px] group-hover:translate-x-0">
                                         <BookOpen size={16} className="mr-2" />
                                         Read
                                     </div>
@@ -160,6 +162,7 @@ const Writing = () => {
                     )}
                 </div>
 
+                {/* Modal */}
                 <AnimatePresence>
                     {selectedPoem && (
                         <motion.div
@@ -191,9 +194,12 @@ const Writing = () => {
                                     <div className="h-1 w-20 bg-primary-hover/30 mx-auto rounded-full mt-4"></div>
                                 </div>
 
-                                <div className="space-y-4 text-center max-h-[60vh] overflow-y-auto custom-scrollbar pr-2">
+                                <div className="space-y-6 text-center max-h-[60vh] overflow-y-auto pr-2">
                                     {selectedPoem.content.split('\n\n').map((stanza: string, i: number) => (
-                                        <p key={i} className="text-gray-300 text-lg font-serif leading-relaxed whitespace-pre-line">
+                                        <p
+                                            key={i}
+                                            className="text-gray-300 text-lg font-serif leading-relaxed whitespace-pre-line"
+                                        >
                                             {stanza}
                                         </p>
                                     ))}
@@ -202,8 +208,6 @@ const Writing = () => {
                         </motion.div>
                     )}
                 </AnimatePresence>
-
-
             </div>
         </div>
     );

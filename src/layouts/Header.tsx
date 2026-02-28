@@ -145,7 +145,7 @@ const Header = () => {
               <a href="https://linkedin.com/in/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="mailto:nshroff@umass.edu" className="text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:contact@niyashroff.me" className="text-gray-400 hover:text-white transition-colors">
                 <Mail size={20} />
               </a>
             </div>
