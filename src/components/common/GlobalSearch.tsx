@@ -1,15 +1,17 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Code, Loader } from 'lucide-react';
+import { Search, X, ChevronRight, Command, Briefcase, GraduationCap, Code, Loader, Camera, Edit3, Home, User, Mail, Video } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { experiences } from '../../data/experience';
 import { education } from '../../data/education';
+import { staticWritings } from '../../data/writing';
+import { localPhotos } from '../../data/photography';
 
 interface SearchResult {
     id: string | number;
     title: string;
     description?: string;
-    category: 'Experience' | 'Education' | 'Projects' | 'Photography' | 'Videography' | 'Writing' | 'Substack';
+    category: 'Experience' | 'Education' | 'Projects' | 'Photography' | 'Videography' | 'Writing' | 'Substack' | 'Page';
     path: string;
     icon: any;
     url?: string;
@@ -40,8 +42,6 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                     .catch(err => console.error('Failed to fetch projects', err))
                     .finally(() => setLoadingProjects(false));
             }
-
-
         }
     }, [isOpen]);
 
@@ -57,14 +57,31 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
     const results = useMemo(() => {
         if (!query.trim()) return [];
 
-        const searchLower = query.toLowerCase();
+        const searchTerms = query.toLowerCase().split(/\s+/).filter(Boolean);
         const allResults: SearchResult[] = [];
+
+        // Helper function to check if all search terms are present in a combined string
+        const matches = (...fields: (string | null | undefined)[]) => {
+            const combined = fields.filter(Boolean).join(' ').toLowerCase();
+            return searchTerms.every(term => combined.includes(term));
+        };
+
+        const staticPages = [
+            { id: 'page-home', title: 'Home', description: 'Landing Page', category: 'Page' as const, path: '/', icon: Home },
+            { id: 'page-about', title: 'About Me', description: 'Personal Background', category: 'Page' as const, path: '/about', icon: User },
+            { id: 'page-contact', title: 'Contact', description: 'Get in touch', category: 'Page' as const, path: '/contact', icon: Mail },
+            { id: 'page-videography', title: 'Videography', description: 'Films and Edits', category: 'Page' as const, path: '/videography', icon: Video },
+        ];
+
+        staticPages.forEach(page => {
+            if (matches(page.title, page.description, page.category)) {
+                allResults.push(page);
+            }
+        });
 
         // Experience
         experiences.forEach((exp, idx) => {
-            if (exp.title.toLowerCase().includes(searchLower) ||
-                exp.company.toLowerCase().includes(searchLower) ||
-                exp.description.toLowerCase().includes(searchLower)) {
+            if (matches(exp.title, exp.company, exp.description)) {
                 allResults.push({
                     id: `exp-${idx}`,
                     title: exp.title,
@@ -78,8 +95,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
 
         // Education
         education.forEach((edu, idx) => {
-            if (edu.degree.toLowerCase().includes(searchLower) ||
-                edu.school.toLowerCase().includes(searchLower)) {
+            if (matches(edu.degree, edu.school)) {
                 allResults.push({
                     id: `edu-${idx}`,
                     title: edu.degree,
@@ -93,9 +109,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
 
         // Projects
         projects.forEach(proj => {
-            if (proj.name.toLowerCase().includes(searchLower) ||
-                (proj.description && proj.description.toLowerCase().includes(searchLower)) ||
-                (proj.language && proj.language.toLowerCase().includes(searchLower))) {
+            if (matches(proj.name, proj.description, proj.language)) {
                 allResults.push({
                     id: `proj-${proj.id}`,
                     title: proj.name,
@@ -107,7 +121,35 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
             }
         });
 
+        // Writing / Substack
+        staticWritings.forEach((writing) => {
+            if (matches(writing.title, writing.content, writing.category)) {
+                const isSubstack = writing.category?.toLowerCase() === 'substack';
+                allResults.push({
+                    id: `writing-${writing.id}`,
+                    title: writing.title,
+                    description: isSubstack ? 'Substack Post' : 'Poetry',
+                    category: isSubstack ? 'Substack' : 'Writing',
+                    path: '/writing',
+                    icon: Edit3,
+                    url: writing.url || undefined
+                });
+            }
+        });
 
+        // Photography
+        localPhotos.forEach(photo => {
+            if (matches(photo.title, photo.category, photo.location)) {
+                allResults.push({
+                    id: `photo-${photo.id}`,
+                    title: photo.title,
+                    description: photo.category || 'Photography',
+                    category: 'Photography',
+                    path: '/photography',
+                    icon: Camera
+                });
+            }
+        });
 
         return allResults;
     }, [query, projects]);
@@ -160,7 +202,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                                 className="w-full bg-transparent text-xl text-white pl-12 pr-12 focus:outline-none placeholder-gray-500"
                                 autoFocus
                             />
-                            {loadingProjects && (
+                            {(loadingProjects) && (
                                 <div className="absolute right-14 top-1/2 transform -translate-y-1/2">
                                     <Loader className="animate-spin text-primary" size={20} />
                                 </div>

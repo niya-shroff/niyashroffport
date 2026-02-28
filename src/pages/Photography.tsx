@@ -1,64 +1,15 @@
-export const fetchDriveFiles = async (folderId: string, apiKey: string) => {
-  const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&fields=files(id,name,mimeType)&key=${apiKey}`;
-  
-  const response = await fetch(url);
-  if (!response.ok) throw new Error('Failed to fetch from Google Drive');
-  
-  const data = await response.json();
-  console.log("files id",data.files[5].id);
-  return data.files.map((file: any) => ({
-    id: file.id,
-    title: file.name.split('.')[0],
-    url: `https://drive.google.com/uc?id=${file.id}&authuser=0`, // Direct image URL
-    category: '', // We’ll fill this later
-    location: '', // Optional, you can customize
-  }));
-};
-
 import { useState, useEffect, useMemo } from 'react';
 import { ZoomIn, X, ChevronLeft, ChevronRight, Search, Filter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { Photo } from '../types';
-
-const folderMap = {
-  Abstract: '152GM0KUC2Z5jW3rOBOgbEA3dkKCltfq_',
-  Animals: '150SWWf9uNtqGh3iSZmrYoKaIDu93153n',
-  Cities: '1x0E20DS8pztW5WjBbYIi3ujm4JiG79q5',
-  Nature: '1-tAlJWabxJMxg7K0IF8PcxqIGugZnWxs',
-  People: '1nNgEhnIhn72SYgleqv1nebmk8nsJeLGU',
-};
-
-const API_KEY = 'AIzaSyDQshWbF7JtjCWpMoT6mxeXgKHjIOMLLXU';
+import { Photo, localPhotos } from '../data/photography';
 
 const Photography = () => {
-  const [photos, setPhotos] = useState<Photo[]>([]);
+  const photos = localPhotos;
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const location = useLocation();
-
-  // Fetch all images from all folders
-  useEffect(() => {
-    const fetchAllPhotos = async () => {
-      const allPhotos: Photo[] = [];
-
-      for (const [category, folderId] of Object.entries(folderMap)) {
-        try {
-          const files = await fetchDriveFiles(folderId, API_KEY);
-          console.log("files",files);
-          files.forEach((f: { category: string; }) => (f.category = category));
-          allPhotos.push(...files);
-        } catch (err) {
-          console.error(`Error fetching folder ${category}:`, err);
-        }
-      }
-
-      setPhotos(allPhotos);
-    };
-
-    fetchAllPhotos();
-  }, []);
 
   // Scroll to hash on mount
   useEffect(() => {
@@ -155,7 +106,7 @@ const Photography = () => {
                 <img
                   src={photo.url}
                   alt={photo.title}
-                //   loading="lazy"
+                  loading="lazy"
                   className="w-full h-auto block transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
