@@ -16,7 +16,7 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"message": "Substack API is running"}
+    return {}
 
 @app.get("/substack/{username}")
 def get_substack_posts(username: str):
