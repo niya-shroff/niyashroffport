@@ -25,6 +25,15 @@ const Writing = () => {
     const filteredContent = useMemo(() => {
         const query = searchQuery.toLowerCase();
 
+        const formatDateStr = (dateStr?: string) => {
+            if (!dateStr) return undefined;
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${days[d.getUTCDay()]}, ${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+        };
+
         const substackItems = substackArticles.map((item, index) => {
             const contentString = item.content || item.description || '';
             return {
@@ -33,7 +42,7 @@ const Writing = () => {
                 excerpt: contentString ? contentString.substring(0, 120) + '...' : '',
                 content: item.content,
                 type: 'substack',
-                date: item.published,
+                date: formatDateStr(item.published),
                 url: item.link ?? null
             };
         });
@@ -47,7 +56,7 @@ const Writing = () => {
                 excerpt: item.content ? item.content.substring(0, 120) + '...' : '',
                 content: item.content,
                 type: (isSubstack ? 'substack' : 'poem') as 'substack' | 'poem',
-                date: item.published_date,
+                date: formatDateStr(item.published_date),
                 url: item.url ?? null
             };
         });
