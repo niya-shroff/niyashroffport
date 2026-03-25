@@ -150,11 +150,11 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
         });
 
         // Fetched Substack
-        substackArticles.forEach((article) => {
+        substackArticles.forEach((article, index) => {
             const contentString = article.content || article.description || '';
             if (matches(article.title, contentString, 'substack')) {
                 allResults.push({
-                    id: `writing-${article.id}`, // using writing prefix to work with deep-linking if needed
+                    id: `writing-${article.id || `fetched-${index}`}`, // using writing prefix to work with deep-linking if needed
                     title: article.title,
                     description: 'Substack Post',
                     category: 'Substack',
