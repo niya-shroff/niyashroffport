@@ -24,7 +24,7 @@ const About = () => {
                                 <div className="bg-gradient-to-br from-primary to-blue-500 rounded-2xl p-1 w-full max-w-md">
                                     <div className="bg-gray-800 rounded-2xl p-8 h-full flex flex-col justify-center">
                                         <img
-                                            src="/1738873701763.jpeg"
+                                            src="/headshot.jpeg"
                                             alt="Niya Shroff"
                                             className="w-48 h-48 rounded-full mx-auto object-cover mb-6 shadow-2xl"
                                         />
