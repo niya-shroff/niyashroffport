@@ -25,16 +25,16 @@ const Writing = () => {
     const filteredContent = useMemo(() => {
         const query = searchQuery.toLowerCase();
 
-        const substackItems = substackArticles.map(item => {
+        const substackItems = substackArticles.map((item, index) => {
             const contentString = item.content || item.description || '';
             return {
-                id: item.id,
+                id: item.id || `fetched-${index}`,
                 title: item.title,
                 excerpt: contentString ? contentString.substring(0, 120) + '...' : '',
                 content: item.content,
                 type: 'substack',
                 date: item.published,
-                url: item.url ?? null
+                url: item.link ?? null
             };
         });
 

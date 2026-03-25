@@ -160,7 +160,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                     category: 'Substack',
                     path: '/writing',
                     icon: Edit3,
-                    url: article.url || undefined
+                    url: article.link || undefined
                 });
             }
         });
