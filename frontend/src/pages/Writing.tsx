@@ -12,7 +12,10 @@ const Writing = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const API_BASE_URL = (import.meta as any).env.VITE_API_URL || '';
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const defaultApiUrl = isLocalhost ? 'http://localhost:8000' : 'https://niyashroff.me';
+        const API_BASE_URL = (import.meta as any).env.VITE_API_URL || defaultApiUrl;
+        
         fetch(`${API_BASE_URL}/substack/newniyas`)
             .then(res => res.json())
             .then(data => setSubstackArticles(data.posts || data))
@@ -23,10 +26,11 @@ const Writing = () => {
         const query = searchQuery.toLowerCase();
 
         const substackItems = substackArticles.map(item => {
+            const contentString = item.content || item.description || '';
             return {
                 id: item.id,
                 title: item.title,
-                excerpt: item.content.substring(0, 120) + '...',
+                excerpt: contentString ? contentString.substring(0, 120) + '...' : '',
                 content: item.content,
                 type: 'substack',
                 date: item.published,
@@ -40,7 +44,7 @@ const Writing = () => {
             return {
                 id: item.id,
                 title: item.title,
-                excerpt: item.content.substring(0, 120) + '...',
+                excerpt: item.content ? item.content.substring(0, 120) + '...' : '',
                 content: item.content,
                 type: (isSubstack ? 'substack' : 'poem') as 'substack' | 'poem',
                 date: item.published_date,
@@ -48,17 +52,20 @@ const Writing = () => {
             };
         });
 
-        return allItems.filter(item => {
+        const combinedItems = [...substackItems, ...allItems];
+
+        return combinedItems.filter(item => {
+            const tempExcerpt = item.excerpt || '';
             const matchesSearch =
-                item.title.toLowerCase().includes(query) ||
-                item.excerpt.toLowerCase().includes(query);
+                item.title?.toLowerCase().includes(query) ||
+                tempExcerpt.toLowerCase().includes(query);
 
             if (activeTab === 'all') return matchesSearch;
             if (activeTab === 'poems') return matchesSearch && item.type === 'poem';
             if (activeTab === 'substack') return matchesSearch && item.type === 'substack';
             return false;
         });
-    }, [activeTab, searchQuery, poems]);
+    }, [activeTab, searchQuery, poems, substackArticles]);
 
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">

@@ -9,33 +9,6 @@ export type WritingItem = {
 
 export const staticWritings: WritingItem[] = [
     {
-        id: 9,
-        title: "words",
-        content:
-            "words have two attributes: denotations and connotations, as we may have learned at some point in English class and through real life itself as we grow up in various social environments.",
-        category: "substack",
-        published_date: "2026-02-28",
-        url: "https://substack.com/home/post/p-189478978"
-    },
-    {
-        id: 1,
-        title: "when you want something in life",
-        content:
-            "when you want something in life — do you chase it or do you wait for it to come to you? i think it really depends on how badly you want that “thing” and if it you really need it now or for the future....",
-        category: "substack",
-        published_date: "2026-02-09",
-        url: "https://substack.com/home/post/p-187338255"
-    },
-    {
-        id: 2,
-        title: "what is substack? new year — same thoughts?",
-        content:
-            "hello wanderers of this planet, those who find the time to read and write in our digital age. perhaps this is a marketing campaign. now im just rambling on the internet, who am i?...",
-        category: "substack",
-        published_date: "2026-01-01",
-        url: "https://substack.com/home/post/p-183174985"
-    },
-    {
         id: 8,
         title: "i light a flower on fire…",
         content:
