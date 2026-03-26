@@ -26,6 +26,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
     const [query, setQuery] = useState('');
     const [projects, setProjects] = useState<any[]>([]);
     const [loadingProjects, setLoadingProjects] = useState(false);
+    const [substackArticles, setSubstackArticles] = useState<any[]>([]);
     const navigate = useNavigate();
 
     // Fetch Content
@@ -41,6 +42,15 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                     })
                     .catch(err => console.error('Failed to fetch projects', err))
                     .finally(() => setLoadingProjects(false));
+            }
+
+            if (substackArticles.length === 0) {
+                const API_BASE_URL = (import.meta as any).env.VITE_API_URL || 'https://backend-misty-moon-6697.fly.dev';
+                
+                fetch(`${API_BASE_URL}/substack/newniyas`)
+                    .then(res => res.json())
+                    .then(data => setSubstackArticles(data.posts || data))
+                    .catch(err => console.error('Failed to fetch substack articles', err));
             }
         }
     }, [isOpen]);
@@ -137,6 +147,22 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
             }
         });
 
+        // Fetched Substack
+        substackArticles.forEach((article, index) => {
+            const contentString = article.content || article.description || '';
+            if (matches(article.title, contentString, 'substack')) {
+                allResults.push({
+                    id: `writing-${article.id || `fetched-${index}`}`, // using writing prefix to work with deep-linking if needed
+                    title: article.title,
+                    description: 'Substack Post',
+                    category: 'Substack',
+                    path: '/writing',
+                    icon: Edit3,
+                    url: article.link || undefined
+                });
+            }
+        });
+
         // Photography
         localPhotos.forEach(photo => {
             if (matches(photo.title, photo.category, photo.location)) {
@@ -152,7 +178,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
         });
 
         return allResults;
-    }, [query, projects]);
+    }, [query, projects, substackArticles]);
 
     const handleSelect = (result: SearchResult) => {
         if (result.category === 'Substack' && result.url) {
