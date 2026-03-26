@@ -45,9 +45,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
             }
 
             if (substackArticles.length === 0) {
-                const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                const defaultApiUrl = isLocalhost ? 'http://localhost:8000' : 'https://niyashroff.me';
-                const API_BASE_URL = (import.meta as any).env.VITE_API_URL || defaultApiUrl;
+                const API_BASE_URL = (import.meta as any).env.VITE_API_URL || 'https://backend-misty-moon-6697.fly.dev';
                 
                 fetch(`${API_BASE_URL}/substack/newniyas`)
                     .then(res => res.json())
