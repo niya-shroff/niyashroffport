@@ -1,43 +1,78 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Feather, Search, ExternalLink } from 'lucide-react';
 
 import { staticWritings, WritingItem } from '../data/writing';
 
 const Writing = () => {
-    const [dbWritings] = useState<WritingItem[]>(staticWritings);
+    const [poems] = useState<WritingItem[]>(staticWritings);
+    const [substackArticles, setSubstackArticles] = useState<any[]>([]);
     const [selectedPoem, setSelectedPoem] = useState<any>(null);
     const [activeTab, setActiveTab] = useState<'all' | 'poems' | 'substack'>('all');
     const [searchQuery, setSearchQuery] = useState('');
 
+    useEffect(() => {
+        const API_BASE_URL = (import.meta as any).env.VITE_API_URL || 'https://backend-misty-moon-6697.fly.dev';
+        
+        fetch(`${API_BASE_URL}/substack/newniyas`)
+            .then(res => res.json())
+            .then(data => setSubstackArticles(data.posts || data))
+            .catch(err => console.error('Failed to fetch substack articles', err));
+    }, []);
+
     const filteredContent = useMemo(() => {
         const query = searchQuery.toLowerCase();
 
-        const allItems = dbWritings.map(item => {
+        const formatDateStr = (dateStr?: string) => {
+            if (!dateStr) return undefined;
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${days[d.getUTCDay()]}, ${d.getUTCDate()} ${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+        };
+
+        const substackItems = substackArticles.map((item, index) => {
+            const contentString = item.content || item.description || '';
+            return {
+                id: item.id || `fetched-${index}`,
+                title: item.title,
+                excerpt: contentString ? contentString.substring(0, 120) + '...' : '',
+                content: item.content,
+                type: 'substack',
+                date: formatDateStr(item.published),
+                url: item.link ?? null
+            };
+        });
+
+        const allItems = poems.map(item => {
             const isSubstack = item.category?.toLowerCase().includes('substack');
 
             return {
                 id: item.id,
                 title: item.title,
-                excerpt: item.content.substring(0, 120) + '...',
+                excerpt: item.content ? item.content.substring(0, 120) + '...' : '',
                 content: item.content,
                 type: (isSubstack ? 'substack' : 'poem') as 'substack' | 'poem',
-                date: item.published_date,
+                date: formatDateStr(item.published_date),
                 url: item.url ?? null
             };
         });
 
-        return allItems.filter(item => {
+        const combinedItems = [...substackItems, ...allItems];
+
+        return combinedItems.filter(item => {
+            const tempExcerpt = item.excerpt || '';
             const matchesSearch =
-                item.title.toLowerCase().includes(query) ||
-                item.excerpt.toLowerCase().includes(query);
+                item.title?.toLowerCase().includes(query) ||
+                tempExcerpt.toLowerCase().includes(query);
 
             if (activeTab === 'all') return matchesSearch;
             if (activeTab === 'poems') return matchesSearch && item.type === 'poem';
             if (activeTab === 'substack') return matchesSearch && item.type === 'substack';
             return false;
         });
-    }, [activeTab, searchQuery, dbWritings]);
+    }, [activeTab, searchQuery, poems, substackArticles]);
 
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-900">
@@ -77,11 +112,10 @@ const Writing = () => {
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all capitalize ${
-                                        activeTab === tab
-                                            ? 'bg-primary text-background shadow-md'
-                                            : 'text-gray-400 hover:text-white hover:bg-gray-800'
-                                    }`}
+                                    className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all capitalize ${activeTab === tab
+                                        ? 'bg-primary text-background shadow-md'
+                                        : 'text-gray-400 hover:text-white hover:bg-gray-800'
+                                        }`}
                                 >
                                     {tab}
                                 </button>
@@ -109,11 +143,10 @@ const Writing = () => {
                         >
                             <div className="flex items-start justify-between mb-6">
                                 <Feather
-                                    className={`h-8 w-8 transition-colors ${
-                                        item.type === 'poem'
-                                            ? 'text-primary'
-                                            : 'text-orange-400'
-                                    }`}
+                                    className={`h-8 w-8 transition-colors ${item.type === 'poem'
+                                        ? 'text-primary'
+                                        : 'text-orange-400'
+                                        }`}
                                 />
 
                                 {item.type === 'substack' && (
@@ -135,11 +168,10 @@ const Writing = () => {
                             {/* Metadata Row */}
                             <div className="pt-4 border-t border-gray-700/50 flex items-center mt-auto">
                                 <div
-                                    className={`px-2 py-1 rounded text-xs font-medium uppercase tracking-wider ${
-                                        item.type === 'poem'
-                                            ? 'bg-primary/10 text-primary'
-                                            : 'bg-orange-500/10 text-orange-400'
-                                    }`}
+                                    className={`px-2 py-1 rounded text-xs font-medium uppercase tracking-wider ${item.type === 'poem'
+                                        ? 'bg-primary/10 text-primary'
+                                        : 'bg-orange-500/10 text-orange-400'
+                                        }`}
                                 >
                                     {item.type}
                                 </div>
