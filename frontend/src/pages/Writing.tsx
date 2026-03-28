@@ -12,9 +12,7 @@ const Writing = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const API_BASE_URL = (import.meta as any).env.VITE_API_URL || 'https://backend-misty-moon-6697.fly.dev';
-        
-        fetch(`${API_BASE_URL}/substack/newniyas`)
+        fetch('https://substacker-umber.vercel.app/substack/newniyas')
             .then(res => res.json())
             .then(data => setSubstackArticles(data.posts || data))
             .catch(err => console.error('Failed to fetch substack articles', err));

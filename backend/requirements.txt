@@ -1,5 +1,0 @@
-fastapi
-uvicorn
-hypercorn
-feedparser
-beautifulsoup4
