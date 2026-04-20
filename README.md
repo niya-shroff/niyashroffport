@@ -17,7 +17,7 @@ This repository contains the source code for my personal portfolio website, wher
 - **Styling**: Tailwind CSS & heavily customized layer variables
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Integrations**: EmailJS (Contact form), Substack API (Writings)
+- **Integrations**: EmailJS (Contact form), Substack API (Substacker - Substack API I developed)
 
 ## Getting Started
 
