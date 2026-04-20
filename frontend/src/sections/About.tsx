@@ -29,32 +29,32 @@ const About = () => {
                             <div className="lg:col-span-5 relative perspective-1000">
                                 <div className="absolute -inset-4 bg-primary/5 blur-2xl rounded-full"></div>
                                 
-                                <div className="card !rotate-[-2deg] p-4 bg-white/5 tape-edge relative z-10 mx-auto max-w-sm">
-                                    <div className="relative overflow-hidden border border-gray-700 aspect-square group">
+                                <div className="photo-frame !rotate-[-2deg] p-4 pb-16 bg-[#fdfbf7] tape-edge relative z-10 mx-auto max-w-sm shadow-2xl border border-gray-300">
+                                    <div className="relative overflow-hidden border border-gray-300 aspect-square shadow-inner">
                                         <img
                                             src="/headshot.jpeg"
                                             alt="Niya Shroff"
-                                            className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
+                                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                                         />
-                                        <div className="absolute inset-0 bg-primary/20 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500"></div>
+                                        {/* Subtle film grain overlay effect without making it B&W */}
+                                        <div className="absolute inset-0 bg-yellow-500/10 mix-blend-overlay pointer-events-none"></div>
                                         
-                                        {/* HUD Elements */}
-                                        <div className="absolute top-2 left-2 text-[8px] font-mono text-primary bg-background/80 px-1">SYS.CAM_01</div>
-                                        <div className="absolute bottom-2 right-2 text-[8px] font-mono text-primary bg-background/80 px-1">REC //</div>
+                                        {/* HUD Elements - kept minimal for tech-scrapbook blend */}
+                                        <div className="absolute top-2 left-2 text-[8px] font-mono text-white bg-black/50 backdrop-blur-sm px-1">SYS.CAM_01</div>
+                                        <div className="absolute bottom-2 right-2 text-[8px] font-mono text-red-500 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-1">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                                            REC
+                                        </div>
                                     </div>
                                     
-                                    <div className="mt-4 flex justify-between items-end border-t border-gray-800 pt-4">
-                                        <div>
-                                            <h3 className="text-lg font-mono text-white tracking-widest uppercase">Niya Shroff ☻</h3>
-                                            <p className="text-primary font-mono text-xs flex items-center gap-1 mt-1">
-                                                <MapPin size={12} />
-                                                NEW_YORK, NY
-                                            </p>
-                                        </div>
-                                        <div className="text-[10px] text-muted font-mono">FILE_#402</div>
+                                    <div className="absolute bottom-3 left-0 w-full text-center flex flex-col justify-center items-center">
+                                        <h3 className="text-3xl font-handwriting text-gray-900 rotate-[-1deg]">Niya Shroff ☻</h3>
+                                        <p className="text-gray-500 font-mono text-[9px] flex items-center justify-center gap-1 mt-1 uppercase tracking-widest">
+                                            <MapPin size={10} />
+                                            NEW_YORK, NY
+                                        </p>
                                     </div>
                                 </div>
-                                {/* Technical decorative elements */}
                                 <div className="absolute -left-8 top-1/2 w-4 h-[1px] bg-gray-600"></div>
                                 <div className="absolute -right-8 top-1/2 w-4 h-[1px] bg-gray-600"></div>
                             </div>
