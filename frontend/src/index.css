@@ -1,25 +1,96 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+    /* Define a subtle dotted background grid for the scrapbook/sci-fi feel */
+    :root {
+        --grid-color: rgba(255, 255, 255, 0.05);
+    }
+    
     html {
         scroll-behavior: smooth;
     }
 
     body {
         @apply bg-background text-white font-sans antialiased;
+        background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+        background-size: 24px 24px;
+        background-position: -12px -12px;
     }
 }
 
 @layer components {
     .btn-primary {
-        @apply px-6 py-2 bg-primary text-background font-semibold rounded-lg hover:bg-primary-hover transition-colors duration-200;
+        @apply px-6 py-2 bg-primary/20 text-primary border border-primary/50 font-mono text-sm rounded hover:bg-primary/40 transition-colors duration-200 uppercase tracking-wider relative overflow-hidden;
     }
 
     .card {
-        @apply bg-surface rounded-xl p-6 border border-gray-700/50 hover:border-primary/50 transition-all duration-300;
+        @apply bg-surface/80 backdrop-blur-sm p-6 border border-gray-800 hover:border-primary/50 transition-all duration-300 relative;
+        /* Asymmetric scrapbook feel */
+        transform-style: preserve-3d;
+    }
+    
+    .card::before {
+        content: '';
+        @apply absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary/50 opacity-0 transition-opacity duration-300;
+    }
+    .card::after {
+        content: '';
+        @apply absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary/50 opacity-0 transition-opacity duration-300;
+    }
+    .card:hover::before, .card:hover::after {
+        @apply opacity-100;
+    }
+
+    .mono-accent {
+        @apply font-mono text-xs tracking-widest text-primary/70 uppercase;
+    }
+    
+    .tape-edge {
+        @apply relative;
+    }
+    .tape-edge::before {
+        content: '';
+        @apply absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-6 bg-white/10 backdrop-blur-md rotate-[-2deg] shadow-sm;
+        z-index: 10;
+    }
+
+    /* Scrapbook Elements */
+    .note-panel {
+        @apply bg-[#fdfbf7] text-gray-800 p-6 shadow-xl relative border border-gray-300;
+        transform-style: preserve-3d;
+        /* Simulating crumpled paper slightly */
+        background-image: 
+            linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+            linear-gradient(#eee .1em, transparent .1em);
+        background-size: 100% 1.2em;
+    }
+    .note-panel::before {
+        content: '';
+        @apply absolute top-0 left-4 bottom-0 w-px bg-[#eab308]/30 shadow-sm;
+    }
+    
+    .photo-frame {
+        @apply bg-white p-3 pb-12 shadow-xl border border-gray-200 relative;
+        transform-style: preserve-3d;
+    }
+    .photo-frame img {
+        @apply filter sepia-[0.3] contrast-125;
+    }
+    .photo-caption {
+        @apply absolute bottom-2 left-0 w-full text-center font-handwriting text-2xl text-gray-800 rotate-[-1deg];
+    }
+}
+
+@layer utilities {
+    .text-glow {
+        text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+    }
+    .text-glow-accent {
+        text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+    .perspective-1000 {
+        perspective: 1000px;
     }
 }

@@ -1,55 +1,88 @@
-import { MapPin } from 'lucide-react';
+import { MapPin, Target } from 'lucide-react';
 
 const About = () => {
     const stats = [
-        { label: 'Years Experience', value: '1+' },
-        { label: 'Countries Visited', value: '20+' },
-        { label: 'Technologies Learnt', value: '15+' },
-        { label: 'Side Quests', value: '5+' },
+        { label: 'EXP_YRS', value: '1.0' },
+        { label: 'LOCATIONS', value: '20+' },
+        { label: 'TECH_STACK', value: '15+' },
+        { label: 'SIDE_QUESTS', value: '5+' },
     ];
 
     return (
-        <section id="about" className="py-20 bg-gray-800">
-            <div className="container mx-auto px-6">
+        <section id="about" className="py-32 bg-background relative overflow-hidden">
+            {/* Background Grid Pattern is handled globally, but we can add some local flavor */}
+            <div className="absolute top-0 right-0 w-1/3 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+            
+            <div className="container mx-auto px-6 relative z-10">
                 <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+                    <div className="flex items-center gap-4 mb-16 border-b border-gray-800 pb-4">
+                        <Target className="text-accent-crimson animate-pulse" size={24} />
+                        <h2 className="text-3xl font-mono text-white tracking-tighter">ABOUT_ENTITY</h2>
+                        <div className="flex-grow w-full h-[1px] bg-gray-800 ml-4"></div>
+                        <span className="font-mono text-[10px] text-muted">SEC. 02</span>
                     </div>
 
-                    <div className="space-y-16">
-                        {/* Top Row - Image and Bio Text Side by Side */}
-                        <div className="grid lg:grid-cols-2 gap-12 items-center">
-                            {/* Left - Profile Image */}
-                            <div className="flex justify-center lg:justify-end">
-                                <div className="bg-gradient-to-br from-primary to-blue-500 rounded-2xl p-1 w-full max-w-md">
-                                    <div className="bg-gray-800 rounded-2xl p-8 h-full flex flex-col justify-center">
+                    <div className="space-y-24">
+                        <div className="grid lg:grid-cols-12 gap-12 items-center">
+                            
+                            {/* Left - Profile Image (Scrapbook photograph style) */}
+                            <div className="lg:col-span-5 relative perspective-1000">
+                                <div className="absolute -inset-4 bg-primary/5 blur-2xl rounded-full"></div>
+                                
+                                <div className="photo-frame !rotate-[-2deg] p-4 pb-16 bg-[#fdfbf7] tape-edge relative z-10 mx-auto max-w-sm shadow-2xl border border-gray-300">
+                                    <div className="relative overflow-hidden border border-gray-300 aspect-square shadow-inner">
                                         <img
                                             src="/headshot.jpeg"
                                             alt="Niya Shroff"
-                                            className="w-48 h-48 rounded-full mx-auto object-cover mb-6 shadow-2xl"
+                                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                                         />
-                                        <div className="text-center">
-                                            <h3 className="text-xl font-semibold text-white mb-2">Niya Shroff </h3>
-                                            <p className="text-primary mb-4 flex items-center justify-center gap-2">
-                                                <MapPin size={16} />
-                                                New York, NY
-                                            </p>
+                                        {/* Subtle film grain overlay effect without making it B&W */}
+                                        <div className="absolute inset-0 bg-yellow-500/10 mix-blend-overlay pointer-events-none"></div>
+                                        
+                                        {/* HUD Elements - kept minimal for tech-scrapbook blend */}
+                                        <div className="absolute top-2 left-2 text-[8px] font-mono text-white bg-black/50 backdrop-blur-sm px-1">SYS.CAM_01</div>
+                                        <div className="absolute bottom-2 right-2 text-[8px] font-mono text-red-500 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-1">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                                            REC
                                         </div>
                                     </div>
+                                    
+                                    <div className="absolute bottom-3 left-0 w-full text-center flex flex-col justify-center items-center">
+                                        <h3 className="text-3xl font-handwriting text-gray-900 rotate-[-1deg]">Niya Shroff ☻</h3>
+                                        <p className="text-gray-500 font-mono text-[9px] flex items-center justify-center gap-1 mt-1 uppercase tracking-widest">
+                                            <MapPin size={10} />
+                                            NEW_YORK, NY
+                                        </p>
+                                    </div>
                                 </div>
+                                <div className="absolute -left-8 top-1/2 w-4 h-[1px] bg-gray-600"></div>
+                                <div className="absolute -right-8 top-1/2 w-4 h-[1px] bg-gray-600"></div>
                             </div>
 
-                            {/* Right - Bio Text */}
-                            <div className="flex justify-center lg:justify-start">
-                                <div className="bg-gray-900 rounded-2xl p-8 w-full max-w-md h-full flex items-center">
-                                    <p className="text-gray-300 leading-relaxed text-lg">
+                            {/* Right - Bio Text (Terminal style) */}
+                            <div className="lg:col-span-7 relative">
+                                <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-gray-800 rounded-tr-3xl"></div>
+                                
+                                <div className="card !p-8 relative z-10 border-l-2 border-l-primary bg-surface/40 backdrop-blur-sm">
+                                    <div className="font-mono text-xs text-muted mb-6 flex gap-2">
+                                        <span className="text-primary">&gt;</span>
+                                        <span className="animate-pulse cursor-block w-2 h-4 bg-primary inline-block"></span>
+                                        <span>EXECUTING bio. sh...</span>
+                                    </div>
+
+                                    <p className="text-gray-300 leading-relaxed text-sm lg:text-base font-sans font-light">
                                         Who am I? What a great question to ask, yet so hard to answer what defines me. What sets my soul on fire? 
                                         Let's circle back to that next meeting. I'm still working on it... 
                                         <br />
                                         <br />
-                                        Anyways, I graduated in December 2024 with a B.S. 
-                                        in Computer Science and B.A. in Economics from UMass Amherst. 
-                                        Now I work at JPMorgan Chase & Co. as a Software Engineer... how cool is that?
+                                        <span className="relative inline-block">
+                                            Anyways, I graduated in December 2024 with a B.S. 
+                                            in Computer Science and B.A. in Economics from UMass Amherst.
+                                            <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-accent-emerald/30"></div>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        Now I work at <span className="text-primary font-mono text-sm">[ JPMorgan Chase & Co. ]</span> as a Software Engineer... how cool is that?
                                         I feel very lucky to be here and I'm excited for what the future holds.
                                         Btw, I adore smiley faces! ☻
                                     </p>
@@ -57,17 +90,24 @@ const About = () => {
                             </div>
                         </div>
 
-                        {/* Bottom Row - Stats Grid (Full Width) */}
-                        <div className="flex justify-center">
-                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full">
+                        {/* Bottom Row - Stats Grid (HUD style) */}
+                        <div className="w-full">
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                                 {stats.map((stat, index) => (
-                                    <div key={index} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 text-center hover:from-gray-700 hover:to-gray-800 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl group aspect-square flex flex-col justify-center">
-                                        <div className="text-3xl font-bold text-primary mb-3 group-hover:text-primary-hover transition-colors duration-200">
+                                    <div key={index} className="card group hover:border-accent-emerald/50 flex flex-col justify-center items-center py-8 relative overflow-hidden">
+                                        {/* Scanline effect on hover */}
+                                        <div className="absolute top-0 left-0 w-full h-[2px] bg-accent-emerald shadow-[0_0_10px_#10b981] -translate-y-full group-hover:animate-[scan_2s_ease-in-out_infinite]"></div>
+                                        
+                                        <div className="text-3xl font-mono font-bold text-white mb-2 group-hover:text-glow-accent transition-all duration-300">
                                             {stat.value}
                                         </div>
-                                        <div className="text-sm text-gray-400 font-medium">
+                                        <div className="text-[10px] font-mono text-primary tracking-widest uppercase">
                                             {stat.label}
                                         </div>
+                                        
+                                        {/* Corner brackets */}
+                                        <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-gray-700 group-hover:border-accent-emerald transition-colors"></div>
+                                        <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-gray-700 group-hover:border-accent-emerald transition-colors"></div>
                                     </div>
                                 ))}
                             </div>
@@ -75,6 +115,14 @@ const About = () => {
                     </div>
                 </div>
             </div>
+            
+            <style>{`
+                @keyframes scan {
+                    0% { transform: translateY(-100%); opacity: 0; }
+                    50% { opacity: 1; }
+                    100% { transform: translateY(100vh); opacity: 0; }
+                }
+            `}</style>
         </section>
     );
 };

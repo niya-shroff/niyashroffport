@@ -33,71 +33,71 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { path: '/', label: 'Home' },
+    { path: '/', label: 'HOME' },
     // Work Dropdown
     {
-      label: 'Work',
+      label: 'WORK',
       dropdown: [
-        { path: '/technical', label: 'Projects' },
-        { path: '/experience', label: 'Experience' },
-        { path: '/education', label: 'Education' },
+        { path: '/technical', label: 'PROJECTS' },
+        { path: '/experience', label: 'EXPERIENCE' },
+        { path: '/education', label: 'EDUCATION' },
       ]
     },
     // Creative Dropdown
     {
-      label: 'Creative',
+      label: 'CREATIVE',
       dropdown: [
-        { path: '/photography', label: 'Photography' },
-        { path: '/videography', label: 'Videography' },
-        { path: '/writing', label: 'Writing' },
+        { path: '/photography', label: 'PHOTOGRAPHY' },
+        { path: '/videography', label: 'VIDEOGRAPHY' },
+        { path: '/writing', label: 'WRITING' },
       ]
     },
-    { path: '/contact', label: 'Contact' },
+    { path: '/contact', label: 'CONTACT' },
   ];
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `text-sm font-medium transition-colors duration-200 ${isActive ? 'text-primary' : 'text-gray-300 hover:text-white'
+    `font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'text-primary text-glow' : 'text-muted hover:text-white'
     }`;
 
   const dropdownLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `block px-4 py-2 text-sm transition-colors duration-200 ${isActive ? 'bg-primary/10 text-primary' : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+    `block px-4 py-2 font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'bg-primary/20 text-primary border-l-2 border-primary' : 'text-muted hover:bg-surfaceHover hover:text-white border-l-2 border-transparent'
     }`;
 
   return (
     <>
       <header
-        className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'
+        className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-md border-b border-surface/50 shadow-[0_0_15px_rgba(0,0,0,0.5)] py-4' : 'bg-transparent py-6'
           }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-white flex items-center gap-2 group">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-500 group-hover:from-blue-500 group-hover:to-primary transition-all duration-500">
-              NS
+          <Link to="/" className="text-2xl font-bold font-sans text-white flex items-center gap-2 group">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent-emerald group-hover:from-accent-emerald group-hover:to-primary transition-all duration-500 font-mono tracking-tighter">
+              [NS]
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item, index) => (
               <div key={index} className="relative group">
                 {item.dropdown ? (
                   <div
                     className="relative"
-                    onMouseEnter={() => item.label === 'Work' ? setWorkDropdownOpen(true) : setCreativeDropdownOpen(true)}
-                    onMouseLeave={() => item.label === 'Work' ? setWorkDropdownOpen(false) : setCreativeDropdownOpen(false)}
+                    onMouseEnter={() => item.label === 'WORK' ? setWorkDropdownOpen(true) : setCreativeDropdownOpen(true)}
+                    onMouseLeave={() => item.label === 'WORK' ? setWorkDropdownOpen(false) : setCreativeDropdownOpen(false)}
                   >
-                    <button className="flex items-center gap-1 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 py-2">
+                    <button className="flex items-center gap-1 font-mono text-xs tracking-widest text-muted hover:text-white transition-colors duration-200 py-2">
                       {item.label}
-                      <ChevronDown size={14} className={`transition-transform duration-200 ${item.label === 'Work' ? (workDropdownOpen ? 'rotate-180' : '') : (creativeDropdownOpen ? 'rotate-180' : '')}`} />
+                      <ChevronDown size={14} className={`transition-transform duration-200 ${item.label === 'WORK' ? (workDropdownOpen ? 'rotate-180 text-primary' : '') : (creativeDropdownOpen ? 'rotate-180 text-primary' : '')}`} />
                     </button>
                     <AnimatePresence>
-                      {((item.label === 'Work' && workDropdownOpen) || (item.label === 'Creative' && creativeDropdownOpen)) && (
+                      {((item.label === 'WORK' && workDropdownOpen) || (item.label === 'CREATIVE' && creativeDropdownOpen)) && (
                         <motion.div
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute left-0 mt-0 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700 overflow-hidden"
+                          className="absolute left-0 mt-0 w-48 bg-surface/90 backdrop-blur-md rounded border border-gray-800 shadow-xl overflow-hidden"
                         >
                           {item.dropdown.map((subItem) => (
                             <NavLink
@@ -130,23 +130,23 @@ const Header = () => {
             {/* Search Button */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="text-gray-400 hover:text-primary transition-colors p-2"
+              className="text-muted hover:text-primary transition-colors p-2"
               aria-label="Search"
             >
-              <Search size={20} />
+              <Search size={18} />
             </button>
 
-            <div className="w-px h-6 bg-gray-700 mx-4"></div>
+            <div className="w-px h-6 bg-gray-800 mx-4 tape-edge"></div>
 
             <div className="flex items-center space-x-4">
-              <a href="https://github.com/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <Github size={20} />
+              <a href="https://github.com/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition-colors">
+                <Github size={18} />
               </a>
-              <a href="https://linkedin.com/in/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <Linkedin size={20} />
+              <a href="https://linkedin.com/in/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition-colors">
+                <Linkedin size={18} />
               </a>
-              <a href="mailto:contact@niyashroff.me" className="text-gray-400 hover:text-white transition-colors">
-                <Mail size={20} />
+              <a href="mailto:contact@niyashroff.me" className="text-muted hover:text-primary transition-colors">
+                <Mail size={18} />
               </a>
             </div>
           </div>
@@ -155,13 +155,13 @@ const Header = () => {
           <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="text-gray-400 hover:text-primary transition-colors p-2"
+              className="text-muted hover:text-primary transition-colors p-2"
             >
               <Search size={20} />
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white focus:outline-none"
+              className="text-muted hover:text-white focus:outline-none"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -175,19 +175,26 @@ const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden bg-gray-900 border-t border-gray-800 overflow-hidden"
+              className="lg:hidden bg-background border-t border-gray-800 overflow-hidden"
             >
-              <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-                <NavLink to="/" onClick={() => setIsOpen(false)} className={linkClass}>Home</NavLink>
-                <div className="font-medium text-gray-500 pt-2 pb-1 text-xs uppercase tracking-wider">Work</div>
-                <NavLink to="/technical" onClick={() => setIsOpen(false)} className="pl-4 text-gray-300 hover:text-white block">Projects</NavLink>
-                <NavLink to="/experience" onClick={() => setIsOpen(false)} className="pl-4 text-gray-300 hover:text-white block">Experience</NavLink>
-                <NavLink to="/education" onClick={() => setIsOpen(false)} className="pl-4 text-gray-300 hover:text-white block">Education</NavLink>
-                <div className="font-medium text-gray-500 pt-2 pb-1 text-xs uppercase tracking-wider">Creative</div>
-                <NavLink to="/photography" onClick={() => setIsOpen(false)} className="pl-4 text-gray-300 hover:text-white block">Photography</NavLink>
-                <NavLink to="/videography" onClick={() => setIsOpen(false)} className="pl-4 text-gray-300 hover:text-white block">Videography</NavLink>
-                <NavLink to="/writing" onClick={() => setIsOpen(false)} className="pl-4 text-gray-300 hover:text-white block">Writing</NavLink>
-                <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass}>Contact</NavLink>
+              <div className="container mx-auto px-6 py-6 flex flex-col space-y-6">
+                <NavLink to="/" onClick={() => setIsOpen(false)} className={linkClass}>HOME</NavLink>
+                
+                <div className="space-y-3">
+                  <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">WORK //</div>
+                  <NavLink to="/technical" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">PROJECTS</NavLink>
+                  <NavLink to="/experience" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">EXPERIENCE</NavLink>
+                  <NavLink to="/education" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">EDUCATION</NavLink>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">CREATIVE //</div>
+                  <NavLink to="/photography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">PHOTOGRAPHY</NavLink>
+                  <NavLink to="/videography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">VIDEOGRAPHY</NavLink>
+                  <NavLink to="/writing" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">WRITING</NavLink>
+                </div>
+
+                <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass}>CONTACT</NavLink>
               </div>
             </motion.div>
           )}

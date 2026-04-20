@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ExternalLink, Github, Star, GitFork } from 'lucide-react';
+import { ExternalLink, Github, Star, GitFork, Terminal, Network, Code2 } from 'lucide-react';
 
 interface GitHubRepo {
   id: number;
@@ -33,7 +33,6 @@ const Projects = () => {
     fetchGitHubRepos();
   }, []);
 
-  // Featured projects with custom descriptions and images
   const featuredProjects = [
     {
       title: 'LinkedIn Scraping Tool',
@@ -81,140 +80,145 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gray-800 relative">
-      {/* Cinematic lighting effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-500/5 to-transparent"></div>
+    <section id="projects" className="py-24 bg-background relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute inset-0 bg-[url('/subtle-grid.svg')] opacity-20" />
+      <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
       
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Technical Projects ☻</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              A showcase of my technical work and software development projects
-            </p>
+      <div className="container mx-auto px-6 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto">
+          
+          <div className="flex flex-col items-center mb-16 relative">
+            <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 -z-10"></div>
+            <div className="bg-background px-6 border border-gray-800 py-3 tape-edge rotate-[1deg]">
+              <h2 className="text-3xl font-mono text-white tracking-widest uppercase flex items-center gap-3">
+                <Code2 className="text-primary" />
+                PROJECT_ARCHIVES
+                <span className="font-handwriting text-accent-crimson text-2xl lowercase absolute -bottom-6 -right-8 rotate-[-10deg]">my work!</span>
+              </h2>
+            </div>
           </div>
 
-          {/* Featured Projects */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
+          {/* Featured Projects (Scrapbook + Sci-Fi mix) */}
+          <div className="grid lg:grid-cols-3 gap-12 mb-24">
             {featuredProjects.map((project, index) => (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={index}
-                className="bg-gray-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 block cursor-pointer"
-              >
-                <div className="relative">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  {project.period && (
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-gray-900/80 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        {project.period}
-                      </span>
-                    </div>
-                  )}
-                </div>
+              <div key={index} className="relative z-10 perspective-1000 group">
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
-                  <p className="text-gray-400 mb-4 leading-relaxed">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="bg-gray-700 text-gray-300 px-3 py-1 rounded-lg text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 text-sm text-gray-400">
-                    <div className="flex items-center gap-1">
-                      <Star size={16} />
-                      <span>{project.stars}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <GitFork size={16} />
-                      <span>{project.forks}</span>
+                {/* Visual Frame - Scrapbook feel */}
+                <div className={`photo-frame ${index % 2 === 0 ? 'rotate-[-3deg]' : 'rotate-[2deg]'} group-hover:rotate-0 transition-transform duration-500 mb-[-40px] relative z-20 w-11/12 mx-auto`}>
+                  <div className="relative overflow-hidden aspect-video">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute top-2 left-2 bg-black/60 px-2 py-1 font-mono text-[8px] text-primary">IMG_0{index + 1}</div>
+                    
+                    {/* Sci-fi Overlay on image */}
+                    <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <div className="absolute top-1/2 left-0 w-full h-[1px] bg-primary/30"></div>
+                      <div className="absolute left-1/2 top-0 h-full w-[1px] bg-primary/30"></div>
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 border border-primary/50 rounded-full"></div>
                     </div>
                   </div>
+                  <div className="photo-caption text-xl mt-2">{project.title}</div>
                 </div>
-              </a>
+
+                {/* Data Node / Info Card - Sci-Fi feel */}
+                <div className="card relative z-10 pt-16 px-6 pb-6 bg-surface/95 backdrop-blur-md">
+                   
+                   <div className="flex justify-between items-start mb-4">
+                     <h3 className="text-lg font-mono text-white font-bold tracking-tight">{project.title}</h3>
+                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition-colors">
+                       <ExternalLink size={18} />
+                     </a>
+                   </div>
+                   
+                   <p className="text-gray-400 text-sm font-sans mb-6 leading-relaxed note-panel !p-4 !text-xs !rotate-[1deg] !mb-6 shadow-sm">
+                     {project.description}
+                   </p>
+
+                   <div className="font-mono text-[10px] text-muted mb-2 uppercase">Tech_Stack //</div>
+                   <div className="flex flex-wrap gap-2 mb-6">
+                     {project.technologies.map((tech, techIndex) => (
+                       <span key={techIndex} className="bg-gray-800/50 border border-gray-700 text-primary px-2 py-1 font-mono text-[10px] tracking-wider uppercase">
+                         {tech}
+                       </span>
+                     ))}
+                   </div>
+                   
+                   <div className="flex items-center space-x-4 border-t border-gray-800 pt-4 font-mono text-xs text-muted">
+                     <div className="flex items-center gap-1 group/icon hover:text-white transition-colors">
+                       <Star size={14} className="group-hover:text-accent-emerald transition-colors" />
+                       <span>{project.stars}</span>
+                     </div>
+                     <div className="flex items-center gap-1 group/icon hover:text-white transition-colors">
+                       <GitFork size={14} className="group-hover:text-primary transition-colors" />
+                       <span>{project.forks}</span>
+                     </div>
+                   </div>
+                </div>
+
+              </div>
             ))}
           </div>
 
-          {/* GitHub Repositories */}
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">Recent GitHub Projects</h3>
+          {/* GitHub Repositories (Terminal / Sci-Fi Grid) */}
+          <div className="border-t border-gray-800 pt-16 relative">
+            <div className="absolute top-0 right-10 w-[1px] h-16 bg-gradient-to-b from-transparent via-primary/50 to-transparent"></div>
+            
+            <div className="flex items-center gap-3 mb-12">
+              <Network className="text-accent-emerald" />
+              <h3 className="text-xl font-mono text-white uppercase tracking-widest">GITHUB_ACTIVITY_LOG</h3>
+            </div>
+
             {loading ? (
-              <div className="text-center text-gray-400">Loading GitHub repositories...</div>
+              <div className="text-center font-mono text-primary animate-pulse py-12">
+                <Terminal className="mx-auto mb-4" />
+                FETCHING_DATA...
+              </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {githubRepos.slice(0, 6).map((repo) => (
-                  <div
+                  <a
                     key={repo.id}
-                    className="bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105"
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block bg-surface/50 border border-gray-800 p-5 hover:border-primary/50 hover:bg-surface transition-all duration-300 group relative overflow-hidden"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <h4 className="text-lg font-semibold text-white mb-2 truncate">{repo.name}</h4>
-                      {repo.language && (
-                        <span className={`w-3 h-3 rounded-full ${getLanguageColor(repo.language)} flex-shrink-0`}></span>
-                      )}
-                    </div>
+                    {/* Hover effect background */}
+                    <div className="absolute inset-0 bg-primary/5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
                     
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                      {repo.description || 'No description available'}
-                    </p>
-                    
-                    {repo.topics && repo.topics.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {repo.topics.slice(0, 3).map((topic, topicIndex) => (
-                          <span
-                            key={topicIndex}
-                            className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs"
-                          >
-                            {topic}
-                          </span>
-                        ))}
-                        {repo.topics.length > 3 && (
-                          <span className="text-gray-400 text-xs px-2 py-1">
-                            +{repo.topics.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    )}
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3 text-xs text-gray-400">
-                        <div className="flex items-center gap-1">
-                          <Star size={14} />
-                          <span>{repo.stargazers_count}</span>
+                     <div className="relative z-10">
+                        <div className="flex items-start justify-between mb-3">
+                          <h4 className="text-base font-mono font-bold text-white truncate group-hover:text-primary transition-colors">{repo.name}</h4>
+                          <Github size={16} className="text-muted group-hover:text-white transition-colors" />
                         </div>
-                        <div className="flex items-center gap-1">
-                          <GitFork size={14} />
-                          <span>{repo.forks_count}</span>
+                        
+                        <p className="text-gray-400 text-sm mb-4 line-clamp-2 font-sans">
+                          {repo.description || 'No description provided.'}
+                        </p>
+                        
+                        <div className="flex items-center justify-between border-t border-gray-800/50 pt-3">
+                          <div className="flex items-center space-x-4 font-mono text-[10px] text-muted">
+                            <span className="flex items-center gap-1 group-hover:text-white transition-colors">
+                              <Star size={12} className="group-hover:text-accent-emerald" /> {repo.stargazers_count}
+                            </span>
+                            <span className="flex items-center gap-1 group-hover:text-white transition-colors">
+                              <GitFork size={12} className="group-hover:text-primary" /> {repo.forks_count}
+                            </span>
+                          </div>
+                          
+                          {repo.language && (
+                            <div className="flex items-center gap-2 font-mono text-[10px] text-gray-300">
+                              <span className={`w-2 h-2 rounded-full ${getLanguageColor(repo.language)}`}></span>
+                              {repo.language}
+                            </div>
+                          )}
                         </div>
-                        {repo.language && (
-                          <span>{repo.language}</span>
-                        )}
-                      </div>
-                      
-                      <a
-                        href={repo.html_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
-                      >
-                        <Github size={16} />
-                      </a>
-                    </div>
-                  </div>
+                     </div>
+                  </a>
                 ))}
               </div>
             )}
