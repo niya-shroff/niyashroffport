@@ -5,15 +5,25 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#34d399', // emerald-400
-          hover: '#10b981', // emerald-500
+          DEFAULT: '#0ea5e9', // electric blue
+          hover: '#0284c7', 
         },
-        background: '#111827', // gray-900
-        surface: '#1f2937', // gray-800
-        surfaceHover: '#374151', // gray-700
+        accent: {
+          emerald: '#10b981', // neon emerald
+          crimson: '#e11d48', // crimson red
+        },
+        background: '#0a0a0a', // deep obsidian
+        surface: '#121212', 
+        surfaceHover: '#1c1c1c', 
+        muted: '#525252',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Outfit', 'sans-serif'],
+        mono: ['"Space Mono"', 'monospace'],
+        handwriting: ['Caveat', 'cursive'],
+      },
+      backgroundImage: {
+        'grid-pattern': "url('/subtle-grid.svg')",
       },
     },
   },
