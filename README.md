@@ -19,22 +19,4 @@ This repository contains the source code for my personal portfolio website, wher
 - **Icons**: Lucide React
 - **Integrations**: EmailJS (Contact form), Substack API (Substacker - Substack API I developed)
 
-## Getting Started
-
-To run this project locally on your machine:
-
-1. Clone the repository
-2. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-3. Install the dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
 Feel free to explore the code and see what I've been building for myself :)
