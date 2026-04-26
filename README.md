@@ -1,9 +1,9 @@
-# Niya Shroff's Portfolio ☻
+# Personal Portfolio
 
 [niyashroff.me](https://niyashroff.me)
 
 ## Overview
-This repository contains the source code for my personal portfolio website, where I showcase my projects, professional journey, photography, videography, and writings. The latest version features a custom **"Minimalist Scrapbook x Modern Sci-Fi"** aesthetic—blending handcrafted physical elements (polaroids, ripped paper, handwritten notes) with high-tech, futuristic data blocks (terminals, scanlines, and glowing accents).
+This repository contains the source code for my personal portfolio website, where I showcase my projects, professional journey, photography, videography, and writings. The latest version features a custom **"Minimalist Scrapbook x Modern Sci-Fi"** aesthetic—blending handcrafted physical elements (polaroids, ripped paper, handwritten notes) with some fun futuristic elements (terminals, scanlines, and glowing accents).
 
 ## Features
 - **Scrapbook & Sci-Fi Aesthetic**: Blends `Space Mono` tech components with `Caveat` handwriting fonts.
