@@ -2,6 +2,8 @@
 
 [niyashroff.me](https://niyashroff.me)
 
+<img width="1276" height="728" alt="Screenshot 2026-04-26 at 6 42 56 PM" src="https://github.com/user-attachments/assets/66d08be5-2bb7-4c3d-aa4a-1adf2d9982d5" />
+
 ## Overview
 This repository contains the source code for my personal portfolio website, where I showcase my projects, professional journey, photography, videography, and writings. The latest version features a custom **"Minimalist Scrapbook x Modern Sci-Fi"** aesthetic—blending handcrafted physical elements (polaroids, ripped paper, handwritten notes) with some fun futuristic elements (terminals, scanlines, and glowing accents).
 
