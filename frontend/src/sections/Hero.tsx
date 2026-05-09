@@ -96,20 +96,19 @@ const Hero = () => {
 
             {/* Floating decorative elements */}
             <div className="absolute -left-8 -bottom-8 w-24 h-24 border-l border-b border-accent-crimson/30 rounded-bl-3xl"></div>
-            <div className="absolute -right-4 -top-4 font-mono text-[10px] text-muted rotate-90 transform origin-bottom-right">
+            <div className="absolute -right-4 -bottom-12 font-mono text-[10px] text-muted rotate-90 transform origin-bottom-right">
               COORD // 40.7128° N, 74.0060° W
             </div>
           </div>
-
         </div>
+      </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <a href="#about" className="text-muted hover:text-primary transition-colors flex flex-col items-center gap-2 group">
-            <span className="font-mono text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Scroll_Down</span>
-            <ChevronDown size={20} />
-          </a>
-        </div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce z-20">
+        <a href="#about" className="text-muted hover:text-primary transition-colors flex flex-col items-center gap-2 group">
+          <span className="font-mono text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Scroll_Down</span>
+          <ChevronDown size={20} />
+        </a>
       </div>
     </section>
   );
