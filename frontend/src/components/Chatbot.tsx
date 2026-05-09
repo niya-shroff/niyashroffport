@@ -127,7 +127,12 @@ export default function Chatbot() {
   if (!isOpen) {
     return (
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+          if (messages.length === 0) {
+            setMessages([{ role: 'assistant', content: "Hi! I'm an AI assistant. How can I help you today?" }]);
+          }
+        }}
         className="fixed bottom-6 right-6 p-4 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all z-50 flex items-center justify-center group"
         aria-label="Open chat"
       >
@@ -146,7 +151,7 @@ export default function Chatbot() {
         </div>
         <div className="flex items-center gap-3">
           <button
-            onClick={() => setMessages([{ role: 'assistant', content: "Hi! I'm an AI assistant. How can I help you today?" }])}
+            onClick={() => setMessages([])}
             className="text-gray-400 hover:text-white transition-colors"
             title="Clear Chat"
           >
