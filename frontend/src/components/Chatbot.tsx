@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send } from 'lucide-react';
+import { MessageSquare, X, Send, Minus, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Message {
@@ -127,7 +127,12 @@ export default function Chatbot() {
   if (!isOpen) {
     return (
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+          if (messages.length === 0) {
+            setMessages([{ role: 'assistant', content: "Hi! I'm an AI assistant. How can I help you today?" }]);
+          }
+        }}
         className="fixed bottom-6 right-6 p-4 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all z-50 flex items-center justify-center group"
         aria-label="Open chat"
       >
@@ -144,12 +149,22 @@ export default function Chatbot() {
           <MessageSquare size={18} className="text-primary" />
           <span className="font-mono text-sm text-primary tracking-wider uppercase">SYSTEM_AGENT</span>
         </div>
-        <button
-          onClick={() => setIsOpen(false)}
-          className="text-gray-400 hover:text-white transition-colors"
-        >
-          <X size={18} />
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setMessages([])}
+            className="text-gray-400 hover:text-white transition-colors"
+            title="Clear Chat"
+          >
+            <Trash2 size={16} />
+          </button>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-gray-400 hover:text-white transition-colors"
+            title="Minimize"
+          >
+            <Minus size={18} />
+          </button>
+        </div>
       </div>
 
       {/* Chat Area */}
