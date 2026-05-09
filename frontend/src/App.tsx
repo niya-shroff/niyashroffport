@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
+import Chatbot from './components/Chatbot';
 
 // Lazy load components
 const Home = lazy(() => import('./pages/Home'));
@@ -50,6 +51,7 @@ function App() {
           <AnimatedRoutes />
         </Suspense>
       </main>
+      <Chatbot />
       <Footer />
     </div>
   );
