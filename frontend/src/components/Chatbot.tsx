@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Minus } from 'lucide-react';
+import { MessageSquare, X, Send, Minus, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Message {
@@ -146,18 +146,18 @@ export default function Chatbot() {
         </div>
         <div className="flex items-center gap-3">
           <button
+            onClick={() => setMessages([{ role: 'assistant', content: "Hi! I'm an AI assistant. How can I help you today?" }])}
+            className="text-gray-400 hover:text-white transition-colors"
+            title="Clear Chat"
+          >
+            <Trash2 size={16} />
+          </button>
+          <button
             onClick={() => setIsOpen(false)}
             className="text-gray-400 hover:text-white transition-colors"
             title="Minimize"
           >
             <Minus size={18} />
-          </button>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="text-gray-400 hover:text-white transition-colors"
-            title="Close"
-          >
-            <X size={18} />
           </button>
         </div>
       </div>
