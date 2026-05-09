@@ -89,7 +89,7 @@ const Hero = () => {
                 </a>
                 <a href="/technical" className="px-6 py-2 border border-gray-800 text-gray-400 font-mono text-sm hover:border-primary/50 hover:text-primary transition-colors uppercase tracking-wider relative group">
                   <span className="absolute inset-0 bg-primary/5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                  VIEW_ARCHIVES
+                  VIEW_PROJECTS
                 </a>
               </div>
             </div>
@@ -111,36 +111,13 @@ const Hero = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 card !rotate-3 !p-2 hover:!rotate-0 transition-transform duration-700 tape-edge z-20">
                {/* Replace with actual image later, using a placeholder gradient for now */}
                <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 relative overflow-hidden group-hover:border-primary/50 transition-colors duration-500">
-                  <div className="absolute inset-0 bg-[url('/subtle-grid.svg')] opacity-20"></div>
-                  
-                  {/* Targeting reticle */}
-                  <div className="absolute inset-0 m-auto w-12 h-12 flex items-center justify-center">
-                     <div className="w-full h-[1px] bg-primary/50 absolute"></div>
-                     <div className="h-full w-[1px] bg-primary/50 absolute"></div>
-                     <div className="w-8 h-8 rounded-full border border-accent-emerald/50"></div>
-                  </div>
-                  
                   {/* Corner accents */}
                   <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary/70"></div>
                   <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-primary/70"></div>
-                  
-                  <div className="absolute bottom-4 left-4 font-mono text-[10px] text-primary/70 tracking-widest">
-                    TARGET_ACQUIRED
-                  </div>
                </div>
             </div>
 
             {/* Floating UI Elements */}
-            <div className="absolute top-1/4 -right-12 bg-surface border border-gray-800 p-3 shadow-xl backdrop-blur-md rounded tape-edge !rotate-[-5deg] z-30">
-              <div className="text-[10px] font-mono text-muted mb-1">SCANNING...</div>
-              <div className="w-32 h-1 bg-gray-800 rounded-full overflow-hidden">
-                <div className="w-1/2 h-full bg-accent-emerald animate-pulse"></div>
-              </div>
-            </div>
-            
-            <div className="absolute bottom-1/4 -left-8 bg-surface border border-gray-800 px-4 py-2 shadow-xl backdrop-blur-md rounded font-mono text-xs text-primary z-30">
-              SYS.ID: 9X-A7
-            </div>
           </div>
 
         </div>
