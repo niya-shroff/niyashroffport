@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send } from 'lucide-react';
+import { MessageSquare, X, Send, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Message {
@@ -144,12 +144,22 @@ export default function Chatbot() {
           <MessageSquare size={18} className="text-primary" />
           <span className="font-mono text-sm text-primary tracking-wider uppercase">SYSTEM_AGENT</span>
         </div>
-        <button
-          onClick={() => setIsOpen(false)}
-          className="text-gray-400 hover:text-white transition-colors"
-        >
-          <X size={18} />
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-gray-400 hover:text-white transition-colors"
+            title="Minimize"
+          >
+            <Minus size={18} />
+          </button>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-gray-400 hover:text-white transition-colors"
+            title="Close"
+          >
+            <X size={18} />
+          </button>
+        </div>
       </div>
 
       {/* Chat Area */}
