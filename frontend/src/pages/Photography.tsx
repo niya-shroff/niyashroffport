@@ -118,7 +118,8 @@ const Photography = () => {
                   <img
                     src={photo.url}
                     alt={photo.title}
-                    loading="lazy"
+                    loading={index < 6 ? "eager" : "lazy"}
+                    decoding="async"
                     className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
                   />
                   {/* HUD Overlay */}
@@ -151,7 +152,7 @@ const Photography = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
               onClick={() => setSelectedPhotoIndex(null)}
             >
               <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
@@ -189,6 +190,8 @@ const Photography = () => {
                   <img
                     src={filteredPhotos[selectedPhotoIndex].url}
                     alt={filteredPhotos[selectedPhotoIndex].title}
+                    loading="eager"
+                    decoding="async"
                     className="max-w-full max-h-[75vh] object-contain shadow-2xl relative z-10"
                   />
                   {/* Corners */}

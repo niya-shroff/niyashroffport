@@ -42,7 +42,7 @@ function App() {
     <div className="min-h-screen bg-gray-900 text-white flex flex-col font-sans selection:bg-primary selection:text-white">
       <div className="film-grain"></div>
       <Header />
-      <main className="flex-grow relative z-10">
+      <main className="flex-grow relative">
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center bg-gray-900">
             <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
