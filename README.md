@@ -1,9 +1,11 @@
-# Niya Shroff's Portfolio ☻
+# Personal Portfolio
 
-Welcome to my personal portfolio space! 
+[niyashroff.me](https://niyashroff.me)
+
+<img width="1276" height="728" alt="Screenshot 2026-04-26 at 6 42 56 PM" src="https://github.com/user-attachments/assets/66d08be5-2bb7-4c3d-aa4a-1adf2d9982d5" />
 
 ## Overview
-This repository contains the source code for my personal portfolio website, where I showcase my projects, professional journey, photography, videography, and writings. The latest version features a custom **"Minimalist Scrapbook x Modern Sci-Fi"** aesthetic—blending handcrafted physical elements (polaroids, ripped paper, handwritten notes) with high-tech, futuristic data blocks (terminals, scanlines, and glowing accents).
+This repository contains the source code for my personal portfolio website, where I showcase my projects, professional journey, photography, videography, and writings. The latest version features a custom **"Minimalist Scrapbook x Modern Sci-Fi"** aesthetic—blending handcrafted physical elements (polaroids, ripped paper, handwritten notes) with some fun futuristic elements (terminals, scanlines, and glowing accents).
 
 ## Features
 - **Scrapbook & Sci-Fi Aesthetic**: Blends `Space Mono` tech components with `Caveat` handwriting fonts.
@@ -17,24 +19,6 @@ This repository contains the source code for my personal portfolio website, wher
 - **Styling**: Tailwind CSS & heavily customized layer variables
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Integrations**: EmailJS (Contact form), Substack API (Writings)
-
-## Getting Started
-
-To run this project locally on your machine:
-
-1. Clone the repository
-2. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-3. Install the dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+- **Integrations**: EmailJS (Contact form), Substack API (Substacker - Substack API I developed)
 
 Feel free to explore the code and see what I've been building for myself :)
