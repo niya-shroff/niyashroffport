@@ -48,9 +48,9 @@ const Header = () => {
     {
       label: 'CREATIVE',
       dropdown: [
+        { path: '/writing', label: 'WRITING' },
         { path: '/photography', label: 'PHOTOGRAPHY' },
         { path: '/videography', label: 'VIDEOGRAPHY' },
-        { path: '/writing', label: 'WRITING' },
       ]
     },
     { path: '/contact', label: 'CONTACT' },
@@ -184,14 +184,14 @@ const Header = () => {
             >
               <div className="container mx-auto px-6 py-6 flex flex-col space-y-6">
                 <NavLink to="/" onClick={() => setIsOpen(false)} className={linkClass}>HOME</NavLink>
-                
+
                 <div className="space-y-3">
                   <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">WORK //</div>
                   <NavLink to="/technical" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">PROJECTS</NavLink>
                   <NavLink to="/experience" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">EXPERIENCE</NavLink>
                   <NavLink to="/education" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">EDUCATION</NavLink>
                 </div>
-                
+
                 <div className="space-y-3">
                   <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">CREATIVE //</div>
                   <NavLink to="/photography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">PHOTOGRAPHY</NavLink>
