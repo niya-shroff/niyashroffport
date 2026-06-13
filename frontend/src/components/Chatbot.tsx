@@ -16,7 +16,7 @@ Niya's Extensive Background Information:
 - Previous Experience: Software Engineering Intern at J.P. Morgan Asset Management (Highbridge) and JPMorgan Chase & Co. (Corporate Tech), Sales Specialist at Apple, Student IT Consultant at UMass Amherst, Undergraduate Researcher at HCI-Vis Lab. She has 1+ years of professional experience, has lived/worked in 20+ locations, knows a 15+ tech stack, and has 5+ side quests.
 - Extracurriculars: Founder of Care Cardz (nonprofit). Philosophy & Open Thought Club VP, TED-Ed speaker.
 - Technical Projects: Her technical projects are pulled live from her GitHub profile (niya-shroff). They include full-stack, data analysis, and SWE projects using React, Python, Java, etc.
-- Writing: She has a collection of poems on her site, including "i light a flower on fire...", "im with the moon", "the chase", "hope you're", "scrolling", and "koh phaghan poem". Her poems explore personal reflection, deep emotion, nature, and human connection.
+- Writing: She has a collection of poems on her site, including "if i light a flower on fire...", "im with the moon", "the chase", "hope you're", "scrolling", and "koh phaghan poem". Her poems explore personal reflection, deep emotion, nature, and human connection.
 - Photography: She has a photography portfolio structured by categories like Abstract, Cities, etc., capturing her visual storytelling.
 - Videography: She explores visual storytelling through motion. Her films and edits are marked as "coming shortly!".
 - Personality: She adores smiley faces (☻), asks deep philosophical questions like "What sets my soul on fire?", and blends technical expertise with artistic vision to build things that solve problems or just look really cool.
@@ -48,27 +48,27 @@ export default function Chatbot() {
     const parts = [];
     let lastIndex = 0;
     let match;
-    
+
     while ((match = linkRegex.exec(content)) !== null) {
       if (match.index > lastIndex) {
         parts.push(content.substring(lastIndex, match.index));
       }
       const text = match[1];
       const url = match[2];
-      
+
       if (url.startsWith('/')) {
         parts.push(<Link key={match.index} to={url} className="text-primary hover:underline" onClick={() => setIsOpen(false)}>{text}</Link>);
       } else {
         parts.push(<a key={match.index} href={url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{text}</a>);
       }
-      
+
       lastIndex = match.index + match[0].length;
     }
-    
+
     if (lastIndex < content.length) {
       parts.push(content.substring(lastIndex));
     }
-    
+
     return parts.length > 0 ? parts : content;
   };
 
@@ -175,11 +175,10 @@ export default function Chatbot() {
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] p-3 rounded-lg text-sm whitespace-pre-wrap ${
-                msg.role === 'user'
+              className={`max-w-[80%] p-3 rounded-lg text-sm whitespace-pre-wrap ${msg.role === 'user'
                   ? 'bg-primary/20 text-white border border-primary/30 rounded-br-none'
                   : 'bg-gray-800 text-gray-200 border border-gray-700 rounded-bl-none'
-              }`}
+                }`}
             >
               {renderMessage(msg.content)}
             </div>
