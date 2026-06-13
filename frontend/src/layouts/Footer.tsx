@@ -24,7 +24,7 @@ const Footer = () => {
 
             {/* Quick Links */}
             <div>
-              <h4 className="text-white font-mono text-xs tracking-widest mb-4">++ QUICK_LINKS</h4>
+              <h4 className="text-gray-900 dark:text-white font-mono text-xs tracking-widest mb-4">++ QUICK_LINKS</h4>
               <ul className="space-y-3">
                 <li>
                   <Link to="/about" className="text-muted hover:text-primary transition-colors duration-200 font-mono text-xs uppercase">
@@ -51,7 +51,7 @@ const Footer = () => {
 
             {/* Services */}
             <div>
-              <h4 className="text-white font-mono text-xs tracking-widest mb-4">++ CAPABILITIES</h4>
+              <h4 className="text-gray-900 dark:text-white font-mono text-xs tracking-widest mb-4">++ CAPABILITIES</h4>
               <ul className="space-y-3 text-muted font-mono text-xs uppercase">
                 <li className="flex items-center gap-2"><div className="w-1 h-1 bg-accent-emerald rounded-full"></div> Engineer</li>
                 <li className="flex items-center gap-2"><div className="w-1 h-1 bg-accent-emerald rounded-full"></div> Writer</li>
@@ -70,7 +70,7 @@ const Footer = () => {
                 <span>AND</span>
                 <Activity size={14} className="text-primary" />
                 <span>BY</span>
-                <span className="text-white">NIYA_SHROFF</span>
+                <span className="text-gray-900 dark:text-white">NIYA_SHROFF</span>
               </div>
 
               <div className="text-muted text-xs font-mono">

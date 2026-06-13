@@ -10,7 +10,7 @@ export type WritingItem = {
 export const staticWritings: WritingItem[] = [
     {
         id: 8,
-        title: "i light a flower on fire…",
+        title: "if i light a flower on fire…",
         content:
             "if i light a flower on fire, \nwhat will happen?\n\nwill it burst into flames?\nwill it suddenly die? \nthe flower was really nice\nthe flower was beautiful \n\nit didn’t deserve to be malnourished \nit needed the sun, water, and soil\ninstead it got nothing at all\n\nokay so what, stop complaining,\nwhat can you do?\n\nif i light a flower on fire, \nwhat will happen?\n\nwill it start to cry?\nwill it be completely numb?\n\nthe flower did everything it could to survive\nthe flower made mistakes but it tried \n\nit didn’t deserve to be ignored\nit needed the light, energy, and love\ninstead it got darkness all the time \n\nokay so what, stop complaining,\nwhat can you do?\n\nSo once again, if i light a flower on fire, \nwhat will happen?\n\nwill it get another chance?\nwill the fire illuminate the petals?\n\nthe flower will be reborn\nthe flower will be live again \n\nit deserves peace and prosperity\nit will gain the strength to continue\ninstead of a shadow, there is light\n\nSo finally, if i light a flower on fire, \nwhat will happen?\n\nthe flower will transcend \nthe flower will fight till death\n\ni will not complain anymore, \ni realized something profound.\n\nthe flower is still beautiful\nthe flower is you.",
         category: "poem",

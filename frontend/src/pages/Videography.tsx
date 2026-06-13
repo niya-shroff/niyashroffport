@@ -50,7 +50,7 @@ const Videography = () => {
                 >
                     <div className="flex items-center gap-3 tape-edge bg-surface px-6 py-3 border border-gray-800 rotate-[1deg] inline-block mb-8 mt-4">
                         <Video className="text-accent-emerald" />
-                        <h2 className="text-2xl font-mono text-white tracking-widest uppercase">VIDEOGRAPHY_LOGS</h2>
+                        <h2 className="text-2xl font-mono text-gray-900 dark:text-white tracking-widest uppercase">VIDEOGRAPHY_LOGS</h2>
                     </div>
 
                     <div className="font-handwriting text-accent-crimson text-2xl rotate-[-2deg] ml-12 mb-8 max-w-2xl">
@@ -73,7 +73,7 @@ const Videography = () => {
                                 onChange={(e) =>
                                     setSearchQuery(e.target.value)
                                 }
-                                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors"
+                                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-gray-900 dark:text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors"
                             />
                         </div>
 
@@ -87,7 +87,7 @@ const Videography = () => {
                                 onChange={(e) =>
                                     setSelectedPlatform(e.target.value)
                                 }
-                                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-8 py-2 text-white font-mono text-sm appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer uppercase"
+                                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-8 py-2 text-gray-900 dark:text-white font-mono text-sm appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer uppercase"
                             >
                                 <option value="All">ALL</option>
                             </select>
@@ -104,7 +104,7 @@ const Videography = () => {
                     
                     <div className="bg-surface/80 border border-gray-800 p-8 backdrop-blur-md text-center relative z-10 z-10 shadow-[0_0_20px_rgba(16,185,129,0.1)] tape-edge rotate-[1deg]">
                         <p className="font-mono text-primary text-xs uppercase tracking-widest mb-4 mb-2">&gt; SYS.STATUS: RENDERING</p>
-                        <p className="font-handwriting text-3xl md:text-5xl text-gray-400">
+                        <p className="font-handwriting text-3xl md:text-5xl text-gray-600 dark:text-gray-400">
                             Films and edits coming shortly!
                         </p>
                     </div>

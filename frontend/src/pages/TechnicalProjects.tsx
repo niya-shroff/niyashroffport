@@ -95,7 +95,7 @@ const TechnicalProjects = () => {
     }
 
     return (
-        <div className="min-h-screen pt-24 pb-12 bg-gray-900">
+        <div className="min-h-screen pt-24 pb-12 bg-background">
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -104,51 +104,51 @@ const TechnicalProjects = () => {
                     className="mb-12"
                 >
                     <h2 className="text-4xl font-bold mb-4 text-primary">Technical Projects</h2>
-                    <p className="text-gray-400 text-lg max-w-2xl mb-8">
+                    <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mb-8">
                         A collection of some of my personal projects, which I'm eventually planning to refine and update.
                     </p>
 
                     {/* Controls */}
-                    <div className="flex flex-col md:flex-row gap-4 bg-gray-800/50 p-6 rounded-2xl border border-gray-700/50 backdrop-blur-sm">
+                    <div className="flex flex-col md:flex-row gap-4 bg-surface/80 p-6 rounded-2xl border border-gray-300 dark:border-gray-300 dark:border-gray-700/50 backdrop-blur-sm">
                         <div className="relative flex-grow">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
                             <input
                                 type="text"
                                 placeholder="Search projects..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-gray-900/50 border border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                                className="w-full bg-background border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
                             />
                         </div>
 
                         <div className="flex gap-4">
                             <div className="relative min-w-[140px]">
-                                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400" size={18} />
                                 <select
                                     value={selectedLanguage}
                                     onChange={(e) => setSelectedLanguage(e.target.value)}
-                                    className="w-full bg-gray-900/50 border border-gray-700 rounded-lg pl-10 pr-8 py-2.5 text-white appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer disabled:opacity-50"
+                                    className="w-full bg-background border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-8 py-2.5 text-gray-900 dark:text-white appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer disabled:opacity-50"
                                     disabled={languages.length <= 1} // Disable if only 'All' exists (e.g. API limit reached)
                                 >
                                     {languages.map(lang => (
                                         <option key={lang} value={lang}>{lang}</option>
                                     ))}
                                 </select>
-                                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
+                                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 pointer-events-none" size={16} />
                             </div>
 
                             <div className="relative min-w-[140px]">
-                                <ArrowUpDown className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                                <ArrowUpDown className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400" size={18} />
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-gray-900/50 border border-gray-700 rounded-lg pl-10 pr-8 py-2.5 text-white appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                                    className="w-full bg-background border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-8 py-2.5 text-gray-900 dark:text-white appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer"
                                 >
                                     <option value="updated">Recently Updated</option>
                                     <option value="stars">Most Stars</option>
                                     <option value="forks">Most Forks</option>
                                 </select>
-                                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" size={16} />
+                                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 pointer-events-none" size={16} />
                             </div>
                         </div>
                     </div>
@@ -166,10 +166,10 @@ const TechnicalProjects = () => {
                                 key={repo.id}
                                 variants={item}
                                 layout
-                                className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group flex flex-col h-full"
+                                className="bg-surface rounded-xl p-6 border border-gray-300 dark:border-gray-700 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group flex flex-col h-full"
                             >
                                 <div className="flex justify-between items-start mb-4">
-                                    <div className="p-2 bg-gray-700/50 rounded-lg group-hover:text-primary transition-colors">
+                                    <div className="p-2 bg-gray-200 dark:bg-gray-700/50 rounded-lg group-hover:text-primary transition-colors">
                                         <Code size={24} />
                                     </div>
                                     <div className="flex gap-3">
@@ -177,7 +177,7 @@ const TechnicalProjects = () => {
                                             href={repo.html_url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-400 hover:text-white transition-colors"
+                                            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors"
                                         >
                                             <Github size={20} />
                                         </a>
@@ -185,7 +185,7 @@ const TechnicalProjects = () => {
                                             href={repo.html_url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-400 hover:text-primary transition-colors"
+                                            className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
                                         >
                                             <ExternalLink size={20} />
                                         </a>
@@ -196,11 +196,11 @@ const TechnicalProjects = () => {
                                     {repo.name}
                                 </h3>
 
-                                <p className="text-gray-400 mb-4 line-clamp-3 text-sm min-h-[60px] flex-grow">
+                                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-sm min-h-[60px] flex-grow">
                                     {repo.description || 'No description available for this project.'}
                                 </p>
 
-                                <div className="flex items-center justify-between text-sm text-gray-500 mt-auto pt-4 border-t border-gray-700/50">
+                                <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-500 mt-auto pt-4 border-t border-gray-300 dark:border-gray-300 dark:border-gray-700/50">
                                     <div className="flex items-center gap-4">
                                         {repo.language && (
                                             <span className="flex items-center gap-1">
@@ -221,7 +221,7 @@ const TechnicalProjects = () => {
                             </motion.div>
                         ))
                     ) : (
-                        <div className="col-span-full text-center py-12 text-gray-400">
+                        <div className="col-span-full text-center py-12 text-gray-600 dark:text-gray-400">
                             <p className="text-lg">No projects found matching your criteria.</p>
                         </div>
                     )}

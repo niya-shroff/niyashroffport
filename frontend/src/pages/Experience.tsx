@@ -69,7 +69,7 @@ const Experience = () => {
         >
           <div className="flex items-center gap-3 border border-gray-800 p-4 tape-edge bg-surface mb-8 inline-block rotate-[-1deg]">
             <Briefcase className="text-primary" />
-            <h2 className="text-2xl font-mono tracking-widest text-white uppercase">Professional_Exp</h2>
+            <h2 className="text-2xl font-mono tracking-widest text-gray-900 dark:text-white uppercase">Professional_Exp</h2>
           </div>
           
           <div className="font-handwriting text-2xl text-accent-crimson max-w-2xl mb-8 rotate-[-2deg] ml-8">
@@ -88,7 +88,7 @@ const Experience = () => {
                 placeholder="EXECUTE SEARCH..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-gray-900 dark:text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors"
               />
             </div>
 
@@ -97,7 +97,7 @@ const Experience = () => {
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-8 py-2 text-white font-mono text-sm appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-8 py-2 text-gray-900 dark:text-white font-mono text-sm appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer"
               >
                 {types.map(type => (
                   <option key={type} value={type}>{type.toUpperCase()}</option>
@@ -136,7 +136,7 @@ const Experience = () => {
 
                   <div className="mb-6 border-b border-gray-800 pb-4">
                     <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold font-sans text-white uppercase">{exp.title}</h3>
+                        <h3 className="text-xl font-bold font-sans text-gray-900 dark:text-white uppercase">{exp.title}</h3>
                         <span className={`px-2 py-0.5 font-mono text-[10px] border tracking-wider uppercase ${getTypeColor(exp.type)}`}>
                             {exp.type}
                         </span>
@@ -147,13 +147,13 @@ const Experience = () => {
                     </div>
                   </div>
 
-                  <p className="text-gray-300 mb-6 font-sans leading-relaxed text-sm">{exp.description}</p>
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 font-sans leading-relaxed text-sm">{exp.description}</p>
 
                   <div className="mb-6">
                     <h5 className="font-mono text-muted text-[10px] mb-3 uppercase tracking-widest">&gt;&gt; Key_Achievements</h5>
                     <ul className="space-y-2">
                       {exp.achievements.map((achievement, achIndex) => (
-                        <li key={achIndex} className="text-gray-400 text-sm flex items-start gap-3">
+                        <li key={achIndex} className="text-gray-600 dark:text-gray-400 text-sm flex items-start gap-3">
                           <span className="text-primary mt-1.5 min-w-[6px] h-1.5 bg-primary clip-triangle"></span>
                           <span>{achievement}</span>
                         </li>
@@ -185,7 +185,7 @@ const Experience = () => {
                     {exp.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="bg-background text-gray-400 px-2 py-1 font-mono text-[10px] uppercase tracking-widest border border-gray-800"
+                        className="bg-background text-gray-600 dark:text-gray-400 px-2 py-1 font-mono text-[10px] uppercase tracking-widest border border-gray-800"
                       >
                         {tech}
                       </span>

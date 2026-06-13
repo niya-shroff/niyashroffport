@@ -59,7 +59,7 @@ const Photography = () => {
           
           <div className="flex items-center gap-3 tape-edge bg-surface px-6 py-3 border border-gray-800 rotate-[1deg] inline-block mb-8 mt-4">
               <Camera className="text-primary" />
-              <h2 className="text-2xl font-mono text-white tracking-widest uppercase">PHOTOGRAPHY_ARCHIVE</h2>
+              <h2 className="text-2xl font-mono text-gray-900 dark:text-white tracking-widest uppercase">PHOTOGRAPHY_ARCHIVE</h2>
           </div>
 
           <div className="font-handwriting text-accent-crimson text-2xl rotate-[-2deg] ml-12 mb-8 max-w-2xl">
@@ -78,7 +78,7 @@ const Photography = () => {
                 placeholder="SCAN_ARCHIVE..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-gray-900 dark:text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors"
               />
             </div>
 
@@ -87,7 +87,7 @@ const Photography = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-8 py-2 text-white font-mono text-sm appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer uppercase"
+                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-8 py-2 text-gray-900 dark:text-white font-mono text-sm appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer uppercase"
               >
                 {categories.map((category) => (
                   <option key={category} value={category}>
@@ -127,9 +127,9 @@ const Photography = () => {
                   <div className="absolute top-2 left-2 bg-black/60 px-2 py-1 font-mono text-[8px] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">IMG.ID: {photo.id}</div>
                   
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <h3 className="text-lg font-bold font-sans text-white mb-1 uppercase">{photo.title}</h3>
+                    <h3 className="text-lg font-bold font-sans text-gray-900 dark:text-white mb-1 uppercase">{photo.title}</h3>
                     <p className="text-xs font-mono text-primary mb-2 uppercase">{photo.location || photo.category}</p>
-                    <div className="flex items-center text-gray-300 text-[10px] font-mono uppercase">
+                    <div className="flex items-center text-gray-700 dark:text-gray-300 text-[10px] font-mono uppercase">
                       <ZoomIn size={12} className="mr-1" />
                       INIT_ZOOM
                     </div>
@@ -186,7 +186,7 @@ const Photography = () => {
                 className="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center justify-center p-2"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="relative inline-block border border-gray-800 p-2 bg-gray-900/50 shadow-[0_0_30px_rgba(14,165,233,0.1)]">
+                <div className="relative inline-block border border-gray-800 p-2 bg-background shadow-[0_0_30px_rgba(14,165,233,0.1)]">
                   <img
                     src={filteredPhotos[selectedPhotoIndex].url}
                     alt={filteredPhotos[selectedPhotoIndex].title}
@@ -202,7 +202,7 @@ const Photography = () => {
                 </div>
                 
                 <div className="mt-8 bg-surface/80 border border-gray-800 px-8 py-4 backdrop-blur-md flex flex-col items-center">
-                  <h3 className="text-white font-mono text-lg tracking-widest uppercase mb-1">{filteredPhotos[selectedPhotoIndex].title}</h3>
+                  <h3 className="text-gray-900 dark:text-white font-mono text-lg tracking-widest uppercase mb-1">{filteredPhotos[selectedPhotoIndex].title}</h3>
                   <p className="text-muted font-mono text-xs uppercase">{filteredPhotos[selectedPhotoIndex].location || filteredPhotos[selectedPhotoIndex].category}</p>
                 </div>
               </motion.div>

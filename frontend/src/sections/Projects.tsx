@@ -91,7 +91,7 @@ const Projects = () => {
           <div className="flex flex-col items-center mb-16 relative">
             <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 -z-10"></div>
             <div className="bg-background px-6 border border-gray-800 py-3 tape-edge rotate-[1deg]">
-              <h2 className="text-3xl font-mono text-white tracking-widest uppercase flex items-center gap-3">
+              <h2 className="text-3xl font-mono text-gray-900 dark:text-white tracking-widest uppercase flex items-center gap-3">
                 <Code2 className="text-primary" />
                 PROJECT_ARCHIVES
                 <span className="font-handwriting text-accent-crimson text-2xl lowercase absolute -bottom-6 -right-8 rotate-[-10deg]">my work!</span>
@@ -128,13 +128,13 @@ const Projects = () => {
                 <div className="card relative z-10 pt-16 px-6 pb-6 bg-surface/95 backdrop-blur-md">
                    
                    <div className="flex justify-between items-start mb-4">
-                     <h3 className="text-lg font-mono text-white font-bold tracking-tight">{project.title}</h3>
+                     <h3 className="text-lg font-mono text-gray-900 dark:text-white font-bold tracking-tight">{project.title}</h3>
                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition-colors">
                        <ExternalLink size={18} />
                      </a>
                    </div>
                    
-                   <p className="text-gray-400 text-sm font-sans mb-6 leading-relaxed note-panel !p-4 !text-xs !rotate-[1deg] !mb-6 shadow-sm">
+                   <p className="text-gray-600 dark:text-gray-400 text-sm font-sans mb-6 leading-relaxed note-panel !p-4 !text-xs !rotate-[1deg] !mb-6 shadow-sm">
                      {project.description}
                    </p>
 
@@ -148,11 +148,11 @@ const Projects = () => {
                    </div>
                    
                    <div className="flex items-center space-x-4 border-t border-gray-800 pt-4 font-mono text-xs text-muted">
-                     <div className="flex items-center gap-1 group/icon hover:text-white transition-colors">
+                     <div className="flex items-center gap-1 group/icon hover:text-gray-900 dark:text-white transition-colors">
                        <Star size={14} className="group-hover:text-accent-emerald transition-colors" />
                        <span>{project.stars}</span>
                      </div>
-                     <div className="flex items-center gap-1 group/icon hover:text-white transition-colors">
+                     <div className="flex items-center gap-1 group/icon hover:text-gray-900 dark:text-white transition-colors">
                        <GitFork size={14} className="group-hover:text-primary transition-colors" />
                        <span>{project.forks}</span>
                      </div>
@@ -169,7 +169,7 @@ const Projects = () => {
             
             <div className="flex items-center gap-3 mb-12">
               <Network className="text-accent-emerald" />
-              <h3 className="text-xl font-mono text-white uppercase tracking-widest">GITHUB_ACTIVITY_LOG</h3>
+              <h3 className="text-xl font-mono text-gray-900 dark:text-white uppercase tracking-widest">GITHUB_ACTIVITY_LOG</h3>
             </div>
 
             {loading ? (
@@ -192,26 +192,26 @@ const Projects = () => {
                     
                      <div className="relative z-10">
                         <div className="flex items-start justify-between mb-3">
-                          <h4 className="text-base font-mono font-bold text-white truncate group-hover:text-primary transition-colors">{repo.name}</h4>
-                          <Github size={16} className="text-muted group-hover:text-white transition-colors" />
+                          <h4 className="text-base font-mono font-bold text-gray-900 dark:text-white truncate group-hover:text-primary transition-colors">{repo.name}</h4>
+                          <Github size={16} className="text-muted group-hover:text-gray-900 dark:text-white transition-colors" />
                         </div>
                         
-                        <p className="text-gray-400 text-sm mb-4 line-clamp-2 font-sans">
+                        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2 font-sans">
                           {repo.description || 'No description provided.'}
                         </p>
                         
                         <div className="flex items-center justify-between border-t border-gray-800/50 pt-3">
                           <div className="flex items-center space-x-4 font-mono text-[10px] text-muted">
-                            <span className="flex items-center gap-1 group-hover:text-white transition-colors">
+                            <span className="flex items-center gap-1 group-hover:text-gray-900 dark:text-white transition-colors">
                               <Star size={12} className="group-hover:text-accent-emerald" /> {repo.stargazers_count}
                             </span>
-                            <span className="flex items-center gap-1 group-hover:text-white transition-colors">
+                            <span className="flex items-center gap-1 group-hover:text-gray-900 dark:text-white transition-colors">
                               <GitFork size={12} className="group-hover:text-primary" /> {repo.forks_count}
                             </span>
                           </div>
                           
                           {repo.language && (
-                            <div className="flex items-center gap-2 font-mono text-[10px] text-gray-300">
+                            <div className="flex items-center gap-2 font-mono text-[10px] text-gray-700 dark:text-gray-300">
                               <span className={`w-2 h-2 rounded-full ${getLanguageColor(repo.language)}`}></span>
                               {repo.language}
                             </div>

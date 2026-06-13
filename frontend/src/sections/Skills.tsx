@@ -103,7 +103,7 @@ const Skills = () => {
               SYS.MODULE
               <span className="w-4 h-[1px] bg-primary block"></span>
             </div>
-            <h2 className="text-3xl font-mono text-white mb-4 uppercase tracking-tighter">TECHNICAL_ARSENAL</h2>
+            <h2 className="text-3xl font-mono text-gray-900 dark:text-white mb-4 uppercase tracking-tighter">TECHNICAL_ARSENAL</h2>
             <p className="text-muted font-mono text-xs max-w-xl mx-auto uppercase tracking-wider">
               &gt; A visual overview of technical capabilities and specialized modules. Always optimizing.
             </p>
@@ -136,7 +136,7 @@ const Skills = () => {
                       {category.skills.map((skill, skillIndex) => (
                         <div key={skillIndex} className="space-y-1">
                           <div className="flex justify-between items-center font-mono text-[10px] uppercase">
-                            <span className="text-gray-300">{skill.name}</span>
+                            <span className="text-gray-700 dark:text-gray-300">{skill.name}</span>
                             <span className={textColor}>{skill.level}%</span>
                           </div>
                           <div className="w-full bg-gray-800 h-[2px]">

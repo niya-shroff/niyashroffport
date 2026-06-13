@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { Menu, X, Github, Linkedin, Mail, ChevronDown, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GlobalSearch from '../components/common/GlobalSearch';
+import ThemeToggle from '../components/common/ThemeToggle';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,11 +57,11 @@ const Header = () => {
   ];
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'text-primary text-glow' : 'text-muted hover:text-white'
+    `font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'text-primary text-glow' : 'text-muted hover:text-gray-900 dark:text-white'
     }`;
 
   const dropdownLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `block px-4 py-2 font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'bg-primary/20 text-primary border-l-2 border-primary' : 'text-muted hover:bg-surfaceHover hover:text-white border-l-2 border-transparent'
+    `block px-4 py-2 font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'bg-primary/20 text-primary border-l-2 border-primary' : 'text-muted hover:bg-surfaceHover hover:text-gray-900 dark:text-white border-l-2 border-transparent'
     }`;
 
   return (
@@ -70,7 +71,7 @@ const Header = () => {
           }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold font-sans text-white flex items-center gap-2 group">
+          <Link to="/" className="text-2xl font-bold font-sans text-gray-900 dark:text-white flex items-center gap-2 group">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent-emerald group-hover:from-accent-emerald group-hover:to-primary transition-all duration-500 font-mono tracking-tighter">
               [NS]
             </span>
@@ -86,7 +87,7 @@ const Header = () => {
                     onMouseEnter={() => item.label === 'WORK' ? setWorkDropdownOpen(true) : setCreativeDropdownOpen(true)}
                     onMouseLeave={() => item.label === 'WORK' ? setWorkDropdownOpen(false) : setCreativeDropdownOpen(false)}
                   >
-                    <button className="flex items-center gap-1 font-mono text-xs tracking-widest text-muted hover:text-white transition-colors duration-200 py-2">
+                    <button className="flex items-center gap-1 font-mono text-xs tracking-widest text-muted hover:text-gray-900 dark:text-white transition-colors duration-200 py-2">
                       {item.label}
                       <ChevronDown size={14} className={`transition-transform duration-200 ${item.label === 'WORK' ? (workDropdownOpen ? 'rotate-180 text-primary' : '') : (creativeDropdownOpen ? 'rotate-180 text-primary' : '')}`} />
                     </button>
@@ -127,16 +128,19 @@ const Header = () => {
               </div>
             ))}
 
-            {/* Search Button */}
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="text-muted hover:text-primary transition-colors p-2"
-              aria-label="Search"
-            >
-              <Search size={18} />
-            </button>
+            {/* Search and Theme Toggle */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="text-muted hover:text-primary transition-colors p-2"
+                aria-label="Search"
+              >
+                <Search size={18} />
+              </button>
+              <ThemeToggle />
+            </div>
 
-            <div className="w-px h-6 bg-gray-800 mx-4 tape-edge"></div>
+            <div className="w-px h-6 bg-gray-800 mx-4"></div>
 
             <div className="flex items-center space-x-4">
               <a href="https://github.com/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition-colors">
@@ -153,6 +157,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
+            <ThemeToggle />
             <button
               onClick={() => setIsSearchOpen(true)}
               className="text-muted hover:text-primary transition-colors p-2"
@@ -161,7 +166,7 @@ const Header = () => {
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-muted hover:text-white focus:outline-none"
+              className="text-muted hover:text-gray-900 dark:text-white focus:outline-none"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -182,16 +187,16 @@ const Header = () => {
                 
                 <div className="space-y-3">
                   <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">WORK //</div>
-                  <NavLink to="/technical" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">PROJECTS</NavLink>
-                  <NavLink to="/experience" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">EXPERIENCE</NavLink>
-                  <NavLink to="/education" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">EDUCATION</NavLink>
+                  <NavLink to="/technical" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">PROJECTS</NavLink>
+                  <NavLink to="/experience" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">EXPERIENCE</NavLink>
+                  <NavLink to="/education" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">EDUCATION</NavLink>
                 </div>
                 
                 <div className="space-y-3">
                   <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">CREATIVE //</div>
-                  <NavLink to="/photography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">PHOTOGRAPHY</NavLink>
-                  <NavLink to="/videography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">VIDEOGRAPHY</NavLink>
-                  <NavLink to="/writing" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-white block font-mono text-sm">WRITING</NavLink>
+                  <NavLink to="/photography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">PHOTOGRAPHY</NavLink>
+                  <NavLink to="/videography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">VIDEOGRAPHY</NavLink>
+                  <NavLink to="/writing" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">WRITING</NavLink>
                 </div>
 
                 <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass}>CONTACT</NavLink>
