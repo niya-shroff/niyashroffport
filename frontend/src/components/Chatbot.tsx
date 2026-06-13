@@ -48,7 +48,7 @@ export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: "Hi! I'm an AI assistant. How can I help you today?" }
+    { role: 'assistant', content: "Hi! I'm Nini, Niya's personal AI agent. How can I help you today?" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -187,8 +187,8 @@ export default function Chatbot() {
       const data = await response.json();
       const messageResponse = data.choices[0].message;
 
-      setMessages(prev => [...prev, { 
-        role: 'assistant', 
+      setMessages(prev => [...prev, {
+        role: 'assistant',
         content: messageResponse.content,
         reasoning_details: messageResponse.reasoning_details
       }]);
@@ -206,7 +206,7 @@ export default function Chatbot() {
         onClick={() => {
           setIsOpen(true);
           if (messages.length === 0) {
-            setMessages([{ role: 'assistant', content: "Hi! I'm an AI assistant. How can I help you today?" }]);
+            setMessages([{ role: 'assistant', content: "Hi! I'm Nini, Niya's personal AI agent. How can I help you today?" }]);
           }
         }}
         className="fixed bottom-6 right-6 p-4 bg-primary text-gray-900 dark:text-white rounded-full shadow-lg hover:bg-primary/90 transition-all z-50 flex items-center justify-center group"
@@ -218,11 +218,10 @@ export default function Chatbot() {
   }
 
   return (
-    <div className={`fixed bottom-4 sm:bottom-6 right-4 sm:right-6 bg-surface border border-gray-300 dark:border-gray-800 rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden tape-edge transition-all duration-300 ease-in-out ${
-      isExpanded 
-        ? 'w-[calc(100vw-2rem)] sm:w-[600px] md:w-[750px] h-[calc(100vh-2rem)] sm:h-[85vh] max-h-[900px]' 
-        : 'w-[calc(100vw-2rem)] sm:w-96 h-[500px] max-h-[calc(100vh-8rem)]'
-    }`}>
+    <div className={`fixed bottom-4 sm:bottom-6 right-4 sm:right-6 bg-surface border border-gray-300 dark:border-gray-800 rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden tape-edge transition-all duration-300 ease-in-out ${isExpanded
+      ? 'w-[calc(100vw-2rem)] sm:w-[600px] md:w-[750px] h-[calc(100vh-2rem)] sm:h-[85vh] max-h-[900px]'
+      : 'w-[calc(100vw-2rem)] sm:w-96 h-[500px] max-h-[calc(100vh-8rem)]'
+      }`}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 bg-surfaceHover border-b border-gray-300 dark:border-gray-800 shrink-0">
         <div className="flex items-center gap-2">
