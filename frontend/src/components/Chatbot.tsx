@@ -167,11 +167,10 @@ export default function Chatbot() {
         { role: 'user', content: userMessage }
       ];
 
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetch('/.netlify/functions/chat', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           model: 'openai/gpt-oss-20b:free',
