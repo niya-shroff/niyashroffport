@@ -17,50 +17,15 @@ const About = () => {
                 <div className="max-w-6xl mx-auto">
                     <div className="flex items-center gap-4 mb-16 border-b border-gray-800 pb-4">
                         <Target className="text-accent-crimson animate-pulse" size={24} />
-                        <h2 className="text-3xl font-mono text-white tracking-tighter">ABOUT_ENTITY</h2>
+                        <h2 className="text-3xl font-mono text-gray-900 dark:text-white tracking-tighter">ABOUT_ENTITY</h2>
                         <div className="flex-grow w-full h-[1px] bg-gray-800 ml-4"></div>
                         <span className="font-mono text-[10px] text-muted">SEC. 02</span>
                     </div>
 
                     <div className="space-y-24">
                         <div className="grid lg:grid-cols-12 gap-12 items-center">
-                            
-                            {/* Left - Profile Image (Scrapbook photograph style) */}
-                            <div className="lg:col-span-5 relative perspective-1000">
-                                <div className="absolute -inset-4 bg-primary/5 blur-2xl rounded-full"></div>
-                                
-                                <div className="photo-frame !rotate-[-2deg] p-4 pb-16 bg-[#fdfbf7] tape-edge relative z-10 mx-auto max-w-sm shadow-2xl border border-gray-300">
-                                    <div className="relative overflow-hidden border border-gray-300 aspect-square shadow-inner">
-                                        <img
-                                            src="/headshot.jpeg"
-                                            alt="Niya Shroff"
-                                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                                        />
-                                        {/* Subtle film grain overlay effect without making it B&W */}
-                                        <div className="absolute inset-0 bg-yellow-500/10 mix-blend-overlay pointer-events-none"></div>
-                                        
-                                        {/* HUD Elements - kept minimal for tech-scrapbook blend */}
-                                        <div className="absolute top-2 left-2 text-[8px] font-mono text-white bg-black/50 backdrop-blur-sm px-1">SYS.CAM_01</div>
-                                        <div className="absolute bottom-2 right-2 text-[8px] font-mono text-red-500 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-1">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                                            REC
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="absolute bottom-3 left-0 w-full text-center flex flex-col justify-center items-center">
-                                        <h3 className="text-3xl font-handwriting text-gray-900 rotate-[-1deg]">Niya Shroff ☻</h3>
-                                        <p className="text-gray-500 font-mono text-[9px] flex items-center justify-center gap-1 mt-1 uppercase tracking-widest">
-                                            <MapPin size={10} />
-                                            NEW_YORK, NY
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="absolute -left-8 top-1/2 w-4 h-[1px] bg-gray-600"></div>
-                                <div className="absolute -right-8 top-1/2 w-4 h-[1px] bg-gray-600"></div>
-                            </div>
-
-                            {/* Right - Bio Text (Terminal style) */}
-                            <div className="lg:col-span-7 relative">
+                            {/* Bio Text (Terminal style) */}
+                            <div className="lg:col-span-12 max-w-4xl mx-auto w-full relative">
                                 <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-gray-800 rounded-tr-3xl"></div>
                                 
                                 <div className="card !p-8 relative z-10 border-l-2 border-l-primary bg-surface/40 backdrop-blur-sm">
@@ -70,7 +35,7 @@ const About = () => {
                                         <span>EXECUTING bio. sh...</span>
                                     </div>
 
-                                    <p className="text-gray-300 leading-relaxed text-sm lg:text-base font-sans font-light">
+                                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm lg:text-base font-sans font-light">
                                         Who am I? What a great question to ask, yet so hard to answer what defines me. What sets my soul on fire? 
                                         Let's circle back to that next meeting. I'm still working on it... 
                                         <br />
@@ -98,7 +63,7 @@ const About = () => {
                                         {/* Scanline effect on hover */}
                                         <div className="absolute top-0 left-0 w-full h-[2px] bg-accent-emerald shadow-[0_0_10px_#10b981] -translate-y-full group-hover:animate-[scan_2s_ease-in-out_infinite]"></div>
                                         
-                                        <div className="text-3xl font-mono font-bold text-white mb-2 group-hover:text-glow-accent transition-all duration-300">
+                                        <div className="text-3xl font-mono font-bold text-gray-900 dark:text-white mb-2 group-hover:text-glow-accent transition-all duration-300">
                                             {stat.value}
                                         </div>
                                         <div className="text-[10px] font-mono text-primary tracking-widest uppercase">

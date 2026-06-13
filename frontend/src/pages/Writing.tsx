@@ -9,12 +9,15 @@ const Writing = () => {
     const [selectedPoem, setSelectedPoem] = useState<any>(null);
     const [activeTab, setActiveTab] = useState<'all' | 'poems' | 'substack'>('all');
     const [searchQuery, setSearchQuery] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
         fetch('https://substacker-umber.vercel.app/substack/newniyas')
             .then(res => res.json())
             .then(data => setSubstackArticles(data.posts || data))
-            .catch(err => console.error('Failed to fetch substack articles', err));
+            .catch(err => console.error('Failed to fetch substack articles', err))
+            .finally(() => setIsLoading(false));
     }, []);
 
     const filteredContent = useMemo(() => {
@@ -31,6 +34,7 @@ const Writing = () => {
 
         const substackItems = substackArticles.map((item, index) => {
             const contentString = item.content || item.description || '';
+            const rawDate = item.published ? new Date(item.published).getTime() : 0;
             return {
                 id: item.id || `fetched-${index}`,
                 title: item.title,
@@ -38,12 +42,14 @@ const Writing = () => {
                 content: item.content,
                 type: 'substack',
                 date: formatDateStr(item.published),
+                rawDate,
                 url: item.link ?? null
             };
         });
 
         const allItems = poems.map(item => {
             const isSubstack = item.category?.toLowerCase().includes('substack');
+            const rawDate = item.published_date ? new Date(item.published_date).getTime() : 0;
 
             return {
                 id: item.id,
@@ -52,13 +58,14 @@ const Writing = () => {
                 content: item.content,
                 type: (isSubstack ? 'substack' : 'poem') as 'substack' | 'poem',
                 date: formatDateStr(item.published_date),
+                rawDate,
                 url: item.url ?? null
             };
         });
 
         const combinedItems = [...substackItems, ...allItems];
 
-        return combinedItems.filter(item => {
+        let result = combinedItems.filter(item => {
             const tempExcerpt = item.excerpt || '';
             const matchesSearch =
                 item.title?.toLowerCase().includes(query) ||
@@ -69,6 +76,16 @@ const Writing = () => {
             if (activeTab === 'substack') return matchesSearch && item.type === 'substack';
             return false;
         });
+
+        if (activeTab === 'all') {
+            // Random shuffle
+            result.sort(() => Math.random() - 0.5);
+        } else {
+            // Sort latest to earliest
+            result.sort((a, b) => b.rawDate - a.rawDate);
+        }
+
+        return result;
     }, [activeTab, searchQuery, poems, substackArticles]);
 
     return (
@@ -88,7 +105,7 @@ const Writing = () => {
                 >
                     <div className="flex items-center gap-3 tape-edge bg-surface px-6 py-3 border border-gray-800 rotate-[1deg] inline-block mb-8 mt-4">
                         <Terminal className="text-primary" />
-                        <h2 className="text-2xl font-mono text-white tracking-widest uppercase">TEXT_ARCHIVE</h2>
+                        <h2 className="text-2xl font-mono text-gray-900 dark:text-white tracking-widest uppercase">TEXT_ARCHIVE</h2>
                     </div>
 
                     <div className="font-handwriting text-accent-crimson text-2xl rotate-[-2deg] ml-12 mb-8 max-w-2xl">
@@ -110,7 +127,7 @@ const Writing = () => {
                                 placeholder="SEARCH WRITINGS..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors uppercase"
+                                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-gray-900 dark:text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors uppercase"
                             />
                         </div>
 
@@ -121,7 +138,7 @@ const Writing = () => {
                                     onClick={() => setActiveTab(tab)}
                                     className={`px-4 py-1 font-mono text-xs uppercase tracking-wider transition-all border ${activeTab === tab
                                         ? 'bg-primary/20 text-primary border-primary shadow-[0_0_10px_rgba(14,165,233,0.2)]'
-                                        : 'text-muted border-transparent hover:text-white hover:border-gray-800'
+                                        : 'text-muted border-transparent hover:text-gray-900 dark:text-white hover:border-gray-800'
                                         }`}
                                 >
                                     {tab}
@@ -131,7 +148,15 @@ const Writing = () => {
                     </div>
                 </motion.div>
 
+                {/* Loading State */}
+                {isLoading && (
+                    <div className="flex justify-center items-center py-20 text-muted font-mono animate-pulse uppercase">
+                        <p>&gt; almost there... loading poems and substack posts...</p>
+                    </div>
+                )}
+
                 {/* Grid */}
+                {!isLoading && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredContent.map((item, index) => (
                         <motion.div
@@ -140,7 +165,7 @@ const Writing = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
                             className={`p-6 border border-gray-300 cursor-pointer group flex flex-col h-full transform transition-all duration-300 hover:z-20 hover:scale-105 shadow-xl
-                                ${item.type === 'poem' ? 'note-panel rotate-[-1deg] hover:rotate-0' : 'bg-surface border-gray-800 hover:border-primary/50 text-white'}
+                                ${item.type === 'poem' ? 'note-panel rotate-[-1deg] hover:rotate-0' : 'bg-surface border-gray-800 hover:border-primary/50 text-gray-900 dark:text-white'}
                             `}
                             onClick={() => {
                                 if (item.type === 'substack' && item.url) {
@@ -166,11 +191,11 @@ const Writing = () => {
                                 )}
                             </div>
 
-                            <h3 className={`text-xl font-bold mb-3 ${item.type === 'poem' ? 'font-handwriting text-2xl text-gray-900 leading-tight' : 'font-mono text-white tracking-tight uppercase group-hover:text-primary transition-colors'}`}>
+                            <h3 className={`text-xl font-bold mb-3 ${item.type === 'poem' ? 'font-handwriting text-2xl text-gray-900 leading-tight' : 'font-mono text-gray-900 dark:text-white tracking-tight uppercase group-hover:text-primary transition-colors'}`}>
                                 {item.title}
                             </h3>
 
-                            <p className={`${item.type === 'poem' ? 'font-handwriting text-gray-700 text-lg leading-relaxed' : 'text-gray-400 font-sans text-sm'} mb-6 flex-grow`}>
+                            <p className={`${item.type === 'poem' ? 'font-handwriting text-gray-700 text-lg leading-relaxed' : 'text-gray-600 dark:text-gray-400 font-sans text-sm'} mb-6 flex-grow`}>
                                 "{item.excerpt}"
                             </p>
 
@@ -186,7 +211,7 @@ const Writing = () => {
                                 </div>
 
                                 {item.date && (
-                                    <span className={`text-[10px] font-mono ${item.type === 'poem' ? 'text-gray-500' : 'text-muted'}`}>
+                                    <span className={`text-[10px] font-mono ${item.type === 'poem' ? 'text-gray-600 dark:text-gray-500' : 'text-muted'}`}>
                                         SYS.DATE // {item.date}
                                     </span>
                                 )}
@@ -205,6 +230,7 @@ const Writing = () => {
                         </div>
                     )}
                 </div>
+                )}
 
                 {/* Modal for Poem Reading */}
                 <AnimatePresence>
@@ -224,7 +250,7 @@ const Writing = () => {
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <button
-                                    className="absolute top-4 right-4 p-2 text-gray-500 hover:text-black rounded-full hover:bg-black/5 transition-colors"
+                                    className="absolute top-4 right-4 p-2 text-gray-600 dark:text-gray-500 hover:text-black rounded-full hover:bg-black/5 transition-colors"
                                     onClick={() => setSelectedPoem(null)}
                                 >
                                     <X size={24} />
@@ -237,7 +263,7 @@ const Writing = () => {
                                         {selectedPoem.title}
                                     </h3>
                                     {selectedPoem.date && (
-                                        <div className="font-handwriting text-gray-500 text-xl">{selectedPoem.date}</div>
+                                        <div className="font-handwriting text-gray-600 dark:text-gray-500 text-xl">{selectedPoem.date}</div>
                                     )}
                                 </div>
 

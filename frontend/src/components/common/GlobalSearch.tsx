@@ -217,13 +217,13 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                         className="fixed top-[15%] left-1/2 transform -translate-x-1/2 w-full max-w-2xl bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 z-50 overflow-hidden"
                     >
                         <div className="relative p-6 border-b border-gray-700">
-                            <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400" size={24} />
+                            <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400" size={24} />
                             <input
                                 type="text"
                                 placeholder="Search everything... (Projects, Experience, Creative)"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
-                                className="w-full bg-transparent text-xl text-white pl-12 pr-12 focus:outline-none placeholder-gray-500"
+                                className="w-full bg-transparent text-xl text-gray-900 dark:text-white pl-12 pr-12 focus:outline-none placeholder-gray-500"
                                 autoFocus
                             />
                             {(loadingProjects) && (
@@ -233,7 +233,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                             )}
                             <button
                                 onClick={onClose}
-                                className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                                className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors"
                             >
                                 <X size={24} />
                             </button>
@@ -241,7 +241,7 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
 
                         <div className="max-h-[60vh] overflow-y-auto custom-scrollbar">
                             {query.trim() === '' ? (
-                                <div className="p-12 text-center text-gray-500">
+                                <div className="p-12 text-center text-gray-600 dark:text-gray-500">
                                     <Command className="mx-auto mb-4 opacity-50" size={48} />
                                     <p className="text-lg">Type to search across all sections</p>
                                 </div>
@@ -253,29 +253,29 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
                                             onClick={() => handleSelect(result)}
                                             className="group flex items-center p-4 rounded-xl hover:bg-gray-700/50 cursor-pointer transition-colors border border-transparent hover:border-primary/20"
                                         >
-                                            <div className="p-3 bg-gray-800 rounded-lg group-hover:bg-primary/10 group-hover:text-primary transition-colors text-gray-400">
+                                            <div className="p-3 bg-gray-800 rounded-lg group-hover:bg-primary/10 group-hover:text-primary transition-colors text-gray-600 dark:text-gray-400">
                                                 <result.icon size={24} />
                                             </div>
                                             <div className="ml-4 flex-grow">
-                                                <h4 className="text-white font-medium group-hover:text-primary transition-colors">
+                                                <h4 className="text-gray-900 dark:text-white font-medium group-hover:text-primary transition-colors">
                                                     {result.title}
                                                 </h4>
-                                                <p className="text-sm text-gray-400">
+                                                <p className="text-sm text-gray-600 dark:text-gray-400">
                                                     {result.category} • {result.description}
                                                 </p>
                                             </div>
-                                            <ChevronRight className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" size={20} />
+                                            <ChevronRight className="text-gray-600 dark:text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" size={20} />
                                         </div>
                                     ))}
                                 </div>
                             ) : (
-                                <div className="p-12 text-center text-gray-500">
+                                <div className="p-12 text-center text-gray-600 dark:text-gray-500">
                                     <p>No results found for "{query}"</p>
                                 </div>
                             )}
                         </div>
 
-                        <div className="p-3 bg-gray-900/50 border-t border-gray-700 text-xs text-gray-500 flex justify-between px-6">
+                        <div className="p-3 bg-gray-900/50 border-t border-gray-700 text-xs text-gray-600 dark:text-gray-500 flex justify-between px-6">
                             <span>Use arrow keys to navigate</span>
                             <span>ESC to close</span>
                         </div>

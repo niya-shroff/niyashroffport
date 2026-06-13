@@ -92,7 +92,7 @@ const Contact = () => {
       icon: Github,
       name: 'GitHub',
       url: 'https://github.com/niya-shroff',
-      color: 'hover:text-white'
+      color: 'hover:text-gray-900 dark:text-white'
     },
     {
       icon: Linkedin,
@@ -119,7 +119,7 @@ const Contact = () => {
           <div className="flex flex-col items-center mb-16 relative">
             <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 -z-10"></div>
             <div className="bg-background px-6 border border-gray-800 py-3 tape-edge rotate-[-1deg]">
-              <h2 className="text-3xl font-mono text-white tracking-widest uppercase flex items-center gap-3">
+              <h2 className="text-3xl font-mono text-gray-900 dark:text-white tracking-widest uppercase flex items-center gap-3">
                 <TerminalSquare className="text-accent-emerald" />
                 INITIATE_CONTACT
                 <span className="font-handwriting text-primary text-2xl lowercase absolute -bottom-6 -right-4 rotate-[-5deg]">say hi!</span>
@@ -186,7 +186,7 @@ const Contact = () => {
             <div className="lg:col-span-7">
               <div className="card !p-0 border-primary/30 overflow-hidden bg-surface/90 backdrop-blur-md shadow-[0_0_30px_rgba(14,165,233,0.1)]">
                 {/* Terminal Header */}
-                <div className="bg-gray-900 px-6 py-3 border-b border-gray-800 flex items-center justify-between">
+                <div className="bg-surface px-6 py-3 border-b border-gray-800 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Code className="text-primary" size={16} />
                     <span className="font-mono text-[10px] text-primary tracking-widest">SECURE_COMM_LINK</span>
@@ -228,7 +228,7 @@ const Contact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={isSubmitting}
-                          className="w-full px-4 py-3 bg-background border border-gray-800 text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
+                          className="w-full px-4 py-3 bg-background border border-gray-800 text-gray-900 dark:text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
                           placeholder="ENTER_NAME..."
                         />
                       </div>
@@ -244,7 +244,7 @@ const Contact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={isSubmitting}
-                          className="w-full px-4 py-3 bg-background border border-gray-800 text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
+                          className="w-full px-4 py-3 bg-background border border-gray-800 text-gray-900 dark:text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
                           placeholder="ENTER_EMAIL..."
                         />
                       </div>
@@ -262,7 +262,7 @@ const Contact = () => {
                         onChange={handleInputChange}
                         required
                         disabled={isSubmitting}
-                        className="w-full px-4 py-3 bg-background border border-gray-800 text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
+                        className="w-full px-4 py-3 bg-background border border-gray-800 text-gray-900 dark:text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 disabled:opacity-50"
                         placeholder="ENTER_SUBJECT..."
                       />
                     </div>
@@ -279,7 +279,7 @@ const Contact = () => {
                         required
                         rows={6}
                         disabled={isSubmitting}
-                        className="w-full px-4 py-3 bg-background border border-gray-800 text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 resize-none disabled:opacity-50"
+                        className="w-full px-4 py-3 bg-background border border-gray-800 text-gray-900 dark:text-white font-mono text-sm placeholder-gray-600 focus:outline-none focus:border-primary transition-colors duration-200 resize-none disabled:opacity-50"
                         placeholder="ENTER_MESSAGE..."
                       />
                     </div>
@@ -289,7 +289,7 @@ const Contact = () => {
                       disabled={isSubmitting}
                       className="w-full group relative overflow-hidden bg-primary/10 border border-primary text-primary font-mono text-sm uppercase tracking-widest py-4 px-6 transition-all duration-300 hover:bg-primary/20 disabled:opacity-50"
                     >
-                      <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out -z-10 text-white"></div>
+                      <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out -z-10 text-gray-900 dark:text-white"></div>
                       <div className="flex items-center justify-center gap-3 relative z-10 group-hover:text-background transition-colors duration-300">
                         {isSubmitting ? (
                           <>
