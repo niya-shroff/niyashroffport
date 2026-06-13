@@ -43,7 +43,7 @@ const About = () => {
                                         <span className="relative inline-block">
                                             Anyways, I graduated in December 2024 with a B.S. 
                                             in Computer Science and B.A. in Economics from UMass Amherst.
-                                            <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-accent-emerald/30"></div>
+                                            <span className="absolute block -bottom-1 left-0 w-full h-[1px] bg-accent-emerald/30"></span>
                                         </span>
                                         <br />
                                         <br />

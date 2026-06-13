@@ -6,5 +6,14 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
+  },
+  server: {
+    proxy: {
+      '/.netlify/functions': {
+        target: 'http://localhost:9999',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   }
 });
