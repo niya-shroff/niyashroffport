@@ -16,7 +16,7 @@ const Footer = () => {
             <div>
               <h3 className="text-xl font-serif text-ink dark:text-white mb-4">Niya Shroff</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed font-sans">
-                A creative studio space sharing ideas, code, stories, and photographs captured through a warm analog lens.
+                Just another human being on this beautiful planet, trying to make sense of it all.
               </p>
             </div>
 

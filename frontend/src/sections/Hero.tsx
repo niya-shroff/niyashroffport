@@ -6,10 +6,10 @@ const Hero = () => {
       <div className="container mx-auto px-6 relative z-10 w-full">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left - Polaroid Photo Stack & Sticky Notes */}
             <div className="lg:col-span-5 relative perspective-1000 order-2 lg:order-1 mt-12 lg:mt-0 flex justify-center">
-              
+
               {/* Decorative Sticky Note - Mint (Ideas) */}
               <div className="absolute -left-12 -top-10 w-32 h-32 bg-[#C1F4C5] p-4 shadow-md rotate-[-12deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
                 <span className="text-[10px] font-mono text-ink/60">#IDEAS</span>
@@ -26,7 +26,7 @@ const Hero = () => {
               <div className="polaroid-frame rotate-[-3deg] z-10 max-w-xs transition-transform duration-500 hover:rotate-[1deg] hover:scale-105">
                 {/* Paperclip asset */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl drop-shadow-sm select-none z-20">📎</div>
-                
+
                 <div className="relative overflow-hidden aspect-square border border-black/5">
                   <img
                     src="/headshot.jpeg"
@@ -37,7 +37,7 @@ const Hero = () => {
                   <div className="absolute inset-0 bg-coral/5 mix-blend-color-burn pointer-events-none"></div>
                   <div className="absolute -inset-10 bg-gradient-to-tr from-coral/0 via-pink/10 to-butterYellow/15 opacity-60 mix-blend-screen pointer-events-none animate-pulse"></div>
                 </div>
-                
+
                 <div className="mt-4 text-center">
                   <h3 className="text-2xl font-handwriting text-ink/80 dark:text-ink/90">niya shroff.jpg</h3>
                   <div className="text-[10px] font-mono text-slate-500 flex items-center justify-center gap-1 mt-1">
@@ -52,7 +52,7 @@ const Hero = () => {
             {/* Right - Editorial Notebook Card */}
             <div className="lg:col-span-7 relative w-full order-1 lg:order-2">
               <div className="card-notebook rotate-[1deg] p-8 md:p-12 shadow-xl bg-white/80 dark:bg-[#1A2333]/80 backdrop-blur-md border border-black/5 dark:border-white/5 relative z-10">
-                
+
                 {/* Top tape decoration */}
                 <div className="absolute -top-3 left-1/3 w-28 h-6 bg-pink/20 dark:bg-pink/10 backdrop-blur-[1px] rotate-[-2deg] border border-pink/10 shadow-sm z-20"></div>
 
@@ -81,12 +81,12 @@ const Hero = () => {
                 </div>
 
                 <p className="text-slate-600 dark:text-slate-300 mb-8 max-w-xl leading-relaxed text-base">
-                  Welcome to my creative notebook. Here, you'll find the intersections of engineering and aesthetics. I build thoughtful full-stack applications, capture stories on film, and script creative essays exploring the spaces where technology meets human expression.
+                  Transforming ideas into reality through code and creativity. Blending technical expertise with artistic vision to build things that solve problems, or just look really cool.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
                   <a href="#about" className="btn-primary">
-                    Read the Journal
+                    Read My Story
                   </a>
                   <a href="/technical" className="btn-secondary">
                     View Portfolio
