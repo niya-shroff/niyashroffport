@@ -98,7 +98,7 @@ const Videography = () => {
 
                         <span className="mono-accent bg-pink/30 dark:bg-pink/10 px-2 py-0.5 rounded text-ink dark:text-pink mb-4 inline-block">Rendering</span>
                         <p className="font-handwriting text-3xl md:text-4xl text-slate-700 dark:text-slate-200 mt-2 leading-relaxed">
-                            Films, scripts, and video edits coming shortly! 🎬
+                            Films, scripts, and video edits coming shortly!
                         </p>
                     </div>
                 </div>
