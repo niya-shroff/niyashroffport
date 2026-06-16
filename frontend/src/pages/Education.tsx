@@ -83,13 +83,6 @@ const Education = () => {
                             {/* Right Column: Descriptions & Details */}
                             <div className="lg:col-span-7 relative pt-4">
                                 
-                                <div className="absolute -top-10 -right-4 bg-[#FFFDFB] dark:bg-[#201B24] border border-black/10 p-4 shadow-md rotate-[2.5deg] z-10 w-[85%] max-w-sm rounded-lg">
-                                    <div className="absolute -top-2 left-4 text-sm">📌</div>
-                                    <p className="font-handwriting text-lg text-slate-800 dark:text-slate-200 leading-relaxed italic">
-                                        "{edu.description}"
-                                    </p>
-                                </div>
-                                
                                 <div className="mt-20 card bg-white/50 dark:bg-[#1D1A22]/50 p-6 pt-16 relative">
                                     {/* Relevant Courses */}
                                     {edu.courses && (

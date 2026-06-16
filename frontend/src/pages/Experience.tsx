@@ -122,7 +122,6 @@ const Experience = () => {
                 <div className="card pt-8 relative overflow-visible mt-4">
                   {/* Scrapbook attached note - Polaroid styled sticker */}
                   <div className="absolute -top-4 -right-4 bg-[#FFFDFB] border border-black/10 p-3 rotate-[3deg] shadow-md max-w-[170px] z-20 rounded-md">
-                     <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-sm">📌</div>
                      <div className="flex items-center gap-1 font-serif text-xs text-ink/80 border-b border-black/5 pb-1 mb-1">
                        <Calendar size={12} className="text-coral" />
                        {exp.period}

@@ -5,7 +5,6 @@ export const education = [
         location: 'Amherst, MA',
         period: 'December 2024',
         honors: 'Magna Cum Laude',
-        description: 'Completed two Bachelor\'s degrees simultaneously, combining technical computer science expertise with economic analysis and theory.',
         courses: [
             'Artificial Intelligence',
             'Software Engineering',
@@ -31,7 +30,6 @@ export const education = [
         school: 'Chelmsford High School',
         location: 'Chelmsford, MA',
         period: 'June 2021',
-        description: 'Graduated with high honors after completing numerous Honors and AP courses.',
         activities: [
             {
                 title: 'Founder of Care Cardz',
