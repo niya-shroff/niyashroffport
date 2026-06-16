@@ -4,159 +4,145 @@ import {
   Brain,
   Cloud,
   Palette,
-  Settings
+  Settings,
+  Wrench
 } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
     {
       icon: Database,
-      title: 'BACKEND_DEV',
+      title: 'Backend Development',
       skills: [
         { name: 'Python', level: 80 },
         { name: 'Java', level: 80 },
         { name: 'Node.js', level: 70 },
         { name: 'Databases', level: 70 },
       ],
-      color: 'blue'
+      color: 'lavender',
+      bgColor: 'bg-lavender',
+      accentColor: 'text-lavender',
+      colorClass: 'border-lavender/30 bg-white/70 dark:bg-[#1A2333]/70'
     },
     {
       icon: Brain,
-      title: 'ARTIFICIAL_INTELLIGENCE',
+      title: 'Artificial Intelligence',
       skills: [
         { name: 'RAG & LLMs', level: 70 },
         { name: 'LangChain', level: 85 },
         { name: 'Prompt Eng', level: 90 },
         { name: 'Pandas/NumPy', level: 60 }
       ],
-      color: 'purple'
+      color: 'skyBlue',
+      bgColor: 'bg-skyBlue',
+      accentColor: 'text-skyBlue',
+      colorClass: 'border-skyBlue/30 bg-white/70 dark:bg-[#1A2333]/70'
     },
     {
       icon: Code,
-      title: 'FRONTEND_DEV',
+      title: 'Frontend Development',
       skills: [
-        { name: 'React/Next.js', level: 65 },
+        { name: 'React / Next.js', level: 65 },
         { name: 'Angular', level: 50 },
         { name: 'TypeScript', level: 65 },
-        { name: 'HTML/CSS', level: 65 },
+        { name: 'HTML / CSS', level: 65 },
       ],
-      color: 'emerald'
+      color: 'pink',
+      bgColor: 'bg-pink',
+      accentColor: 'text-pink',
+      colorClass: 'border-pink/30 bg-white/70 dark:bg-[#1A2333]/70'
     },
     {
       icon: Cloud,
-      title: 'CLOUD_&_DEVOPS',
+      title: 'Cloud & DevOps',
       skills: [
         { name: 'AWS', level: 80 },
         { name: 'Docker', level: 70 },
-        { name: 'Git/GitHub', level: 90 },
-        { name: 'CI/CD', level: 80 },
+        { name: 'Git & GitHub', level: 90 },
+        { name: 'CI / CD', level: 80 },
       ],
-      color: 'amber'
+      color: 'mint',
+      bgColor: 'bg-mint',
+      accentColor: 'text-mint',
+      colorClass: 'border-mint/30 bg-white/70 dark:bg-[#1A2333]/70'
     },
     {
       icon: Palette,
-      title: 'DESIGN_&_TOOLS',
+      title: 'Design & UI/UX',
       skills: [
         { name: 'Figma', level: 60 },
         { name: 'UI/UX Design', level: 70 },
-        { name: 'Responsive', level: 70 },
+        { name: 'Responsive Layouts', level: 70 },
         { name: 'Prototyping', level: 60 },
       ],
-      color: 'pink'
+      color: 'coral',
+      bgColor: 'bg-coral',
+      accentColor: 'text-coral',
+      colorClass: 'border-coral/30 bg-white/70 dark:bg-[#1A2333]/70'
     },
     {
       icon: Settings,
-      title: 'OTHER_FRAMEWORKS',
+      title: 'Methodologies & Other',
       skills: [
         { name: 'REST APIs', level: 88 },
         { name: 'GraphQL', level: 50 },
         { name: 'E2E Testing', level: 90 },
-        { name: 'Agile/Scrum', level: 85 },
+        { name: 'Agile / Scrum', level: 85 },
       ],
-      color: 'indigo'
+      color: 'butterYellow',
+      bgColor: 'bg-butterYellow',
+      accentColor: 'text-slate-600 dark:text-butterYellow',
+      colorClass: 'border-butterYellow/30 bg-white/70 dark:bg-[#1A2333]/70'
     },
   ];
 
-  const getColorClasses = (color: string) => {
-    const colors = {
-      emerald: 'text-accent-emerald border-accent-emerald/30 shadow-[0_0_15px_rgba(16,185,129,0.2)] bg-accent-emerald',
-      blue: 'text-primary border-primary/30 shadow-[0_0_15px_rgba(14,165,233,0.2)] bg-primary',
-      purple: 'text-purple-400 border-purple-400/30 shadow-[0_0_15px_rgba(192,132,252,0.2)] bg-purple-400',
-      amber: 'text-amber-400 border-amber-400/30 shadow-[0_0_15px_rgba(251,191,36,0.2)] bg-amber-400',
-      pink: 'text-accent-crimson border-accent-crimson/30 shadow-[0_0_15px_rgba(225,29,72,0.2)] bg-accent-crimson',
-      indigo: 'text-indigo-400 border-indigo-400/30 shadow-[0_0_15px_rgba(129,140,248,0.2)] bg-indigo-400',
-    };
-    return colors[color as keyof typeof colors] || colors.emerald;
-  };
-
   return (
-    <section id="skills" className="py-24 bg-background relative border-t border-gray-800">
-      {/* Decorative floating lines */}
-      <div className="absolute top-0 right-[10%] w-[1px] h-32 bg-gradient-to-b from-primary/50 to-transparent"></div>
-      <div className="absolute bottom-0 left-[10%] w-[1px] h-32 bg-gradient-to-t from-accent-emerald/50 to-transparent"></div>
-
+    <section id="skills" className="py-24 bg-background relative border-t border-black/5 dark:border-white/5">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center mb-16">
-            <div className="font-mono text-primary text-xs uppercase tracking-widest mb-2 flex items-center gap-2">
-              <span className="w-4 h-[1px] bg-primary block"></span>
-              SYS.MODULE
-              <span className="w-4 h-[1px] bg-primary block"></span>
+            <div className="font-serif text-coral text-xs tracking-widest mb-2 flex items-center gap-2">
+              <Wrench size={16} />
+              <span>Skillset</span>
             </div>
-            <h2 className="text-3xl font-mono text-gray-900 dark:text-white mb-4 uppercase tracking-tighter">TECHNICAL_ARSENAL</h2>
-            <p className="text-muted font-mono text-xs max-w-xl mx-auto uppercase tracking-wider">
-              &gt; A visual overview of technical capabilities and specialized modules. Always optimizing.
+            <h2 className="text-3xl font-serif text-gray-900 dark:text-white mb-4 tracking-tight">Toolkit & Craft</h2>
+            <p className="text-slate-600 dark:text-slate-400 text-sm max-w-xl mx-auto font-sans leading-relaxed">
+              A detailed overview of technical skills, development tools, and engineering methodologies that fuel my digital solutions.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillCategories.map((category, index) => {
-              const colorClasses = getColorClasses(category.color);
-              const textColor = colorClasses.split(' ')[0];
-              const borderColor = colorClasses.split(' ')[1];
-              const shadowColor = colorClasses.split(' ')[2];
-              const bgColor = colorClasses.split(' ')[3];
-
               return (
                 <div
                   key={index}
-                  className={`card !p-0 overflow-hidden group hover:${borderColor} hover:${shadowColor}`}
+                  className={`card !p-0 overflow-hidden border ${category.colorClass} hover:-translate-y-1 hover:shadow-md transition-all duration-300`}
                 >
                   <div className="p-6">
-                    <div className="flex justify-between items-start mb-8">
-                      <div className={`p-2 border border-gray-700/50 rounded flex items-center justify-center group-hover:border-transparent group-hover:${bgColor} transition-colors duration-300`}>
-                        <category.icon className={`w-5 h-5 ${textColor} group-hover:text-background transition-colors duration-300`} />
+                    <div className="flex justify-between items-start mb-6">
+                      <div className={`p-2.5 rounded-lg ${category.bgColor}/20 flex items-center justify-center`}>
+                        <category.icon className="w-5 h-5 text-ink dark:text-white" />
                       </div>
-                      <div className="text-[10px] font-mono text-muted uppercase">ID: {index + 1}0</div>
+                      <div className="text-[10px] font-mono text-slate-400">SKILL_MODULE_0{index + 1}</div>
                     </div>
 
-                    <h3 className={`text-sm font-mono tracking-widest ${textColor} mb-6`}>{category.title}</h3>
+                    <h3 className="text-base font-serif font-semibold text-slate-800 dark:text-slate-100 mb-6">{category.title}</h3>
 
                     <div className="space-y-4">
                       {category.skills.map((skill, skillIndex) => (
                         <div key={skillIndex} className="space-y-1">
-                          <div className="flex justify-between items-center font-mono text-[10px] uppercase">
-                            <span className="text-gray-700 dark:text-gray-300">{skill.name}</span>
-                            <span className={textColor}>{skill.level}%</span>
+                          <div className="flex justify-between items-center font-sans text-xs">
+                            <span className="text-slate-700 dark:text-slate-300 font-medium">{skill.name}</span>
+                            <span className="text-slate-500 dark:text-slate-400">{skill.level}%</span>
                           </div>
-                          <div className="w-full bg-gray-800 h-[2px]">
+                          <div className="w-full bg-slate-200 dark:bg-slate-700/50 h-[3px] rounded-full overflow-hidden">
                             <div
-                              className={`h-full ${bgColor} transition-all duration-1000 ease-out`}
+                              className={`h-full ${category.bgColor} transition-all duration-1000 ease-out`}
                               style={{ width: `${skill.level}%` }}
                             />
                           </div>
                         </div>
                       ))}
-                    </div>
-                  </div>
-                  
-                  {/* Decorative Footer */}
-                  <div className="bg-surfaceHover px-6 py-2 border-t border-gray-800 flex justify-between items-center">
-                    <span className="font-mono text-[8px] text-muted">STATUS: ONLINE</span>
-                    <div className="flex gap-1">
-                      <div className={`w-1 h-1 rounded-full ${bgColor} animate-pulse`}></div>
-                      <div className={`w-1 h-1 rounded-full ${bgColor} opacity-30`}></div>
-                      <div className={`w-1 h-1 rounded-full ${bgColor} opacity-30`}></div>
                     </div>
                   </div>
                 </div>

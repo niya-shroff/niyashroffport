@@ -208,7 +208,7 @@ export default function Chatbot() {
             setMessages([{ role: 'assistant', content: "Hi! I'm Nini, Niya's personal AI agent. How can I help you today?" }]);
           }
         }}
-        className="fixed bottom-6 right-6 p-4 bg-primary text-gray-900 dark:text-white rounded-full shadow-lg hover:bg-primary/90 transition-all z-50 flex items-center justify-center group"
+        className="fixed bottom-6 right-6 p-4 bg-coral text-white rounded-full shadow-lg hover:scale-105 transition-all z-50 flex items-center justify-center"
         aria-label="Open chat"
       >
         <MessageSquare size={24} />
@@ -217,34 +217,34 @@ export default function Chatbot() {
   }
 
   return (
-    <div className={`fixed bottom-4 sm:bottom-6 right-4 sm:right-6 bg-surface border border-gray-300 dark:border-gray-800 rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden tape-edge transition-all duration-300 ease-in-out ${isExpanded
+    <div className={`fixed bottom-4 sm:bottom-6 right-4 sm:right-6 bg-white dark:bg-[#1D1A22] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300 ease-in-out ${isExpanded
       ? 'w-[calc(100vw-2rem)] sm:w-[600px] md:w-[750px] h-[calc(100vh-2rem)] sm:h-[85vh] max-h-[900px]'
       : 'w-[calc(100vw-2rem)] sm:w-96 h-[500px] max-h-[calc(100vh-8rem)]'
       }`}>
       {/* Header */}
-      <div className="flex items-center justify-between p-4 bg-surfaceHover border-b border-gray-300 dark:border-gray-800 shrink-0">
+      <div className="flex items-center justify-between p-4 bg-white/50 dark:bg-[#1D1A22]/50 border-b border-black/5 dark:border-white/5 shrink-0">
         <div className="flex items-center gap-2">
-          <MessageSquare size={18} className="text-primary" />
-          <span className="font-mono text-sm text-primary tracking-wider uppercase">SYSTEM_AGENT</span>
+          <MessageSquare size={18} className="text-coral" />
+          <span className="font-serif text-sm font-semibold text-ink dark:text-white tracking-wide">Ask Nini ✍️</span>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMessages([])}
-            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors"
+            className="text-slate-400 hover:text-coral transition-colors"
             title="Clear Chat"
           >
             <Trash2 size={16} />
           </button>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors"
+            className="text-slate-400 hover:text-coral transition-colors"
             title={isExpanded ? "Collapse" : "Expand"}
           >
             {isExpanded ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
           </button>
           <button
             onClick={() => setIsOpen(false)}
-            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors"
+            className="text-slate-400 hover:text-coral transition-colors"
             title="Close"
           >
             <X size={18} />
@@ -253,16 +253,16 @@ export default function Chatbot() {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-surface min-h-0">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#FDF8F2]/30 dark:bg-[#1D1A22]/20 min-h-0">
         {messages.map((msg, idx) => (
           <div
             key={idx}
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] p-3 rounded-lg text-sm whitespace-pre-wrap ${msg.role === 'user'
-                ? 'bg-primary/20 text-gray-900 dark:text-white border border-primary/30 rounded-br-none'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 rounded-bl-none'
+              className={`max-w-[80%] p-3 rounded-2xl text-sm whitespace-pre-wrap ${msg.role === 'user'
+                ? 'bg-lavender/40 text-ink dark:text-slate-100 border border-lavender/30 rounded-br-none'
+                : 'bg-white dark:bg-[#201B24] text-slate-800 dark:text-slate-200 border border-black/5 dark:border-white/5 rounded-bl-none shadow-[0_2px_12px_rgba(0,0,0,0.02)]'
                 }`}
             >
               {renderMessage(msg.content)}
@@ -271,10 +271,10 @@ export default function Chatbot() {
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 p-3 rounded-lg rounded-bl-none text-sm flex gap-1 items-center">
-              <span className="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-pulse"></span>
-              <span className="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-pulse delay-75"></span>
-              <span className="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-pulse delay-150"></span>
+            <div className="bg-white dark:bg-[#201B24] border border-black/5 dark:border-white/5 text-slate-400 p-3 rounded-2xl rounded-bl-none text-sm flex gap-1 items-center shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-coral/60 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-coral/60 animate-pulse delay-75"></span>
+              <span className="w-2 h-2 rounded-full bg-coral/60 animate-pulse delay-150"></span>
             </div>
           </div>
         )}
@@ -282,21 +282,21 @@ export default function Chatbot() {
       </div>
 
       {/* Input Area */}
-      <form onSubmit={handleSubmit} className="p-4 bg-surfaceHover border-t border-gray-300 dark:border-gray-800 flex gap-2 shrink-0">
+      <form onSubmit={handleSubmit} className="p-4 bg-white/50 dark:bg-[#1D1A22]/50 border-t border-black/5 dark:border-white/5 flex gap-2 shrink-0">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message..."
-          className="flex-1 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-primary/50 transition-colors"
+          placeholder="Ask me something about Niya..."
+          className="flex-1 bg-background border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:border-coral transition-colors"
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={!input.trim() || isLoading}
-          className="bg-primary/20 hover:bg-primary/30 border border-primary/30 text-primary p-2 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-coral hover:bg-coral/90 text-white p-2.5 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Send size={18} />
+          <Send size={16} />
         </button>
       </form>
     </div>

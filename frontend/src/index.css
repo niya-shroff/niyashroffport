@@ -5,27 +5,27 @@
 @layer base {
     /* Define variables for theming */
     :root {
-        --color-primary: 14 165 233; /* #0ea5e9 */
-        --color-primary-hover: 2 132 199; /* #0284c7 */
-        --color-accent-emerald: 16 185 129; /* #10b981 */
-        --color-accent-crimson: 225 29 72; /* #e11d48 */
-        --color-background: 253 251 247; /* #fdfbf7 */
-        --color-surface: 255 255 255; /* #ffffff */
-        --color-surface-hover: 241 245 249; /* #f1f5f9 */
-        --color-muted: 71 85 105; /* #475569 - slate-600 */
-        --grid-color: rgba(0, 0, 0, 0.05);
+        --color-primary: 255 138 118; /* Coral #FF8A76 */
+        --color-primary-hover: 240 120 100;
+        --color-accent-emerald: 193 244 197; /* Mint */
+        --color-accent-crimson: 255 200 221; /* Dusty Pink */
+        --color-background: 253 248 242; /* #FDF8F2 */
+        --color-surface: 255 255 255;
+        --color-surface-hover: 253 248 242;
+        --color-muted: 107 114 128; /* #6B7280 */
+        --grid-color: rgba(31, 41, 55, 0.03);
     }
 
     .dark {
-        --color-primary: 14 165 233;
-        --color-primary-hover: 2 132 199;
-        --color-accent-emerald: 16 185 129;
-        --color-accent-crimson: 225 29 72;
-        --color-background: 10 10 10; /* #0a0a0a */
-        --color-surface: 18 18 18; /* #121212 */
-        --color-surface-hover: 28 28 28; /* #1c1c1c */
-        --color-muted: 82 82 82; /* #525252 */
-        --grid-color: rgba(255, 255, 255, 0.05);
+        --color-primary: 255 200 221; /* Pink */
+        --color-primary-hover: 205 180 219; /* Lavender */
+        --color-accent-emerald: 193 244 197;
+        --color-accent-crimson: 255 138 118;
+        --color-background: 11 15 25; /* #0B0F19 */
+        --color-surface: 26 35 51; /* #1A2333 */
+        --color-surface-hover: 32 44 64;
+        --color-muted: 148 163 184; /* #94A3B8 */
+        --grid-color: rgba(255, 255, 255, 0.03);
     }
     
     html {
@@ -33,83 +33,105 @@
     }
 
     body {
-        @apply bg-background text-gray-900 dark:text-white font-sans antialiased transition-colors duration-300;
-        background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
-        background-size: 24px 24px;
-        background-position: -12px -12px;
+        @apply bg-background transition-colors duration-300 antialiased font-sans text-gray-900 dark:text-slate-100;
+        background: linear-gradient(
+          135deg,
+          #FFF8F0 0%,
+          #FFE8F3 25%,
+          #EAE6FF 55%,
+          #E6F4FF 80%,
+          #F6FFEE 100%
+        );
+        background-attachment: fixed;
+    }
+
+    .dark body {
+        background: linear-gradient(
+          135deg,
+          #0B0F19 0%,
+          #121824 25%,
+          #1A2333 50%,
+          #131A26 75%,
+          #0A0F18 100%
+        );
+        background-attachment: fixed;
     }
 }
 
 @layer components {
+    /* Elegant analog/notebook button styles */
     .btn-primary {
-        @apply px-6 py-2 bg-primary/20 text-primary border border-primary/50 font-mono text-sm rounded hover:bg-primary/40 transition-colors duration-200 uppercase tracking-wider relative overflow-hidden;
+        @apply px-6 py-2.5 bg-coral text-white font-serif font-semibold text-sm rounded-lg shadow-sm hover:bg-opacity-90 active:scale-95 transition-all duration-200 tracking-wide inline-flex items-center gap-2;
     }
 
+    .btn-secondary {
+        @apply px-6 py-2.5 border border-ink/10 dark:border-white/10 text-ink dark:text-white font-sans text-sm rounded-lg hover:bg-ink/5 dark:hover:bg-white/5 active:scale-95 transition-all duration-200 inline-flex items-center gap-2;
+    }
+
+    /* Paper Card Aesthetic */
     .card {
-        @apply bg-surface/80 backdrop-blur-sm p-6 border border-gray-800 hover:border-primary/50 transition-all duration-300 relative;
-        /* Asymmetric scrapbook feel */
-        transform-style: preserve-3d;
+        @apply bg-white/75 dark:bg-white/5 backdrop-blur-md p-6 border border-black/5 dark:border-white/5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] rounded-2xl transition-all duration-300 relative overflow-hidden;
+    }
+
+    .card-notebook {
+        @apply card relative pl-10;
     }
     
-    .card::before {
+    /* Notebook margin lines */
+    .card-notebook::before {
         content: '';
-        @apply absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary/50 opacity-0 transition-opacity duration-300;
-    }
-    .card::after {
-        content: '';
-        @apply absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary/50 opacity-0 transition-opacity duration-300;
-    }
-    .card:hover::before, .card:hover::after {
-        @apply opacity-100;
+        @apply absolute left-6 top-0 bottom-0 w-px bg-red-400/30 dark:bg-red-400/20;
     }
 
     .mono-accent {
-        @apply font-mono text-xs tracking-widest text-primary/70 uppercase;
+        @apply font-mono text-[11px] tracking-widest text-muted dark:text-slate-400 uppercase;
     }
     
-    .tape-edge {
+    .tape-effect {
         @apply relative;
     }
-    .tape-edge::before {
+    .tape-effect::after {
         content: '';
-        @apply absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-6 bg-white/10 backdrop-blur-md rotate-[-2deg] shadow-sm;
-        z-index: 10;
+        @apply absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-white/20 dark:bg-white/5 backdrop-blur-[2px] border border-white/10 rotate-[-3deg] shadow-sm;
+        pointer-events: none;
     }
 
-    /* Scrapbook Elements */
-    .note-panel {
-        @apply bg-[#fdfbf7] text-gray-800 p-6 shadow-xl relative border border-gray-300;
-        transform-style: preserve-3d;
-        /* Simulating crumpled paper slightly */
-        background-image: 
-            linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-            linear-gradient(#eee .1em, transparent .1em);
-        background-size: 100% 1.2em;
+    /* Polaroid photo frame style */
+    .polaroid-frame {
+        @apply bg-[#FCFAF7] p-3 pb-10 shadow-lg border border-black/5 dark:border-white/5 transition-transform duration-300 relative;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
     }
-    .note-panel::before {
-        content: '';
-        @apply absolute top-0 left-4 bottom-0 w-px bg-[#eab308]/30 shadow-sm;
+    .polaroid-frame img {
+        @apply w-full aspect-square object-cover filter sepia-[0.1] contrast-[1.05];
     }
-    
-    .photo-frame {
-        @apply bg-white p-3 pb-12 shadow-xl border border-gray-200 relative;
-        transform-style: preserve-3d;
+    .polaroid-caption {
+        @apply absolute bottom-2.5 left-0 w-full text-center font-handwriting text-xl text-ink/80 dark:text-ink/80;
     }
-    .photo-frame img {
-        @apply filter sepia-[0.3] contrast-125;
+
+    /* Highlight effects */
+    .highlight-yellow {
+        background: linear-gradient(100deg, rgba(255, 244, 184, 0.6) 0%, rgba(255, 244, 184, 0.3) 100%);
+        border-radius: 4px;
+        padding: 0 4px;
     }
-    .photo-caption {
-        @apply absolute bottom-2 left-0 w-full text-center font-handwriting text-2xl text-gray-800 rotate-[-1deg];
+    .highlight-pink {
+        background: linear-gradient(100deg, rgba(255, 200, 221, 0.6) 0%, rgba(255, 200, 221, 0.3) 100%);
+        border-radius: 4px;
+        padding: 0 4px;
+    }
+    .highlight-mint {
+        background: linear-gradient(100deg, rgba(193, 244, 197, 0.6) 0%, rgba(193, 244, 197, 0.3) 100%);
+        border-radius: 4px;
+        padding: 0 4px;
+    }
+    .highlight-lavender {
+        background: linear-gradient(100deg, rgba(205, 180, 219, 0.6) 0%, rgba(205, 180, 219, 0.3) 100%);
+        border-radius: 4px;
+        padding: 0 4px;
     }
 }
 
 @layer utilities {
-    .text-glow {
-        text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
-    }
-    .text-glow-accent {
-        text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-    }
     .perspective-1000 {
         perspective: 1000px;
     }

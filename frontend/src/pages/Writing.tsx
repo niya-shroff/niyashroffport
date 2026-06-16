@@ -89,11 +89,7 @@ const Writing = () => {
     }, [activeTab, searchQuery, poems, substackArticles]);
 
     return (
-        <div className="min-h-screen pt-24 pb-12 bg-background relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute inset-0 bg-[url('/subtle-grid.svg')] opacity-20 pointer-events-none" />
-            <div className="absolute top-1/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
-
+        <div className="min-h-screen pt-28 pb-16 bg-background relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10 w-full">
                 
                 {/* Header */}
@@ -103,45 +99,46 @@ const Writing = () => {
                     transition={{ duration: 0.5 }}
                     className="mb-12"
                 >
-                    <div className="flex items-center gap-3 tape-edge bg-surface px-6 py-3 border border-gray-800 rotate-[1deg] inline-block mb-8 mt-4">
-                        <Terminal className="text-primary" />
-                        <h2 className="text-2xl font-mono text-gray-900 dark:text-white tracking-widest uppercase">TEXT_ARCHIVE</h2>
+                    <div className="flex items-center gap-3 bg-lavender/30 dark:bg-lavender/10 px-5 py-2 rounded-lg border border-lavender/20 inline-flex mb-6 mt-4">
+                        <Feather className="text-ink dark:text-lavender" size={18} />
+                        <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Journal Archives</h2>
                     </div>
 
-                    <div className="font-handwriting text-accent-crimson text-2xl rotate-[-2deg] ml-12 mb-8 max-w-2xl">
-                        Thoughts put to paper. A collection of poems and substack posts.
-                    </div>
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold text-ink dark:text-white mb-4 tracking-tight">
+                        Writings & Musings
+                    </h1>
+
+                    <p className="font-serif italic text-slate-500 text-lg mb-8 max-w-2xl">
+                        Thoughts put to paper. A collection of poems, essays, and stories drafted in coffee shop corners.
+                    </p>
 
                     {/* Search + Tabs */}
-                    <div className="flex flex-col md:flex-row gap-4 bg-surface p-4 border border-gray-800 max-w-4xl relative">
-                        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary"></div>
-                        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary"></div>
-
+                    <div className="flex flex-col md:flex-row gap-4 bg-white/50 dark:bg-[#1D1A22]/50 p-4 border border-black/5 dark:border-white/5 rounded-2xl max-w-4xl relative">
                         <div className="relative flex-grow">
                             <Search
-                                className="absolute left-3 top-1/2 -translate-y-1/2 text-primary"
+                                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
                                 size={16}
                             />
                             <input
                                 type="text"
-                                placeholder="SEARCH WRITINGS..."
+                                placeholder="Search writings and thoughts..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-gray-900 dark:text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors uppercase"
+                                className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-gray-900 dark:text-white font-sans text-sm focus:outline-none focus:border-coral transition-colors"
                             />
                         </div>
 
-                        <div className="flex gap-2 p-1 border border-gray-800 bg-background">
+                        <div className="flex gap-2 p-1 border border-black/5 dark:border-white/5 bg-background rounded-xl">
                             {(['all', 'poems', 'substack'] as const).map((tab) => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`px-4 py-1 font-mono text-xs uppercase tracking-wider transition-all border ${activeTab === tab
-                                        ? 'bg-primary/20 text-primary border-primary shadow-[0_0_10px_rgba(14,165,233,0.2)]'
-                                        : 'text-muted border-transparent hover:text-gray-900 dark:text-white hover:border-gray-800'
+                                    className={`px-4 py-1.5 rounded-lg font-serif text-sm capitalize tracking-wide transition-all ${activeTab === tab
+                                        ? 'bg-lavender text-ink font-semibold shadow-sm'
+                                        : 'text-slate-500 hover:text-gray-900 dark:text-white'
                                         }`}
                                 >
-                                    {tab}
+                                    {tab === 'all' ? 'All Entries' : tab === 'poems' ? 'Poems' : 'Substack'}
                                 </button>
                             ))}
                         </div>
@@ -150,8 +147,8 @@ const Writing = () => {
 
                 {/* Loading State */}
                 {isLoading && (
-                    <div className="flex justify-center items-center py-20 text-muted font-mono animate-pulse uppercase">
-                        <p>&gt; almost there... loading poems and substack posts...</p>
+                    <div className="flex justify-center items-center py-20 text-slate-500 font-serif italic animate-pulse">
+                        <p>Flipping pages... loading writings...</p>
                     </div>
                 )}
 
@@ -164,8 +161,10 @@ const Writing = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
-                            className={`p-6 border border-gray-300 cursor-pointer group flex flex-col h-full transform transition-all duration-300 hover:z-20 hover:scale-105 shadow-xl
-                                ${item.type === 'poem' ? 'note-panel rotate-[-1deg] hover:rotate-0' : 'bg-surface border-gray-800 hover:border-primary/50 text-gray-900 dark:text-white'}
+                            className={`p-6 cursor-pointer group flex flex-col h-full transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 relative
+                                ${item.type === 'poem' 
+                                    ? 'card-notebook rotate-[-1deg] hover:rotate-0 bg-[#FFFDFB] dark:bg-[#201B24]' 
+                                    : 'card bg-white/70 dark:bg-[#1D1A22]/70'}
                             `}
                             onClick={() => {
                                 if (item.type === 'substack' && item.url) {
@@ -175,58 +174,58 @@ const Writing = () => {
                                 }
                             }}
                         >
-                            <div className="flex items-start justify-between mb-4 border-b border-gray-300/50 pb-2">
+                            {/* Tape accent for poem card */}
+                            {item.type === 'poem' && (
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-5 bg-pink/20 dark:bg-pink/10 backdrop-blur-[1px] rotate-[-2deg] border border-pink/10 shadow-sm z-20"></div>
+                            )}
+
+                            <div className="flex items-start justify-between mb-4 border-b border-black/5 dark:border-white/5 pb-2">
                                 <Feather
-                                    className={`h-5 w-5 transition-colors ${item.type === 'poem'
-                                        ? 'text-gray-800'
-                                        : 'text-accent-crimson'
+                                    className={`h-5 w-5 ${item.type === 'poem'
+                                        ? 'text-lavender'
+                                        : 'text-coral'
                                         }`}
                                 />
 
                                 {item.type === 'substack' && (
                                     <ExternalLink
-                                        size={16}
-                                        className="text-muted group-hover:text-primary transition-colors"
+                                        size={14}
+                                        className="text-slate-400 group-hover:text-coral transition-colors"
                                     />
                                 )}
                             </div>
 
-                            <h3 className={`text-xl font-bold mb-3 ${item.type === 'poem' ? 'font-handwriting text-2xl text-gray-900 leading-tight' : 'font-mono text-gray-900 dark:text-white tracking-tight uppercase group-hover:text-primary transition-colors'}`}>
+                            <h3 className={`text-xl font-bold mb-3 tracking-tight group-hover:text-coral transition-colors ${item.type === 'poem' ? 'font-handwriting text-2xl text-gray-900 dark:text-slate-100 leading-tight' : 'font-serif text-gray-900 dark:text-white'}`}>
                                 {item.title}
                             </h3>
 
-                            <p className={`${item.type === 'poem' ? 'font-handwriting text-gray-700 text-lg leading-relaxed' : 'text-gray-600 dark:text-gray-400 font-sans text-sm'} mb-6 flex-grow`}>
+                            <p className={`mb-6 flex-grow ${item.type === 'poem' ? 'font-handwriting text-slate-700 dark:text-slate-300 text-lg leading-relaxed' : 'text-slate-600 dark:text-slate-400 font-sans text-sm leading-relaxed'}`}>
                                 "{item.excerpt}"
                             </p>
 
                             {/* Metadata Row */}
-                            <div className="pt-4 border-t border-gray-300/50 flex items-center mt-auto justify-between">
+                            <div className="pt-4 border-t border-black/5 dark:border-white/5 flex items-center mt-auto justify-between">
                                 <div
-                                    className={`px-2 py-1 text-[10px] font-mono font-medium uppercase tracking-wider border ${item.type === 'poem'
-                                        ? 'border-gray-400 text-gray-600 bg-gray-100'
-                                        : 'border-accent-crimson/50 text-accent-crimson bg-accent-crimson/10'
+                                    className={`px-2 py-0.5 text-xs font-serif rounded-md ${item.type === 'poem'
+                                        ? 'bg-lavender/30 text-ink dark:text-lavender'
+                                        : 'bg-pink/30 text-ink dark:text-pink'
                                         }`}
                                 >
-                                    {item.type}
+                                    {item.type === 'poem' ? 'Poem' : 'Substack'}
                                 </div>
 
                                 {item.date && (
-                                    <span className={`text-[10px] font-mono ${item.type === 'poem' ? 'text-gray-600 dark:text-gray-500' : 'text-muted'}`}>
-                                        SYS.DATE // {item.date}
+                                    <span className="text-xs font-sans text-slate-400 dark:text-slate-500">
+                                        {item.date}
                                     </span>
                                 )}
                             </div>
-                            
-                            {/* Tape if it's a poem notebook page */}
-                            {item.type === 'poem' && (
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-white/40 shadow-sm backdrop-blur-sm rotate-2"></div>
-                            )}
                         </motion.div>
                     ))}
 
                     {filteredContent.length === 0 && (
-                        <div className="col-span-full text-center py-20 text-muted font-mono animate-pulse uppercase">
-                            <p>&gt; ERR_NO_ENTRIES_FOUND</p>
+                        <div className="col-span-full text-center py-20 text-slate-500 font-serif italic">
+                            <p>No journal entries found matching that query.</p>
                         </div>
                     )}
                 </div>
@@ -239,35 +238,35 @@ const Writing = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
                             onClick={() => setSelectedPoem(null)}
                         >
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                className="note-panel max-w-2xl w-full p-8 md:p-12 relative shadow-2xl rotate-1"
+                                className="card-notebook max-w-2xl w-full p-8 md:p-12 relative bg-[#FFFDFB] dark:bg-[#201B24] border border-black/10 dark:border-white/10 shadow-2xl rotate-1"
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <button
-                                    className="absolute top-4 right-4 p-2 text-gray-600 dark:text-gray-500 hover:text-black rounded-full hover:bg-black/5 transition-colors"
+                                    className="absolute top-4 right-4 p-2 text-slate-400 hover:text-ink dark:hover:text-white rounded-full hover:bg-black/5 transition-colors"
                                     onClick={() => setSelectedPoem(null)}
                                 >
                                     <X size={24} />
                                 </button>
 
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-500/20 shadow-sm backdrop-blur-sm rotate-[-2deg]"></div>
+                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-butterYellow/40 dark:bg-butterYellow/10 shadow-sm backdrop-blur-[1px] rotate-[-2deg] border border-butterYellow/10"></div>
 
-                                <div className="text-center mb-8 border-b border-gray-300 pb-6">
-                                    <h3 className="text-4xl md:text-5xl font-handwriting font-bold text-gray-900 mb-2">
+                                <div className="text-center mb-8 border-b border-black/5 dark:border-white/5 pb-6">
+                                    <h3 className="text-4xl md:text-5xl font-handwriting font-bold text-gray-900 dark:text-white mb-2">
                                         {selectedPoem.title}
                                     </h3>
                                     {selectedPoem.date && (
-                                        <div className="font-handwriting text-gray-600 dark:text-gray-500 text-xl">{selectedPoem.date}</div>
+                                        <div className="font-handwriting text-slate-500 text-xl">{selectedPoem.date}</div>
                                     )}
                                 </div>
 
-                                <div className="space-y-6 text-left max-h-[60vh] overflow-y-auto pr-4 pl-4 font-handwriting text-2xl text-gray-800 leading-relaxed">
+                                <div className="space-y-6 text-left max-h-[60vh] overflow-y-auto pr-4 pl-4 font-handwriting text-2xl text-slate-800 dark:text-slate-200 leading-relaxed">
                                     {selectedPoem.content.split('\n\n').map((stanza: string, i: number) => (
                                         <p
                                             key={i}

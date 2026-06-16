@@ -1,149 +1,116 @@
-import { useState, useEffect } from 'react';
-import { ChevronDown, Terminal, MapPin } from 'lucide-react';
+import { ChevronDown, MapPin, Camera, BookOpen, Film, PenTool } from 'lucide-react';
 
 const Hero = () => {
-  const [displayText, setDisplayText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const fullText = "INITIALIZING PORTFOLIO > SYS.ONLINE";
-
-  useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
-
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const scrollProgress = Math.min(scrollY / (windowHeight * 0.3), 1);
-
-      if (scrollProgress > 0 && !isTyping) {
-        setIsTyping(true);
-        typeText();
-      } else if (scrollProgress === 0) {
-        setDisplayText('');
-        setIsTyping(false);
-      }
-    };
-
-    const typeText = () => {
-      let currentIndex = 0;
-      setDisplayText('');
-
-      const typeNextChar = () => {
-        if (currentIndex < fullText.length) {
-          setDisplayText(fullText.slice(0, currentIndex + 1));
-          currentIndex++;
-          timeoutId = setTimeout(typeNextChar, 50);
-        } else {
-          setIsTyping(false);
-        }
-      };
-
-      typeNextChar();
-    };
-
-    // Initial load
-    typeText();
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, []);
-
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Sci-Fi Ambient Light */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent-emerald/5 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="container mx-auto px-6 relative z-10 w-full mt-12 md:mt-0">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-28 pb-16">
+      <div className="container mx-auto px-6 relative z-10 w-full">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             
-            {/* Left - Profile Image (Scrapbook photograph style) */}
-            <div className="lg:col-span-5 relative perspective-1000 order-2 lg:order-1 mt-12 lg:mt-0">
-                <div className="absolute -inset-4 bg-primary/5 blur-2xl rounded-full"></div>
+            {/* Left - Polaroid Photo Stack & Sticky Notes */}
+            <div className="lg:col-span-5 relative perspective-1000 order-2 lg:order-1 mt-12 lg:mt-0 flex justify-center">
+              
+              {/* Decorative Sticky Note - Mint (Ideas) */}
+              <div className="absolute -left-12 -top-10 w-32 h-32 bg-[#C1F4C5] p-4 shadow-md rotate-[-12deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
+                <span className="text-[10px] font-mono text-ink/60">#IDEAS</span>
+                <span className="font-handwriting text-lg text-ink/90 leading-tight">Code + Art = Magic</span>
+              </div>
+
+              {/* Decorative Sticky Note - Yellow (Notes) */}
+              <div className="absolute -right-12 bottom-0 w-36 h-36 bg-[#FFF4B8] p-4 shadow-md rotate-[8deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
+                <span className="text-[10px] font-mono text-ink/60">#CURRENTLY</span>
+                <span className="font-handwriting text-lg text-ink/90 leading-tight">Reading: Dev docs & photobooks</span>
+              </div>
+
+              {/* Main Polaroid Photo - Headshot */}
+              <div className="polaroid-frame rotate-[-3deg] z-10 max-w-xs transition-transform duration-500 hover:rotate-[1deg] hover:scale-105">
+                {/* Paperclip asset */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl drop-shadow-sm select-none z-20">📎</div>
                 
-                <div className="photo-frame !rotate-[-2deg] p-4 pb-16 bg-[#fdfbf7] tape-edge relative z-10 mx-auto max-w-sm shadow-2xl border border-gray-300">
-                    <div className="relative overflow-hidden border border-gray-300 aspect-square shadow-inner">
-                        <img
-                            src="/headshot.jpeg"
-                            alt="Niya Shroff"
-                            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                        />
-                        {/* Subtle film grain overlay effect without making it B&W */}
-                        <div className="absolute inset-0 bg-yellow-500/10 mix-blend-overlay pointer-events-none"></div>
-                        
-                        {/* HUD Elements */}
-                        <div className="absolute top-2 left-2 text-[8px] font-mono text-gray-900 dark:text-white bg-black/50 backdrop-blur-sm px-1">SYS.CAM_01</div>
-                        <div className="absolute bottom-2 right-2 text-[8px] font-mono text-red-500 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                            REC
-                        </div>
-                    </div>
-                    
-                    <div className="absolute bottom-3 left-0 w-full text-center flex flex-col justify-center items-center">
-                        <h3 className="text-3xl font-handwriting text-gray-900 rotate-[-1deg]">Niya Shroff ☻</h3>
-                        <p className="text-gray-600 dark:text-gray-500 font-mono text-[9px] flex items-center justify-center gap-1 mt-1 uppercase tracking-widest">
-                            <MapPin size={10} />
-                            NEW_YORK, NY
-                        </p>
-                    </div>
+                <div className="relative overflow-hidden aspect-square border border-black/5">
+                  <img
+                    src="/headshot.jpeg"
+                    alt="Niya Shroff"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Fujifilm analog leak overlay */}
+                  <div className="absolute inset-0 bg-coral/5 mix-blend-color-burn pointer-events-none"></div>
+                  <div className="absolute -inset-10 bg-gradient-to-tr from-coral/0 via-pink/10 to-butterYellow/15 opacity-60 mix-blend-screen pointer-events-none animate-pulse"></div>
                 </div>
-                <div className="absolute -left-8 top-1/2 w-4 h-[1px] bg-gray-600 hidden lg:block"></div>
-                <div className="absolute -right-8 top-1/2 w-4 h-[1px] bg-gray-600 hidden lg:block"></div>
+                
+                <div className="mt-4 text-center">
+                  <h3 className="text-2xl font-handwriting text-ink/80 dark:text-ink/90">niya shroff.jpg</h3>
+                  <div className="text-[10px] font-mono text-slate-500 flex items-center justify-center gap-1 mt-1">
+                    <MapPin size={10} />
+                    NYC // 40.7128° N
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            {/* Right - Terminal Block */}
-            <div className="lg:col-span-7 relative perspective-1000 w-full order-1 lg:order-2">
-              {/* Background offset card (Scrapbook feel) */}
-              <div className="absolute inset-0 bg-surface border border-gray-800 rotate-1 transform origin-center rounded-sm opacity-50"></div>
+            {/* Right - Editorial Notebook Card */}
+            <div className="lg:col-span-7 relative w-full order-1 lg:order-2">
+              <div className="card-notebook rotate-[1deg] p-8 md:p-12 shadow-xl bg-white/80 dark:bg-[#1A2333]/80 backdrop-blur-md border border-black/5 dark:border-white/5 relative z-10">
+                
+                {/* Top tape decoration */}
+                <div className="absolute -top-3 left-1/3 w-28 h-6 bg-pink/20 dark:bg-pink/10 backdrop-blur-[1px] rotate-[-2deg] border border-pink/10 shadow-sm z-20"></div>
 
-              <div className="card rotate-[-1deg] p-8 md:p-12 shadow-2xl relative z-10 tape-edge bg-surface/95 flex flex-col items-center text-center">
-                <div className="flex items-center justify-center gap-2 mb-6 border-b border-gray-800 pb-4 w-full">
-                  <Terminal size={18} className="text-primary" />
-                  <span className="font-mono text-xs text-primary uppercase tracking-widest">{displayText}<span className="animate-pulse">_</span></span>
+                <div className="mb-6">
+                  <span className="mono-accent bg-lavender/30 dark:bg-lavender/10 px-2.5 py-1 rounded text-ink dark:text-lavender">Creative Studio</span>
                 </div>
 
-                <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-4 leading-tight tracking-tight font-sans">
-                  NIYA <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent-emerald">SHROFF</span>
+                <h1 className="text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight tracking-tight font-serif">
+                  Niya Shroff
                 </h1>
 
-                <div className="font-mono text-xs text-muted mb-6 flex justify-center gap-4 w-full">
-                  <span>[ TYPE: HUMAN ]</span>
-                  <span>[ STATUS: EXPLORING ]</span>
+                {/* Subtitle list of disciplines with colored accent highlight */}
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <span className="highlight-yellow text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
+                    <PenTool size={13} /> Writer
+                  </span>
+                  <span className="highlight-pink text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
+                    <Camera size={13} /> Photographer
+                  </span>
+                  <span className="highlight-mint text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
+                    <Film size={13} /> Vlogger
+                  </span>
+                  <span className="highlight-lavender text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
+                    <BookOpen size={13} /> Storyteller
+                  </span>
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-md leading-relaxed text-sm mx-auto">
-                  Transforming ideas into reality through code and creativity. Blending technical expertise with artistic vision to build things that solve problems, or just look really cool.
+                <p className="text-slate-600 dark:text-slate-300 mb-8 max-w-xl leading-relaxed text-base">
+                  Welcome to my creative notebook. Here, you'll find the intersections of engineering and aesthetics. I build thoughtful full-stack applications, capture stories on film, and script creative essays exploring the spaces where technology meets human expression.
                 </p>
 
-                <div className="flex flex-wrap justify-center gap-4">
+                <div className="flex flex-wrap gap-4">
                   <a href="#about" className="btn-primary">
-                    BEGIN_EXPLORATION
+                    Read the Journal
                   </a>
-                  <a href="/technical" className="px-6 py-2 border border-gray-800 text-gray-600 dark:text-gray-400 font-mono text-sm hover:border-primary/50 hover:text-primary transition-colors uppercase tracking-wider relative group">
-                    <span className="absolute inset-0 bg-primary/5 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                    VIEW_PROJECTS
+                  <a href="/technical" className="btn-secondary">
+                    View Portfolio
                   </a>
                 </div>
               </div>
 
-              {/* Floating decorative elements */}
-              <div className="absolute -left-8 -bottom-8 w-24 h-24 border-l border-b border-accent-crimson/30 rounded-bl-3xl hidden lg:block"></div>
-              <div className="absolute -right-4 -bottom-12 font-mono text-[10px] text-muted rotate-90 transform origin-bottom-right hidden lg:block">
-                COORD // 40.7128° N, 74.0060° W
+              {/* Graphic background binder rings ornament */}
+              <div className="absolute -left-3 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-20 pointer-events-none opacity-40">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-5 h-5 rounded-full border-2 border-slate-400/50 bg-background dark:bg-[#0B0F19] shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]"></div>
+                ))}
               </div>
             </div>
+
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce z-20">
-        <a href="#about" className="text-muted hover:text-primary transition-colors flex flex-col items-center gap-2 group">
-          <span className="font-mono text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Scroll_Down</span>
-          <ChevronDown size={20} />
+        <a href="#about" className="text-slate-400 hover:text-coral transition-colors flex flex-col items-center gap-1 group">
+          <span className="font-serif text-xs italic opacity-0 group-hover:opacity-100 transition-opacity">Scroll down</span>
+          <ChevronDown size={18} />
         </a>
       </div>
     </section>

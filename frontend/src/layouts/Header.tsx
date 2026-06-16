@@ -57,23 +57,23 @@ const Header = () => {
   ];
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'text-primary text-glow' : 'text-muted hover:text-gray-900 dark:text-white'
+    `font-serif text-sm tracking-wide transition-all duration-300 ${isActive ? 'text-coral font-semibold border-b-2 border-coral/80 pb-0.5' : 'text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white'
     }`;
 
   const dropdownLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `block px-4 py-2 font-mono text-xs tracking-widest transition-all duration-300 ${isActive ? 'bg-primary/20 text-primary border-l-2 border-primary' : 'text-muted hover:bg-surfaceHover hover:text-gray-900 dark:text-white border-l-2 border-transparent'
+    `block px-4 py-2 font-serif text-sm tracking-wide transition-all duration-300 ${isActive ? 'bg-coral/10 text-coral border-l-2 border-coral font-semibold' : 'text-slate-600 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 hover:text-ink dark:hover:text-white border-l-2 border-transparent'
     }`;
 
   return (
     <>
       <header
-        className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-md border-b border-surface/50 shadow-[0_0_15px_rgba(0,0,0,0.5)] py-4' : 'bg-transparent py-6'
+        className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-md border-b border-black/5 dark:border-white/5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] py-4' : 'bg-transparent py-6'
           }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold font-sans text-gray-900 dark:text-white flex items-center gap-2 group">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent-emerald group-hover:from-accent-emerald group-hover:to-primary transition-all duration-500 font-mono tracking-tighter">
-              [NS]
+          <Link to="/" className="text-xl font-bold font-serif text-gray-900 dark:text-white flex items-center gap-2 group">
+            <span className="text-ink dark:text-white font-serif tracking-tight font-medium hover:text-coral transition-colors">
+              Niya Shroff
             </span>
           </Link>
 
@@ -87,9 +87,9 @@ const Header = () => {
                     onMouseEnter={() => item.label === 'WORK' ? setWorkDropdownOpen(true) : setCreativeDropdownOpen(true)}
                     onMouseLeave={() => item.label === 'WORK' ? setWorkDropdownOpen(false) : setCreativeDropdownOpen(false)}
                   >
-                    <button className="flex items-center gap-1 font-mono text-xs tracking-widest text-muted hover:text-gray-900 dark:text-white transition-colors duration-200 py-2">
+                    <button className="flex items-center gap-1 font-serif text-sm tracking-wide text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white transition-colors duration-200 py-2">
                       {item.label}
-                      <ChevronDown size={14} className={`transition-transform duration-200 ${item.label === 'WORK' ? (workDropdownOpen ? 'rotate-180 text-primary' : '') : (creativeDropdownOpen ? 'rotate-180 text-primary' : '')}`} />
+                      <ChevronDown size={14} className={`transition-transform duration-200 ${item.label === 'WORK' ? (workDropdownOpen ? 'rotate-180 text-coral' : '') : (creativeDropdownOpen ? 'rotate-180 text-coral' : '')}`} />
                     </button>
                     <AnimatePresence>
                       {((item.label === 'WORK' && workDropdownOpen) || (item.label === 'CREATIVE' && creativeDropdownOpen)) && (
@@ -98,7 +98,7 @@ const Header = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute left-0 mt-0 w-48 bg-surface/90 backdrop-blur-md rounded border border-gray-800 shadow-xl overflow-hidden"
+                          className="absolute left-0 mt-0 w-48 bg-white/95 dark:bg-[#1A2333]/95 backdrop-blur-md rounded-xl border border-black/5 dark:border-white/5 shadow-lg overflow-hidden"
                         >
                           {item.dropdown.map((subItem) => (
                             <NavLink
@@ -132,7 +132,7 @@ const Header = () => {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="text-muted hover:text-primary transition-colors p-2"
+                className="text-slate-600 dark:text-slate-300 hover:text-coral transition-colors p-2"
                 aria-label="Search"
               >
                 <Search size={18} />
@@ -140,16 +140,16 @@ const Header = () => {
               <ThemeToggle />
             </div>
 
-            <div className="w-px h-6 bg-gray-800 mx-4"></div>
+            <div className="w-px h-6 bg-black/10 dark:bg-white/10 mx-4"></div>
 
             <div className="flex items-center space-x-4">
-              <a href="https://github.com/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition-colors">
+              <a href="https://github.com/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-slate-600 dark:text-slate-300 hover:text-coral transition-colors">
                 <Github size={18} />
               </a>
-              <a href="https://linkedin.com/in/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-primary transition-colors">
+              <a href="https://linkedin.com/in/niya-shroff" target="_blank" rel="noopener noreferrer" className="text-slate-600 dark:text-slate-300 hover:text-coral transition-colors">
                 <Linkedin size={18} />
               </a>
-              <a href="mailto:contact@niyashroff.me" className="text-muted hover:text-primary transition-colors">
+              <a href="mailto:contact@niyashroff.me" className="text-slate-600 dark:text-slate-300 hover:text-coral transition-colors">
                 <Mail size={18} />
               </a>
             </div>
@@ -160,13 +160,13 @@ const Header = () => {
             <ThemeToggle />
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="text-muted hover:text-primary transition-colors p-2"
+              className="text-slate-600 dark:text-slate-300 hover:text-coral transition-colors p-2"
             >
               <Search size={20} />
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-muted hover:text-gray-900 dark:text-white focus:outline-none"
+              className="text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white focus:outline-none"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -180,23 +180,23 @@ const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden bg-background border-t border-gray-800 overflow-hidden"
+              className="lg:hidden bg-background/95 border-t border-black/5 dark:border-white/5 overflow-hidden"
             >
               <div className="container mx-auto px-6 py-6 flex flex-col space-y-6">
                 <NavLink to="/" onClick={() => setIsOpen(false)} className={linkClass}>HOME</NavLink>
 
                 <div className="space-y-3">
-                  <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">WORK //</div>
-                  <NavLink to="/technical" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">PROJECTS</NavLink>
-                  <NavLink to="/experience" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">EXPERIENCE</NavLink>
-                  <NavLink to="/education" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">EDUCATION</NavLink>
+                  <div className="font-serif text-coral text-xs tracking-widest uppercase">WORK //</div>
+                  <NavLink to="/technical" onClick={() => setIsOpen(false)} className="pl-4 text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white block font-serif text-sm">PROJECTS</NavLink>
+                  <NavLink to="/experience" onClick={() => setIsOpen(false)} className="pl-4 text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white block font-serif text-sm">EXPERIENCE</NavLink>
+                  <NavLink to="/education" onClick={() => setIsOpen(false)} className="pl-4 text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white block font-serif text-sm">EDUCATION</NavLink>
                 </div>
 
                 <div className="space-y-3">
-                  <div className="font-mono text-accent-emerald text-xs tracking-widest uppercase">CREATIVE //</div>
-                  <NavLink to="/photography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">PHOTOGRAPHY</NavLink>
-                  <NavLink to="/videography" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">VIDEOGRAPHY</NavLink>
-                  <NavLink to="/writing" onClick={() => setIsOpen(false)} className="pl-4 text-muted hover:text-gray-900 dark:text-white block font-mono text-sm">WRITING</NavLink>
+                  <div className="font-serif text-coral text-xs tracking-widest uppercase">CREATIVE //</div>
+                  <NavLink to="/photography" onClick={() => setIsOpen(false)} className="pl-4 text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white block font-serif text-sm">PHOTOGRAPHY</NavLink>
+                  <NavLink to="/videography" onClick={() => setIsOpen(false)} className="pl-4 text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white block font-serif text-sm">VIDEOGRAPHY</NavLink>
+                  <NavLink to="/writing" onClick={() => setIsOpen(false)} className="pl-4 text-slate-600 dark:text-slate-300 hover:text-ink dark:hover:text-white block font-serif text-sm">WRITING</NavLink>
                 </div>
 
                 <NavLink to="/contact" onClick={() => setIsOpen(false)} className={linkClass}>CONTACT</NavLink>

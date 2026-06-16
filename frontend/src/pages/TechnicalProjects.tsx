@@ -80,75 +80,81 @@ const TechnicalProjects = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen pt-24 flex justify-center items-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            <div className="min-h-screen pt-28 flex justify-center items-center bg-background">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-coral"></div>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="min-h-screen pt-24 container mx-auto px-6 text-center">
-                <p className="text-red-400">{error}</p>
+            <div className="min-h-screen pt-28 container mx-auto px-6 text-center bg-background">
+                <p className="text-coral font-serif text-lg">{error}</p>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen pt-24 pb-12 bg-background">
-            <div className="container mx-auto px-6">
+        <div className="min-h-screen pt-28 pb-16 bg-background relative overflow-hidden">
+            <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     className="mb-12"
                 >
-                    <h2 className="text-4xl font-bold mb-4 text-primary">Technical Projects</h2>
-                    <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mb-8">
-                        A collection of some of my personal projects, which I'm eventually planning to refine and update.
+                    <div className="flex items-center gap-3 bg-skyBlue/30 dark:bg-skyBlue/10 px-5 py-2 rounded-lg border border-skyBlue/20 inline-flex mb-6 mt-4">
+                        <Code className="text-ink dark:text-skyBlue" size={18} />
+                        <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Developer Notebook</h2>
+                    </div>
+
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold text-ink dark:text-white mb-4 tracking-tight">
+                        Technical Projects
+                    </h1>
+
+                    <p className="font-serif italic text-slate-500 text-lg mb-8 max-w-2xl">
+                        A digital collection of software designs, full-stack applications, and experiments.
                     </p>
 
                     {/* Controls */}
-                    <div className="flex flex-col md:flex-row gap-4 bg-surface/80 p-6 rounded-2xl border border-gray-300 dark:border-gray-300 dark:border-gray-700/50 backdrop-blur-sm">
+                    <div className="flex flex-col md:flex-row gap-4 bg-white/50 dark:bg-[#1D1A22]/50 p-4 border border-black/5 dark:border-white/5 rounded-2xl max-w-4xl relative">
                         <div className="relative flex-grow">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400" size={20} />
+                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={16} />
                             <input
                                 type="text"
-                                placeholder="Search projects..."
+                                placeholder="Search repositories..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-background border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                                className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-gray-900 dark:text-white font-sans text-sm focus:outline-none focus:border-coral transition-colors"
                             />
                         </div>
 
                         <div className="flex gap-4">
                             <div className="relative min-w-[140px]">
-                                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400" size={18} />
                                 <select
                                     value={selectedLanguage}
                                     onChange={(e) => setSelectedLanguage(e.target.value)}
-                                    className="w-full bg-background border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-8 py-2.5 text-gray-900 dark:text-white appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer disabled:opacity-50"
-                                    disabled={languages.length <= 1} // Disable if only 'All' exists (e.g. API limit reached)
+                                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-4 pr-8 py-2.5 text-gray-900 dark:text-white font-serif text-sm appearance-none focus:outline-none focus:border-coral transition-colors cursor-pointer capitalize disabled:opacity-50"
+                                    disabled={languages.length <= 1}
                                 >
                                     {languages.map(lang => (
-                                        <option key={lang} value={lang}>{lang}</option>
+                                        <option key={lang} value={lang}>{lang === 'All' ? 'All Languages' : lang}</option>
                                     ))}
                                 </select>
-                                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 pointer-events-none" size={16} />
+                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
                             </div>
 
                             <div className="relative min-w-[140px]">
-                                <ArrowUpDown className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400" size={18} />
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-background border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-8 py-2.5 text-gray-900 dark:text-white appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                                    className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-4 pr-8 py-2.5 text-gray-900 dark:text-white font-serif text-sm appearance-none focus:outline-none focus:border-coral transition-colors cursor-pointer"
                                 >
                                     <option value="updated">Recently Updated</option>
                                     <option value="stars">Most Stars</option>
                                     <option value="forks">Most Forks</option>
                                 </select>
-                                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 pointer-events-none" size={16} />
+                                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
                             </div>
                         </div>
                     </div>
@@ -166,54 +172,53 @@ const TechnicalProjects = () => {
                                 key={repo.id}
                                 variants={item}
                                 layout
-                                className="bg-surface rounded-xl p-6 border border-gray-300 dark:border-gray-700 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group flex flex-col h-full"
+                                className="card bg-white/70 dark:bg-[#1D1A22]/70 border border-black/5 dark:border-white/5 hover:border-coral/30 hover:-translate-y-1 hover:shadow-md transition-all duration-300 group flex flex-col h-full"
                             >
                                 <div className="flex justify-between items-start mb-4">
-                                    <div className="p-2 bg-gray-200 dark:bg-gray-700/50 rounded-lg group-hover:text-primary transition-colors">
-                                        <Code size={24} />
+                                    <div className="p-2.5 bg-skyBlue/20 rounded-lg text-ink dark:text-white transition-colors">
+                                        <Code size={20} />
                                     </div>
                                     <div className="flex gap-3">
                                         <a
                                             href={repo.html_url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors"
+                                            className="text-slate-400 hover:text-coral transition-colors"
                                         >
-                                            <Github size={20} />
+                                            <Github size={18} />
                                         </a>
                                         <a
                                             href={repo.html_url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
+                                            className="text-slate-400 hover:text-coral transition-colors"
                                         >
-                                            <ExternalLink size={20} />
+                                            <ExternalLink size={18} />
                                         </a>
                                     </div>
                                 </div>
 
-                                <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors break-words">
+                                <h3 className="text-xl font-serif font-bold text-ink dark:text-white mb-2 group-hover:text-coral transition-colors break-words">
                                     {repo.name}
                                 </h3>
 
-                                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-sm min-h-[60px] flex-grow">
+                                <p className="text-slate-600 dark:text-slate-400 mb-4 font-sans text-sm leading-relaxed flex-grow">
                                     {repo.description || 'No description available for this project.'}
                                 </p>
 
-                                <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-500 mt-auto pt-4 border-t border-gray-300 dark:border-gray-300 dark:border-gray-700/50">
+                                <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mt-auto pt-4 border-t border-black/5 dark:border-white/5">
                                     <div className="flex items-center gap-4">
                                         {repo.language && (
-                                            <span className="flex items-center gap-1">
-                                                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                                            <span className="flex items-center gap-1.5 bg-mint/30 text-ink dark:text-mint px-2 py-0.5 rounded text-[11px] font-serif font-medium">
                                                 {repo.language}
                                             </span>
                                         )}
                                         <span className="flex items-center gap-1">
-                                            <Star size={14} />
+                                            <Star size={12} />
                                             {repo.stargazers_count}
                                         </span>
                                         <span className="flex items-center gap-1">
-                                            <GitFork size={14} />
+                                            <GitFork size={12} />
                                             {repo.forks_count}
                                         </span>
                                     </div>
@@ -221,7 +226,7 @@ const TechnicalProjects = () => {
                             </motion.div>
                         ))
                     ) : (
-                        <div className="col-span-full text-center py-12 text-gray-600 dark:text-gray-400">
+                        <div className="col-span-full text-center py-12 text-slate-500 font-serif italic">
                             <p className="text-lg">No projects found matching your criteria.</p>
                         </div>
                     )}

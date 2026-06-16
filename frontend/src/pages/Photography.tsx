@@ -57,44 +57,45 @@ const Photography = () => {
       <div className="container mx-auto px-6 relative z-10 w-full">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-12">
           
-          <div className="flex items-center gap-3 tape-edge bg-surface px-6 py-3 border border-gray-800 rotate-[1deg] inline-block mb-8 mt-4">
-              <Camera className="text-primary" />
-              <h2 className="text-2xl font-mono text-gray-900 dark:text-white tracking-widest uppercase">PHOTOGRAPHY_ARCHIVE</h2>
+          <div className="flex items-center gap-3 bg-coral/20 px-5 py-2 rounded-lg border border-coral/10 inline-flex mb-6 mt-4">
+              <Camera className="text-coral" size={18} />
+              <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Film & Digital</h2>
           </div>
 
-          <div className="font-handwriting text-accent-crimson text-2xl rotate-[-2deg] ml-12 mb-8 max-w-2xl">
-              Capturing moments in time on my Panasonic Lumix G7 and Fujifilm X-T30 III. Here's a collection of shots from my travels and daily life.
-          </div>
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-ink dark:text-white mb-4 tracking-tight">
+              Scrapbook of Moments
+          </h1>
 
-          {/* Controls - Terminal Style */}
-          <div className="flex flex-col md:flex-row gap-4 bg-surface p-4 border border-gray-800 max-w-4xl relative">
-            <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-accent-emerald"></div>
-            <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-accent-emerald"></div>
-            
+          <p className="font-serif italic text-slate-500 text-lg mb-8 max-w-2xl">
+              Capturing moments in time on my Panasonic Lumix G7 and Fujifilm X-T30. Stories told through frames.
+          </p>
+
+          {/* Controls - Elegant Card Style */}
+          <div className="flex flex-col md:flex-row gap-4 bg-white/50 dark:bg-[#1D1A22]/50 p-4 border border-black/5 dark:border-white/5 rounded-2xl max-w-4xl relative">
             <div className="relative flex-grow">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={16} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={16} />
               <input
                 type="text"
-                placeholder="SCAN_ARCHIVE..."
+                placeholder="Search archive by location, title..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-4 py-2 text-gray-900 dark:text-white font-mono text-sm placeholder-muted focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-gray-900 dark:text-white font-sans text-sm focus:outline-none focus:border-coral transition-colors"
               />
             </div>
 
             <div className="relative min-w-[200px]">
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={16} />
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-background border border-gray-700 rounded-none pl-10 pr-8 py-2 text-gray-900 dark:text-white font-mono text-sm appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer uppercase"
+                className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-4 pr-8 py-2.5 text-gray-900 dark:text-white font-serif text-sm appearance-none focus:outline-none focus:border-coral transition-colors cursor-pointer capitalize"
               >
                 {categories.map((category) => (
                   <option key={category} value={category}>
-                    {category}
+                    {category === 'All' ? 'All Categories' : category}
                   </option>
                 ))}
               </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
             </div>
           </div>
         </motion.div>
@@ -108,9 +109,9 @@ const Photography = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: (index % 12) * 0.1 }}
-                className={`photo-frame cursor-pointer mb-8 break-inside-avoid shadow-xl
-                    ${index % 3 === 0 ? 'rotate-[-2deg]' : index % 3 === 1 ? 'rotate-[1deg]' : 'rotate-[-1deg]'}
-                    hover:rotate-0 hover:z-20 transition-all duration-300
+                className={`polaroid-frame cursor-pointer mb-8 break-inside-avoid
+                    ${index % 3 === 0 ? 'rotate-[-2deg]' : index % 3 === 1 ? 'rotate-[1.5deg]' : 'rotate-[-1deg]'}
+                    hover:rotate-0 hover:scale-[1.03] transition-all duration-300
                 `}
                 onClick={() => setSelectedPhotoIndex(index)}
               >
@@ -120,59 +121,56 @@ const Photography = () => {
                     alt={photo.title}
                     loading={index < 6 ? "eager" : "lazy"}
                     decoding="async"
-                    className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-auto block"
                   />
-                  {/* HUD Overlay */}
-                  <div className="absolute inset-0 bg-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute top-2 left-2 bg-black/60 px-2 py-1 font-mono text-[8px] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">IMG.ID: {photo.id}</div>
+                  {/* Film leak subtle light flare overlay */}
+                  <div className="absolute inset-0 bg-coral/5 mix-blend-color-burn pointer-events-none"></div>
                   
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <h3 className="text-lg font-bold font-sans text-gray-900 dark:text-white mb-1 uppercase">{photo.title}</h3>
-                    <p className="text-xs font-mono text-primary mb-2 uppercase">{photo.location || photo.category}</p>
-                    <div className="flex items-center text-gray-700 dark:text-gray-300 text-[10px] font-mono uppercase">
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                    <h3 className="text-lg font-bold font-serif text-white mb-1">{photo.title}</h3>
+                    <p className="text-xs font-sans text-coral mb-2">{photo.location || photo.category}</p>
+                    <div className="flex items-center text-white/80 text-[11px] font-sans">
                       <ZoomIn size={12} className="mr-1" />
-                      INIT_ZOOM
+                      View Photograph
                     </div>
                   </div>
                 </div>
-                <div className="photo-caption text-xl mt-3 pb-1">{photo.title}</div>
+                <div className="polaroid-caption">{photo.title}</div>
               </motion.div>
             ))
           ) : (
-            <div className="col-span-full text-center py-20 text-muted font-mono animate-pulse">
-              &gt; ERR_NO_IMAGES_FOUND
+            <div className="col-span-full text-center py-20 text-slate-500 font-serif italic">
+              No photographs found matching that query.
             </div>
           )}
         </div>
 
-        {/* Lightbox - Sci-fi / Terminal hybrid */}
+        {/* Lightbox - Clean Editorial Style */}
         <AnimatePresence>
           {selectedPhotoIndex !== null && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
               onClick={() => setSelectedPhotoIndex(null)}
             >
-              <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-              
               <button
-                className="absolute top-6 right-6 p-2 text-muted hover:text-primary rounded-full hover:bg-white/5 transition-colors z-50 focus:outline-none focus:border-primary border border-transparent"
+                className="absolute top-6 right-6 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50 focus:outline-none"
                 onClick={() => setSelectedPhotoIndex(null)}
               >
                 <X size={32} />
               </button>
 
               <button
-                className="absolute left-6 top-1/2 transform -translate-y-1/2 p-2 text-muted hover:text-primary rounded-full hover:bg-white/5 transition-colors z-50"
+                className="absolute left-6 top-1/2 transform -translate-y-1/2 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50"
                 onClick={handlePrev}
               >
                 <ChevronLeft size={48} />
               </button>
 
               <button
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 p-2 text-muted hover:text-primary rounded-full hover:bg-white/5 transition-colors z-50"
+                className="absolute right-6 top-1/2 transform -translate-y-1/2 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50"
                 onClick={handleNext}
               >
                 <ChevronRight size={48} />
@@ -180,30 +178,25 @@ const Photography = () => {
 
               <motion.div
                 key={selectedPhotoIndex}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 className="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center justify-center p-2"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="relative inline-block border border-gray-800 p-2 bg-background shadow-[0_0_30px_rgba(14,165,233,0.1)]">
+                <div className="relative inline-block border border-black/10 dark:border-white/10 p-3 bg-white dark:bg-[#1D1A22] shadow-2xl rounded-sm">
                   <img
                     src={filteredPhotos[selectedPhotoIndex].url}
                     alt={filteredPhotos[selectedPhotoIndex].title}
                     loading="eager"
                     decoding="async"
-                    className="max-w-full max-h-[75vh] object-contain shadow-2xl relative z-10"
+                    className="max-w-full max-h-[70vh] object-contain shadow-md relative z-10"
                   />
-                  {/* Corners */}
-                  <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary z-20"></div>
-                  <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-primary z-20"></div>
-                  <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-primary z-20"></div>
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary z-20"></div>
                 </div>
                 
-                <div className="mt-8 bg-surface/80 border border-gray-800 px-8 py-4 backdrop-blur-md flex flex-col items-center">
-                  <h3 className="text-gray-900 dark:text-white font-mono text-lg tracking-widest uppercase mb-1">{filteredPhotos[selectedPhotoIndex].title}</h3>
-                  <p className="text-muted font-mono text-xs uppercase">{filteredPhotos[selectedPhotoIndex].location || filteredPhotos[selectedPhotoIndex].category}</p>
+                <div className="mt-6 text-center text-white">
+                  <h3 className="font-serif text-2xl font-bold mb-1">{filteredPhotos[selectedPhotoIndex].title}</h3>
+                  <p className="text-coral font-sans text-sm italic">{filteredPhotos[selectedPhotoIndex].location || filteredPhotos[selectedPhotoIndex].category}</p>
                 </div>
               </motion.div>
             </motion.div>
