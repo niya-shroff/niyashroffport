@@ -9,7 +9,7 @@ const About = () => {
     ];
 
     return (
-        <section id="about" className="py-24 bg-background relative overflow-hidden">
+        <section id="about" className="py-24 bg-transparent relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
                 <div className="max-w-6xl mx-auto">
                     <div className="flex items-center gap-4 mb-12 border-b border-black/5 dark:border-white/5 pb-4">

@@ -80,7 +80,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-24 bg-background relative overflow-hidden">
+    <section id="projects" className="py-24 bg-transparent relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute inset-0 bg-[url('/subtle-grid.svg')] opacity-20" />
       <div className="absolute top-1/3 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
@@ -90,7 +90,7 @@ const Projects = () => {
           
           <div className="flex flex-col items-center mb-16 relative">
             <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-800 -z-10"></div>
-            <div className="bg-background px-6 border border-gray-800 py-3 tape-edge rotate-[1deg]">
+            <div className="bg-transparent px-6 border border-gray-800 py-3 tape-edge rotate-[1deg]">
               <h2 className="text-3xl font-mono text-gray-900 dark:text-white tracking-widest uppercase flex items-center gap-3">
                 <Code2 className="text-primary" />
                 PROJECT_ARCHIVES

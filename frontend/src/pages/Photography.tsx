@@ -50,7 +50,7 @@ const Photography = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-background relative overflow-hidden">
+    <div className="min-h-screen pt-24 pb-12 bg-transparent relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute inset-0 bg-[url('/subtle-grid.svg')] opacity-20 pointer-events-none" />
 

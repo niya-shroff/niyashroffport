@@ -56,7 +56,7 @@ const Experience = () => {
   };
 
   return (
-    <div className="min-h-screen pt-28 pb-16 bg-background relative overflow-hidden">
+    <div className="min-h-screen pt-28 pb-16 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}

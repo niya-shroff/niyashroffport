@@ -80,7 +80,7 @@ const TechnicalProjects = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen pt-28 flex justify-center items-center bg-background">
+            <div className="min-h-screen pt-28 flex justify-center items-center bg-transparent">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-coral"></div>
             </div>
         );
@@ -88,14 +88,14 @@ const TechnicalProjects = () => {
 
     if (error) {
         return (
-            <div className="min-h-screen pt-28 container mx-auto px-6 text-center bg-background">
+            <div className="min-h-screen pt-28 container mx-auto px-6 text-center bg-transparent">
                 <p className="text-coral font-serif text-lg">{error}</p>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen pt-28 pb-16 bg-background relative overflow-hidden">
+        <div className="min-h-screen pt-28 pb-16 bg-transparent relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
