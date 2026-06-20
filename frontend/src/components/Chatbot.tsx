@@ -225,7 +225,7 @@ export default function Chatbot() {
       <div className="flex items-center justify-between p-4 bg-white/50 dark:bg-[#1D1A22]/50 border-b border-black/5 dark:border-white/5 shrink-0">
         <div className="flex items-center gap-2">
           <MessageSquare size={18} className="text-coral" />
-          <span className="font-serif text-sm font-semibold text-ink dark:text-white tracking-wide">Ask Nini ✍️</span>
+          <span className="font-serif text-sm font-semibold text-ink dark:text-white tracking-wide">Ask Nini</span>
         </div>
         <div className="flex items-center gap-3">
           <button

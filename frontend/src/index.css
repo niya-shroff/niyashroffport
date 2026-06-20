@@ -135,4 +135,43 @@
     .perspective-1000 {
         perspective: 1000px;
     }
+    
+    @keyframes float-gentle {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    @keyframes spin-slow {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes hue-shift {
+        0% {
+            filter: hue-rotate(0deg);
+        }
+        100% {
+            filter: hue-rotate(360deg);
+        }
+    }
+
+    .animate-float-gentle {
+        animation: float-gentle 6s ease-in-out infinite;
+    }
+
+    .animate-spin-slow {
+        animation: spin-slow 15s linear infinite;
+    }
+
+    .animate-hue-shift {
+        animation: hue-shift 8s linear infinite;
+    }
 }

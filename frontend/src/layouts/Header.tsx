@@ -72,8 +72,9 @@ const Header = () => {
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
           <Link to="/" className="text-xl font-bold font-serif text-gray-900 dark:text-white flex items-center gap-2 group">
-            <span className="text-ink dark:text-white font-serif tracking-tight font-medium hover:text-coral transition-colors">
+            <span className="text-ink dark:text-white font-serif tracking-tight font-medium hover:text-coral transition-colors flex items-center gap-1.5">
               Niya Shroff
+              <span className="inline-block transition-all duration-700 ease-out group-hover:rotate-[360deg] text-coral dark:text-lavender select-none font-sans">☻</span>
             </span>
           </Link>
 

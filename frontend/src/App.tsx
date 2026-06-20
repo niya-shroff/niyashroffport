@@ -4,6 +4,8 @@ import { AnimatePresence } from 'framer-motion';
 import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 import Chatbot from './components/Chatbot';
+import SmileyBackground from './components/SmileyBackground';
+
 
 // Lazy load components
 const Home = lazy(() => import('./pages/Home'));
@@ -42,6 +44,7 @@ function App() {
     <div className="min-h-screen bg-background text-gray-900 dark:text-white flex flex-col font-sans selection:bg-primary selection:text-white transition-colors duration-300 relative overflow-hidden">
       
       {/* Background Visualizations */}
+      <SmileyBackground />
       <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-primary/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob"></div>
         <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-accent-crimson/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob" style={{ animationDelay: '2s' }}></div>

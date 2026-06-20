@@ -62,9 +62,11 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="pt-4">
             <div className="flex flex-col md:flex-row items-center justify-between">
-              <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-sans mb-4 md:mb-0">
+              <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-sans mb-4 md:mb-0 group">
                 <span>Made with</span>
                 <Heart size={14} className="text-coral fill-coral" />
+                <span>and</span>
+                <span className="text-coral dark:text-lavender transition-transform duration-500 group-hover:rotate-[360deg] select-none font-sans">☻</span>
                 <span>by</span>
                 <span className="text-ink dark:text-white font-medium">Niya Shroff</span>
               </div>
