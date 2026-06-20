@@ -267,7 +267,7 @@ const photoMetadataMap: Record<string, { location: string; people?: string[]; ta
         tags: ["sunset", "river", "skyline", "reflections", "golden hour"],
         vibe: "romantic golden riverfront sunset overlooking the city"
     },
-    "Rheine Falls Switzerland": {
+    "Rhine Falls Switzerland": {
         location: "Rhine Falls, Switzerland",
         tags: ["waterfall", "falls", "river", "powerful", "rushing water"],
         vibe: "powerful, energetic, and loud waterfall natural display"
