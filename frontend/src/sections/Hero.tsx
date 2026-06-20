@@ -9,40 +9,42 @@ const Hero = () => {
 
             {/* Left - Polaroid Photo Stack & Sticky Notes */}
             <div className="lg:col-span-5 relative perspective-1000 order-2 lg:order-1 mt-12 lg:mt-0 flex justify-center">
-
-              {/* Decorative Sticky Note - Mint (Ideas) */}
-              <div className="absolute -left-12 -top-10 w-32 h-32 bg-[#C1F4C5] p-4 shadow-md rotate-[-12deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
-                <span className="text-[10px] font-mono text-ink/60">#IDEAS</span>
-                <span className="font-handwriting text-lg text-ink/90 leading-tight"> is coding magic ??</span>
-              </div>
-
-              {/* Decorative Sticky Note - Yellow (Notes) */}
-              <div className="absolute -right-12 bottom-0 w-36 h-36 bg-[#FFF4B8] p-4 shadow-md rotate-[8deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
-                <span className="text-[10px] font-mono text-ink/60">#CURRENTLY</span>
-                <span className="font-handwriting text-lg text-ink/90 leading-tight">working on some pretty cool stuff...</span>
-              </div>
-
-              {/* Main Polaroid Photo - Headshot */}
-              <div className="polaroid-frame rotate-[-3deg] z-10 max-w-xs transition-transform duration-500 hover:rotate-[1deg] hover:scale-105">
-                {/* Paperclip asset */}
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl drop-shadow-sm select-none z-20">📎</div>
-
-                <div className="relative overflow-hidden aspect-square border border-black/5">
-                  <img
-                    src="/headshot.jpeg"
-                    alt="Niya Shroff"
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Fujifilm analog leak overlay */}
-                  <div className="absolute inset-0 bg-coral/5 mix-blend-color-burn pointer-events-none"></div>
-                  <div className="absolute -inset-10 bg-gradient-to-tr from-coral/0 via-pink/10 to-butterYellow/15 opacity-60 mix-blend-screen pointer-events-none animate-pulse"></div>
+              
+              <div className="relative w-full max-w-xs mx-auto">
+                {/* Decorative Sticky Note - Mint (Ideas) */}
+                <div className="absolute -left-12 -top-24 md:-left-24 md:-top-20 w-32 h-32 bg-[#C1F4C5] p-4 shadow-md rotate-[-12deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
+                  <span className="text-[10px] font-mono text-ink/60">#IDEAS</span>
+                  <span className="font-handwriting text-lg text-ink/90 leading-tight"> is coding magic ??</span>
                 </div>
 
-                <div className="mt-4 text-center">
-                  <h3 className="text-2xl font-handwriting text-ink/80 dark:text-ink/90">niya shroff.jpg</h3>
-                  <div className="text-[10px] font-mono text-slate-500 flex items-center justify-center gap-1 mt-1">
-                    <MapPin size={10} />
-                    NYC
+                {/* Decorative Sticky Note - Yellow (Currently) */}
+                <div className="absolute -right-12 -bottom-24 md:-right-24 md:-bottom-20 w-36 h-36 bg-[#FFF4B8] p-4 shadow-md rotate-[8deg] rounded-sm border border-black/5 flex flex-col justify-between z-20">
+                  <span className="text-[10px] font-mono text-ink/60">#CURRENTLY</span>
+                  <span className="font-handwriting text-lg text-ink/90 leading-tight">working on some pretty cool stuff...</span>
+                </div>
+
+                {/* Main Polaroid Photo - Headshot */}
+                <div className="polaroid-frame rotate-[-3deg] z-10 w-full transition-transform duration-500 hover:rotate-[1deg] hover:scale-105">
+                  {/* Paperclip asset */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl drop-shadow-sm select-none z-20">📎</div>
+
+                  <div className="relative overflow-hidden aspect-square border border-black/5">
+                    <img
+                      src="/headshot.jpeg"
+                      alt="Niya Shroff"
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Fujifilm analog leak overlay */}
+                    <div className="absolute inset-0 bg-coral/5 mix-blend-color-burn pointer-events-none"></div>
+                    <div className="absolute -inset-10 bg-gradient-to-tr from-coral/0 via-pink/10 to-butterYellow/15 opacity-60 mix-blend-screen pointer-events-none animate-pulse"></div>
+                  </div>
+
+                  <div className="mt-4 text-center">
+                    <h3 className="text-2xl font-handwriting text-ink/80 dark:text-ink/90">niya shroff.jpg</h3>
+                    <div className="text-[10px] font-mono text-slate-500 flex items-center justify-center gap-1 mt-1">
+                      <MapPin size={10} />
+                      NYC
+                    </div>
                   </div>
                 </div>
               </div>
