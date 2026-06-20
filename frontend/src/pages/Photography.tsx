@@ -28,11 +28,15 @@ const Photography = () => {
   const categories = useMemo(() => ['All', ...Array.from(new Set(photos.map(p => p.category)))], [photos]);
 
   const filteredPhotos = useMemo(() => {
+    const query = searchQuery.toLowerCase();
     return photos.filter(photo => {
       const matchesSearch =
-        photo.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        photo.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        photo.category.toLowerCase().includes(searchQuery.toLowerCase());
+        photo.title.toLowerCase().includes(query) ||
+        photo.location.toLowerCase().includes(query) ||
+        photo.category.toLowerCase().includes(query) ||
+        (photo.vibe && photo.vibe.toLowerCase().includes(query)) ||
+        (photo.people && photo.people.some(p => p.toLowerCase().includes(query))) ||
+        (photo.tags && photo.tags.some(t => t.toLowerCase().includes(query)));
       const matchesCategory = selectedCategory === 'All' || photo.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });

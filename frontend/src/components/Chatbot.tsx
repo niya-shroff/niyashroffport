@@ -20,7 +20,10 @@ Niya's Extensive Background Information:
 - Extracurriculars: Founder of Care Cardz (nonprofit). Philosophy & Open Thought Club VP, TED-Ed speaker.
 - Technical Projects: Her technical projects are pulled live from her GitHub profile (niya-shroff). They include full-stack, data analysis, and SWE projects using React, Python, Java, etc.
 - Writing: She has a collection of poems on her site, including "if i light a flower on fire...", "im with the moon", "the chase", "hope you're", "scrolling", and "koh phaghan poem". Her poems explore personal reflection, deep emotion, nature, and human connection.
-- Photography: She has a photography portfolio structured by categories like Abstract, Cities, etc., capturing her visual storytelling.
+- Photography: She has a photography portfolio structured by categories: Abstract, Animals, Cities, Nature, and People. Her photos capture beautiful locations, people, and themes:
+  - People: Natalie (candid/posing in Budapest & Amherst), Aly (travel/candid in Amsterdam & Howth/Ireland), Kelly & Ricky (jumps & scenic overlooks in Amherst & Oregon), Niya's Dad (relaxing in Los Angeles), and her Brother (sunset silhouette in California).
+  - Locations: New York City (Starscape neon/night vibes, Brooklyn Bridge, Central Park), Europe (Paris Eiffel Tower, Prague Castle/Street/Sunset, Budapest Danube cruise/stairs, Vienna sunset, canals in Venice, street art in Berlin & Amsterdam & Belgium), Switzerland (Rhine Falls, Alps mountains, Thun black cat), Slovenia (lakes Bled & Bohinj), Ireland (lighthouse & cliffs in Howth), and US West Coast (California beaches, Big Sur, Portland/Oregon moose & nature).
+  - Vibes: Street art/graffiti, neon night starscapes, serene lakes/waterfalls, wildlife/nature, candid portraits, coastal sunsets, cozy indoor settings, historic architectures.
 - Videography: She explores visual storytelling through motion. Her films and edits are marked as "coming shortly!".
 - Personality: She adores smiley faces (☻), asks deep philosophical questions like "What sets my soul on fire?", and blends technical expertise with artistic vision to build things that solve problems or just look really cool.
 
@@ -37,7 +40,7 @@ Site Navigation Directory:
 
 **CRITICAL INSTRUCTIONS FOR DISPLAYING IN-CHAT WIDGETS:**
 If the user asks to read a poem based on a keyword, output the exact tag: [SEARCH_POEM: keyword]
-If the user asks to see a photo based on a keyword or category, output the exact tag: [SEARCH_PHOTO: keyword]
+If the user asks to see a photo based on a keyword, category, location, person, or vibe, output the exact tag: [SEARCH_PHOTO: keyword]
 If the user asks to read a substack article based on a keyword, output the exact tag: [SEARCH_SUBSTACK: keyword]
 
 These tags will be replaced by interactive widgets in the chat. Do not try to write out the poem or photo URL yourself, just use the tag. You can add regular text before or after the tag.
@@ -102,12 +105,22 @@ export default function Chatbot() {
             parts.push(<em key={match.index} className="text-gray-600 dark:text-gray-500 text-xs block my-1">[No poem found for "{keyword}"]</em>);
           }
         } else if (type === 'PHOTO') {
-          const photo = localPhotos.find(p => p.category.toLowerCase().includes(keyword) || p.title.toLowerCase().includes(keyword));
+          const keywordLower = keyword.toLowerCase();
+          const photo = localPhotos.find(p =>
+            p.category.toLowerCase().includes(keywordLower) ||
+            p.title.toLowerCase().includes(keywordLower) ||
+            p.location.toLowerCase().includes(keywordLower) ||
+            (p.vibe && p.vibe.toLowerCase().includes(keywordLower)) ||
+            (p.people && p.people.some(person => person.toLowerCase().includes(keywordLower))) ||
+            (p.tags && p.tags.some(tag => tag.toLowerCase().includes(keywordLower)))
+          );
           if (photo) {
             parts.push(
               <div key={match.index} className="mt-2 mb-2 border border-gray-300 dark:border-gray-700 rounded overflow-hidden">
                 <img src={photo.url} alt={photo.title} className="w-full h-auto object-cover max-h-48" />
-                <div className="p-2 bg-surface text-xs text-gray-600 dark:text-gray-400 capitalize">{photo.title.replace(/_/g, ' ')} • {photo.category}</div>
+                <div className="p-2 bg-surface text-xs text-gray-600 dark:text-gray-400 capitalize">
+                  {photo.title.replace(/_/g, ' ')} • {photo.location || photo.category}
+                </div>
               </div>
             );
           } else {

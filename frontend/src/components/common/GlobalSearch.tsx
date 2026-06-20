@@ -163,11 +163,13 @@ const GlobalSearch = ({ isOpen, onClose }: GlobalSearchProps) => {
 
         // Photography
         localPhotos.forEach(photo => {
-            if (matches(photo.title, photo.category, photo.location)) {
+            const peopleStr = photo.people?.join(' ') || '';
+            const tagsStr = photo.tags?.join(' ') || '';
+            if (matches(photo.title, photo.category, photo.location, peopleStr, tagsStr, photo.vibe)) {
                 allResults.push({
                     id: `photo-${photo.id}`,
                     title: photo.title,
-                    description: photo.category || 'Photography',
+                    description: `${photo.category}${photo.location ? ` • ${photo.location}` : ''}`,
                     category: 'Photography',
                     path: '/photography',
                     icon: Camera
