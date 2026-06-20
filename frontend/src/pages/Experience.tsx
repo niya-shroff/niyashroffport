@@ -97,7 +97,7 @@ const Experience = () => {
                 className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-4 pr-8 py-2.5 text-gray-900 dark:text-white font-serif text-sm appearance-none focus:outline-none focus:border-coral transition-colors cursor-pointer capitalize"
               >
                 {types.map(type => (
-                  <option key={type} value={type}>{type === 'All' ? 'All Job Types' : type}</option>
+                  <option key={type} value={type}>{type === 'All' ? 'All Experiences' : type}</option>
                 ))}
               </select>
               <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
@@ -122,22 +122,22 @@ const Experience = () => {
                 <div className="card pt-8 relative overflow-visible mt-4">
                   {/* Scrapbook attached note - Polaroid styled sticker */}
                   <div className="absolute -top-4 -right-4 bg-[#FFFDFB] border border-black/10 p-3 rotate-[3deg] shadow-md max-w-[170px] z-20 rounded-md">
-                     <div className="flex items-center gap-1 font-serif text-xs text-ink/80 border-b border-black/5 pb-1 mb-1">
-                       <Calendar size={12} className="text-coral" />
-                       {exp.period}
-                     </div>
-                     <div className="flex items-center gap-1 font-serif text-xs text-ink/80">
-                       <MapPin size={12} className="text-skyBlue" />
-                       {exp.location}
-                     </div>
+                    <div className="flex items-center gap-1 font-serif text-xs text-ink/80 border-b border-black/5 pb-1 mb-1">
+                      <Calendar size={12} className="text-coral" />
+                      {exp.period}
+                    </div>
+                    <div className="flex items-center gap-1 font-serif text-xs text-ink/80">
+                      <MapPin size={12} className="text-skyBlue" />
+                      {exp.location}
+                    </div>
                   </div>
 
                   <div className="mb-6 border-b border-black/5 dark:border-white/5 pb-4">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
-                        <h3 className="text-xl font-serif font-bold text-ink dark:text-white leading-tight">{exp.title}</h3>
-                        <span className="bg-lavender/30 text-ink dark:text-lavender px-2 py-0.5 rounded text-[11px] font-serif font-medium">
-                            {exp.type}
-                        </span>
+                      <h3 className="text-xl font-serif font-bold text-ink dark:text-white leading-tight">{exp.title}</h3>
+                      <span className="bg-lavender/30 text-ink dark:text-lavender px-2 py-0.5 rounded text-[11px] font-serif font-medium">
+                        {exp.type}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 text-coral font-serif font-medium text-sm">
                       <Building size={14} />

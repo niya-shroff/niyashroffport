@@ -101,15 +101,15 @@ const Writing = () => {
                 >
                     <div className="flex items-center gap-3 bg-lavender/30 dark:bg-lavender/10 px-5 py-2 rounded-lg border border-lavender/20 inline-flex mb-6 mt-4">
                         <Feather className="text-ink dark:text-lavender" size={18} />
-                        <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Journal Archives</h2>
+                        <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Stories</h2>
                     </div>
 
                     <h1 className="text-4xl md:text-5xl font-serif font-bold text-ink dark:text-white mb-4 tracking-tight">
-                        Writings & Musings
+                        My Brain in Word Form
                     </h1>
 
                     <p className="font-serif italic text-slate-500 text-lg mb-8 max-w-2xl">
-                        Thoughts put to paper. A collection of poems, essays, and stories drafted in coffee shop corners.
+                        Random thoughts put to paper; a collection of poems, essays, and stories written with emotion and packed with humanity.
                     </p>
 
                     {/* Search + Tabs */}

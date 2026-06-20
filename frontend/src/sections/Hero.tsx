@@ -1,4 +1,4 @@
-import { ChevronDown, MapPin, Camera, BookOpen, Film, PenTool } from 'lucide-react';
+import { ChevronDown, MapPin, Camera, BookOpen, Film, PenTool, CodeIcon } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -13,13 +13,13 @@ const Hero = () => {
               {/* Decorative Sticky Note - Mint (Ideas) */}
               <div className="absolute -left-12 -top-10 w-32 h-32 bg-[#C1F4C5] p-4 shadow-md rotate-[-12deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
                 <span className="text-[10px] font-mono text-ink/60">#IDEAS</span>
-                <span className="font-handwriting text-lg text-ink/90 leading-tight">Code + Art = Magic</span>
+                <span className="font-handwriting text-lg text-ink/90 leading-tight"> is coding magic ??</span>
               </div>
 
               {/* Decorative Sticky Note - Yellow (Notes) */}
               <div className="absolute -right-12 bottom-0 w-36 h-36 bg-[#FFF4B8] p-4 shadow-md rotate-[8deg] rounded-sm border border-black/5 flex flex-col justify-between z-0">
                 <span className="text-[10px] font-mono text-ink/60">#CURRENTLY</span>
-                <span className="font-handwriting text-lg text-ink/90 leading-tight">Reading: Dev docs & photobooks</span>
+                <span className="font-handwriting text-lg text-ink/90 leading-tight">working on some pretty cool stuff...</span>
               </div>
 
               {/* Main Polaroid Photo - Headshot */}
@@ -42,7 +42,7 @@ const Hero = () => {
                   <h3 className="text-2xl font-handwriting text-ink/80 dark:text-ink/90">niya shroff.jpg</h3>
                   <div className="text-[10px] font-mono text-slate-500 flex items-center justify-center gap-1 mt-1">
                     <MapPin size={10} />
-                    NYC // 40.7128° N
+                    NYC
                   </div>
                 </div>
               </div>
@@ -57,26 +57,26 @@ const Hero = () => {
                 <div className="absolute -top-3 left-1/3 w-28 h-6 bg-pink/20 dark:bg-pink/10 backdrop-blur-[1px] rotate-[-2deg] border border-pink/10 shadow-sm z-20"></div>
 
                 <div className="mb-6">
-                  <span className="mono-accent bg-lavender/30 dark:bg-lavender/10 px-2.5 py-1 rounded text-ink dark:text-lavender">Creative Studio</span>
+                  <span className="mono-accent bg-lavender/30 dark:bg-lavender/10 px-2.5 py-1 rounded text-ink dark:text-lavender"> #1 Smiley Face Fan</span>
                 </div>
 
                 <h1 className="text-4xl md:text-6xl font-bold text-ink dark:text-white mb-6 leading-tight tracking-tight font-serif">
-                  Niya Shroff
+                  Niya Shroff ☻
                 </h1>
 
                 {/* Subtitle list of disciplines with colored accent highlight */}
                 <div className="flex flex-wrap gap-3 mb-6">
                   <span className="highlight-yellow text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
-                    <PenTool size={13} /> Writer
+                    <CodeIcon size={13} /> Engineer
                   </span>
                   <span className="highlight-pink text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
                     <Camera size={13} /> Photographer
                   </span>
-                  <span className="highlight-mint text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
-                    <Film size={13} /> Vlogger
-                  </span>
                   <span className="highlight-lavender text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
-                    <BookOpen size={13} /> Storyteller
+                    <BookOpen size={13} /> Writer
+                  </span>
+                  <span className="highlight-mint text-ink dark:text-ink font-serif text-sm px-2 py-0.5 flex items-center gap-1.5 shadow-sm">
+                    <Film size={13} /> Filmmaker
                   </span>
                 </div>
 
@@ -86,10 +86,10 @@ const Hero = () => {
 
                 <div className="flex flex-wrap gap-4">
                   <a href="#about" className="btn-primary">
-                    Read My Story
+                   A bit about me...
                   </a>
                   <a href="/technical" className="btn-secondary">
-                    View Portfolio
+                    View my work
                   </a>
                 </div>
               </div>

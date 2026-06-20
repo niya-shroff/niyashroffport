@@ -2,7 +2,7 @@ export const experiences = [
     {
         title: 'Software Engineer',
         company: 'JPMorgan Chase & Co.',
-        location: 'Jersey City, NJ',
+        location: 'Jersey City, NJ)',
         period: 'Jul 2025 - Present',
         type: 'Full-time',
         description: 'Full-stack software engineer within the Asset & Wealth Management Line of Business, developing enterprise-level financial applications and contributing to critical business systems.',
@@ -106,11 +106,11 @@ export const experiences = [
         technologies: ['Raiser\'s Edge', 'CRM Management', 'Give Campus', 'Database Management']
     },
     {
-        title: 'NPO Founder',
+        title: 'Founder',
         company: 'Care Cardz',
         location: 'Chelmsford, MA',
         period: 'Jun 2020 - May 2023',
-        type: 'Founder',
+        type: 'Nonprofit',
         description: 'Founded and led a nonprofit organization dedicated to spreading joy in the community through handwritten cards, managing all aspects from operations to partnerships.',
         achievements: [
             'Founded a nonprofit organization dedicated to spreading joy in the community through handwritten cards',

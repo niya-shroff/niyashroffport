@@ -80,7 +80,7 @@ const Contact = () => {
     },
     {
       icon: MapPin,
-      title: 'Studio Location',
+      title: 'Based In',
       value: 'New York, NY',
       onClick: handleLocationClick,
       color: 'text-skyBlue'
@@ -119,9 +119,9 @@ const Contact = () => {
               <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Contact</h2>
             </div>
             <h1 className="text-4xl md:text-5xl font-serif font-bold text-ink dark:text-white mb-2 tracking-tight">
-              Write Me a Note
+              Let's Connect ☻
             </h1>
-            <span className="font-handwriting text-coral text-2xl lowercase mt-1 rotate-[-2deg]">say hi!</span>
+            <span className="font-handwriting text-coral text-2xl lowercase mt-1 rotate-[-2deg]"> drop a message, or just say hi!</span>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-12 items-start mt-12">

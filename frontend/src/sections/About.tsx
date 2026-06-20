@@ -14,7 +14,7 @@ const About = () => {
                 <div className="max-w-6xl mx-auto">
                     <div className="flex items-center gap-4 mb-12 border-b border-black/5 dark:border-white/5 pb-4">
                         <BookOpen className="text-coral" size={22} />
-                        <h2 className="text-3xl font-serif text-gray-900 dark:text-white tracking-tight">The Story So Far</h2>
+                        <h2 className="text-3xl font-serif text-gray-900 dark:text-white tracking-tight">My Story So Far</h2>
                         <div className="flex-grow h-[1px] bg-black/5 dark:bg-white/5 ml-4"></div>
                         <span className="font-serif italic text-xs text-slate-500">Chapter 01</span>
                     </div>

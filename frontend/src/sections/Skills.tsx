@@ -101,14 +101,11 @@ const Skills = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center mb-16">
-            <div className="font-serif text-coral text-xs tracking-widest mb-2 flex items-center gap-2">
+            <div className="font-serif text-coral text-2xl tracking-widest mb-2 flex items-center gap-2">
               <Wrench size={16} />
               <span>Skillset</span>
             </div>
-            <h2 className="text-3xl font-serif text-gray-900 dark:text-white mb-4 tracking-tight">Toolkit & Craft</h2>
-            <p className="text-slate-600 dark:text-slate-400 text-sm max-w-xl mx-auto font-sans leading-relaxed">
-              A detailed overview of technical skills, development tools, and engineering methodologies that fuel my digital solutions.
-            </p>
+            <h2 className="text-xl font-serif text-gray 900 dark:text-white mb-4 tracking-tight">Tools & Technologies</h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -123,7 +120,6 @@ const Skills = () => {
                       <div className={`p-2.5 rounded-lg ${category.bgColor}/20 flex items-center justify-center`}>
                         <category.icon className="w-5 h-5 text-ink dark:text-white" />
                       </div>
-                      <div className="text-[10px] font-mono text-slate-400">SKILL_MODULE_0{index + 1}</div>
                     </div>
 
                     <h3 className="text-base font-serif font-semibold text-slate-800 dark:text-slate-100 mb-6">{category.title}</h3>
