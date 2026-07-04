@@ -3,6 +3,7 @@ export interface Photo {
     title: string;
     url: string;
     category: string;
+    camera: 'Fujifilm' | 'Lumix';
     location: string;
     people: string[];
     tags: string[];
@@ -381,10 +382,21 @@ export const localPhotos: Photo[] = Object.entries(photoModules).map(([path, mod
 
     // Extract category (the folder name directly under photography)
     let category = '';
+    let camera: 'Fujifilm' | 'Lumix' = 'Lumix';
     const photoDirIndex = parts.indexOf('photography');
     if (photoDirIndex !== -1 && photoDirIndex + 1 < parts.length - 1) {
         let dirName = parts[photoDirIndex + 1];
         category = dirName.charAt(0).toUpperCase() + dirName.slice(1);
+
+        // Extract camera name if present
+        if (photoDirIndex + 2 < parts.length - 1) {
+            const camSegment = parts[photoDirIndex + 2].toLowerCase();
+            if (camSegment === 'fujifilm') {
+                camera = 'Fujifilm';
+            } else if (camSegment === 'lumix') {
+                camera = 'Lumix';
+            }
+        }
     } else {
         category = 'Uncategorized';
     }
@@ -396,6 +408,7 @@ export const localPhotos: Photo[] = Object.entries(photoModules).map(([path, mod
         title: title,
         url: moduleExport as string,
         category: category,
+        camera: camera,
         location: meta.location || '',
         people: meta.people || [],
         tags: meta.tags || [],

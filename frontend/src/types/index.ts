@@ -4,6 +4,7 @@ export interface Photo {
     title: string;
     category: string;
     location: string;
+    camera?: 'Fujifilm' | 'Lumix';
 }
 
 export interface Video {

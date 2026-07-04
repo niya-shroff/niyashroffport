@@ -9,6 +9,7 @@ const Photography = () => {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCamera, setSelectedCamera] = useState<'All' | 'Fujifilm' | 'Lumix'>('All');
   const location = useLocation();
 
   useEffect(() => {
@@ -38,9 +39,10 @@ const Photography = () => {
         (photo.people && photo.people.some(p => p.toLowerCase().includes(query))) ||
         (photo.tags && photo.tags.some(t => t.toLowerCase().includes(query)));
       const matchesCategory = selectedCategory === 'All' || photo.category === selectedCategory;
-      return matchesSearch && matchesCategory;
+      const matchesCamera = selectedCamera === 'All' || photo.camera === selectedCamera;
+      return matchesSearch && matchesCategory && matchesCamera;
     });
-  }, [searchQuery, selectedCategory, photos]);
+  }, [searchQuery, selectedCategory, selectedCamera, photos]);
 
   const handleNext = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -87,19 +89,34 @@ const Photography = () => {
               />
             </div>
 
-            <div className="relative min-w-[200px]">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-4 pr-8 py-2.5 text-gray-900 dark:text-white font-serif text-sm appearance-none focus:outline-none focus:border-coral transition-colors cursor-pointer capitalize"
-              >
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category === 'All' ? 'All Categories' : category}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
+            <div className="flex gap-4">
+              <div className="relative min-w-[160px]">
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-4 pr-8 py-2.5 text-gray-900 dark:text-white font-serif text-sm appearance-none focus:outline-none focus:border-coral transition-colors cursor-pointer capitalize"
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category === 'All' ? 'All Categories' : category}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
+              </div>
+
+              <div className="relative min-w-[160px]">
+                <select
+                  value={selectedCamera}
+                  onChange={(e) => setSelectedCamera(e.target.value as 'All' | 'Fujifilm' | 'Lumix')}
+                  className="w-full bg-background border border-black/10 dark:border-white/10 rounded-xl pl-4 pr-8 py-2.5 text-gray-900 dark:text-white font-serif text-sm appearance-none focus:outline-none focus:border-coral transition-colors cursor-pointer"
+                >
+                  <option value="All">All Cameras</option>
+                  <option value="Fujifilm">Fujifilm X-T30 III</option>
+                  <option value="Lumix">Panasonic Lumix G7</option>
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -132,7 +149,8 @@ const Photography = () => {
                   
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                     <h3 className="text-lg font-bold font-serif text-white mb-1">{photo.title}</h3>
-                    <p className="text-xs font-sans text-coral mb-2">{photo.location || photo.category}</p>
+                    <p className="text-xs font-sans text-coral mb-0.5">{photo.location || photo.category}</p>
+                    <p className="text-[10px] font-sans text-slate-300 mb-2">Shot on {photo.camera === 'Fujifilm' ? 'Fujifilm X-T30 III' : 'Panasonic Lumix G7'}</p>
                     <div className="flex items-center text-white/80 text-[11px] font-sans">
                       <ZoomIn size={12} className="mr-1" />
                       View Photograph
@@ -200,7 +218,8 @@ const Photography = () => {
                 
                 <div className="mt-6 text-center text-white">
                   <h3 className="font-serif text-2xl font-bold mb-1">{filteredPhotos[selectedPhotoIndex].title}</h3>
-                  <p className="text-coral font-sans text-sm italic">{filteredPhotos[selectedPhotoIndex].location || filteredPhotos[selectedPhotoIndex].category}</p>
+                  <p className="text-coral font-sans text-sm italic mb-1">{filteredPhotos[selectedPhotoIndex].location || filteredPhotos[selectedPhotoIndex].category}</p>
+                  <p className="text-slate-400 font-sans text-xs">Shot on {filteredPhotos[selectedPhotoIndex].camera === 'Fujifilm' ? 'Fujifilm X-T30 III' : 'Panasonic Lumix G7'}</p>
                 </div>
               </motion.div>
             </motion.div>
