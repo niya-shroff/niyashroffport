@@ -364,6 +364,96 @@ const photoMetadataMap: Record<string, { location: string; people?: string[]; ta
     }
 };
 
+const locationMappings = [
+    { prefix: "Brooklyn New York", location: "Brooklyn, New York, USA" },
+    { prefix: "New York City Starscape", location: "New York City, NY, USA" },
+    { prefix: "New York City", location: "New York, USA" },
+    { prefix: "New York Little Island", location: "New York, USA" },
+    { prefix: "New York", location: "New York, USA" },
+    { prefix: "Washington D.C.", location: "Washington D.C., USA" },
+    { prefix: "Lake Bled Slovenia", location: "Lake Bled, Slovenia" },
+    { prefix: "Lake Bled", location: "Lake Bled, Slovenia" },
+    { prefix: "Lake Bohinj Slovenia", location: "Lake Bohinj, Slovenia" },
+    { prefix: "Lake Bohinj", location: "Lake Bohinj, Slovenia" },
+    { prefix: "Lake Como, Italy", location: "Lake Como, Italy" },
+    { prefix: "Lake Como", location: "Lake Como, Italy" },
+    { prefix: "Como Italy", location: "Como, Italy" },
+    { prefix: "Como", location: "Como, Italy" },
+    { prefix: "Taormina Italy Piazza Giuseppe Baciunimed", location: "Taormina, Italy" },
+    { prefix: "Taormina Italy", location: "Taormina, Italy" },
+    { prefix: "Taormina Pigeon Flowers", location: "Taormina, Italy" },
+    { prefix: "Taormina", location: "Taormina, Italy" },
+    { prefix: "Valetta Malta Giant Ferrel", location: "Valetta, Malta" },
+    { prefix: "Valetta Malta View", location: "Valetta, Malta" },
+    { prefix: "Valetta Malta Overlook", location: "Valetta, Malta" },
+    { prefix: "Valetta Malta", location: "Valetta, Malta" },
+    { prefix: "Valetta", location: "Valetta, Malta" },
+    { prefix: "Palermo Italy", location: "Palermo, Italy" },
+    { prefix: "Palermo", location: "Palermo, Italy" },
+    { prefix: "Lisbon Portugal", location: "Lisbon, Portugal" },
+    { prefix: "Lisbon", location: "Lisbon, Portugal" },
+    { prefix: "Verona Italy", location: "Verona, Italy" },
+    { prefix: "Verona", location: "Verona, Italy" },
+    { prefix: "Catania Italy", location: "Catania, Italy" },
+    { prefix: "Catania", location: "Catania, Italy" },
+    { prefix: "Venice Italy", location: "Venice, Italy" },
+    { prefix: "Venice Canal", location: "Venice, Italy" },
+    { prefix: "Venice", location: "Venice, Italy" },
+    { prefix: "Amsterdam", location: "Amsterdam, Netherlands" },
+    { prefix: "Belgium", location: "Belgium" },
+    { prefix: "Berlin Wall", location: "Berlin, Germany" },
+    { prefix: "Berlin", location: "Berlin, Germany" },
+    { prefix: "Big Sur California", location: "Big Sur, California, USA" },
+    { prefix: "Big Sur", location: "Big Sur, California, USA" },
+    { prefix: "Budapest Natalie Stairs", location: "Budapest, Hungary" },
+    { prefix: "Budapest Natalie Wall", location: "Budapest, Hungary" },
+    { prefix: "Budapest Natalie Hair Cruise", location: "Budapest, Hungary" },
+    { prefix: "Budapest Natalie", location: "Budapest, Hungary" },
+    { prefix: "Budapest", location: "Budapest, Hungary" },
+    { prefix: "California Beach Rocks", location: "California, USA" },
+    { prefix: "California Beach Sunset", location: "California, USA" },
+    { prefix: "California Beach", location: "California, USA" },
+    { prefix: "California", location: "California, USA" },
+    { prefix: "Cannes", location: "Cannes, France" },
+    { prefix: "Dublin", location: "Dublin, Ireland" },
+    { prefix: "Edinburgh Scotland", location: "Edinburgh, Scotland" },
+    { prefix: "Edinburgh", location: "Edinburgh, Scotland" },
+    { prefix: "Ghent Belgium", location: "Ghent, Belgium" },
+    { prefix: "Ghent", location: "Ghent, Belgium" },
+    { prefix: "Howth Ireland", location: "Howth, Ireland" },
+    { prefix: "Howth", location: "Howth, Ireland" },
+    { prefix: "Leaving Ireland", location: "Ireland" },
+    { prefix: "Los Angeles", location: "Los Angeles, California, USA" },
+    { prefix: "Madrid Turtles Resting Museum", location: "Madrid, Spain" },
+    { prefix: "Madrid Turtles Resting", location: "Madrid, Spain" },
+    { prefix: "Madrid", location: "Madrid, Spain" },
+    { prefix: "Milan", location: "Milan, Italy" },
+    { prefix: "Monaco", location: "Monaco" },
+    { prefix: "Nice France", location: "Nice, France" },
+    { prefix: "Nice", location: "Nice, France" },
+    { prefix: "Paris", location: "Paris, France" },
+    { prefix: "Poconos", location: "Poconos, Pennsylvania, USA" },
+    { prefix: "Pompeii Italy", location: "Pompeii, Italy" },
+    { prefix: "Pompeii", location: "Pompeii, Italy" },
+    { prefix: "Portland Oregon", location: "Portland, Oregon, USA" },
+    { prefix: "Portland", location: "Portland, Oregon, USA" },
+    { prefix: "Prague Sunset", location: "Prague, Czech Republic" },
+    { prefix: "Prague", location: "Prague, Czech Republic" },
+    { prefix: "Rhine Falls Switzerland", location: "Rhine Falls, Switzerland" },
+    { prefix: "Rheine Falls Switzerland", location: "Rhine Falls, Switzerland" },
+    { prefix: "Swiss Mountains Upclose", location: "Swiss Alps, Switzerland" },
+    { prefix: "Swiss Mountains", location: "Swiss Alps, Switzerland" },
+    { prefix: "Swiss", location: "Switzerland" },
+    { prefix: "Thun Switzerland", location: "Thun, Switzerland" },
+    { prefix: "Thun", location: "Thun, Switzerland" },
+    { prefix: "Toledo Spain", location: "Toledo, Spain" },
+    { prefix: "Toledo", location: "Toledo, Spain" },
+    { prefix: "Vienna Sunset Crossing", location: "Vienna, Austria" },
+    { prefix: "Vienna", location: "Vienna, Austria" },
+    { prefix: "Amherst", location: "Amherst, MA, USA (UMass)" },
+    { prefix: "Oregon", location: "Oregon, USA" }
+];
+
 // Dynamically import all images in the photography assets folder
 const photoModules = import.meta.glob('../assets/photography/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}', {
     eager: true,
@@ -377,8 +467,8 @@ export const localPhotos: Photo[] = Object.entries(photoModules).map(([path, mod
     // Extract the file name with extension
     const fileNameWithExt = parts[parts.length - 1];
 
-    // Title is filename without extension, replace underscores with spaces
-    const title = fileNameWithExt.split('.').slice(0, -1).join('.').replace(/_/g, ' ');
+    // Original raw title from filename
+    const originalTitle = fileNameWithExt.split('.').slice(0, -1).join('.').replace(/_/g, ' ');
 
     // Extract category (the folder name directly under photography)
     let category = '';
@@ -401,7 +491,51 @@ export const localPhotos: Photo[] = Object.entries(photoModules).map(([path, mod
         category = 'Uncategorized';
     }
 
-    const meta = photoMetadataMap[title] || {};
+    const meta = photoMetadataMap[originalTitle] || {};
+
+    let location = meta.location || '';
+    let title = originalTitle;
+
+    // Parse and clean title and location based on locationMappings
+    for (const rule of locationMappings) {
+        if (originalTitle.toLowerCase().startsWith(rule.prefix.toLowerCase())) {
+            if (!location) {
+                location = rule.location;
+            }
+            
+            // For special custom titles
+            if (originalTitle === "Lake Bled Slovenia Full") {
+                title = "Full View";
+            } else if (originalTitle === "Leaving Ireland Sunrise") {
+                title = "Sunrise";
+            } else if (originalTitle === "Rhine Falls Switzerland" || originalTitle === "Rheine Falls Switzerland") {
+                title = "Rhine Falls";
+            } else if (originalTitle === "Swiss Mountains Upclose") {
+                title = "Mountains Up Close";
+            } else if (originalTitle === "Swiss Mountains") {
+                title = "Mountains";
+            } else if (originalTitle === "Prague Sunset") {
+                title = "Sunset";
+            } else if (originalTitle === "Vienna Sunset Crossing") {
+                title = "Sunset Crossing";
+            } else if (originalTitle === "Berlin Wall Piece") {
+                title = "Wall Piece";
+            } else {
+                // Strip the prefix
+                let remaining = originalTitle.substring(rule.prefix.length).trim();
+                remaining = remaining.replace(/^[,-\s]+/, ''); // Strip leading punctuation/spaces
+                
+                if (remaining) {
+                    title = remaining;
+                } else {
+                    // Fallback if title is empty (e.g. "Como Italy" -> prefix "Como Italy" -> remaining "")
+                    // We extract the city name (strip the country suffix)
+                    title = rule.prefix.replace(/\s+(Italy|Spain|Germany|France|Belgium|Slovenia|Netherlands|Portugal|Switzerland|USA|Ireland|Scotland|Austria)$/i, '').trim();
+                }
+            }
+            break;
+        }
+    }
 
     return {
         id: `photo-${index}`,
@@ -409,7 +543,7 @@ export const localPhotos: Photo[] = Object.entries(photoModules).map(([path, mod
         url: moduleExport as string,
         category: category,
         camera: camera,
-        location: meta.location || '',
+        location: location,
         people: meta.people || [],
         tags: meta.tags || [],
         vibe: meta.vibe || ''
