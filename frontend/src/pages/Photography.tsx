@@ -12,6 +12,10 @@ const Photography = () => {
   const [selectedCamera, setSelectedCamera] = useState<'All' | 'Fujifilm' | 'Lumix'>('All');
   const location = useLocation();
 
+  // Mobile swipe gestures state
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
@@ -44,15 +48,57 @@ const Photography = () => {
     });
   }, [searchQuery, selectedCategory, selectedCamera, photos]);
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (selectedPhotoIndex === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedPhotoIndex(null);
+      } else if (e.key === 'ArrowRight') {
+        setSelectedPhotoIndex((prev) => (prev !== null ? (prev + 1) % filteredPhotos.length : null));
+      } else if (e.key === 'ArrowLeft') {
+        setSelectedPhotoIndex((prev) => (prev !== null ? (prev - 1 + filteredPhotos.length) % filteredPhotos.length : null));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedPhotoIndex, filteredPhotos.length]);
+
+  const handleNext = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     if (selectedPhotoIndex !== null) setSelectedPhotoIndex((selectedPhotoIndex + 1) % filteredPhotos.length);
   };
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     if (selectedPhotoIndex !== null)
       setSelectedPhotoIndex((selectedPhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length);
+  };
+
+  // Swipe detection handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const minSwipeDistance = 50;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      handleNext();
+    } else if (isRightSwipe) {
+      handlePrev();
+    }
   };
 
   return (
@@ -78,7 +124,7 @@ const Photography = () => {
 
           {/* Controls - Elegant Card Style */}
           <div className="flex flex-col md:flex-row gap-4 bg-white/50 dark:bg-[#1D1A22]/50 p-4 border border-black/5 dark:border-white/5 rounded-2xl max-w-4xl relative">
-            <div className="relative flex-grow">
+            <div className="relative flex-grow w-full">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={16} />
               <input
                 type="text"
@@ -89,8 +135,8 @@ const Photography = () => {
               />
             </div>
 
-            <div className="flex gap-4">
-              <div className="relative min-w-[160px]">
+            <div className="grid grid-cols-2 md:flex gap-4 w-full md:w-auto">
+              <div className="relative flex-1 md:min-w-[160px]">
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
@@ -105,7 +151,7 @@ const Photography = () => {
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">▼</div>
               </div>
 
-              <div className="relative min-w-[160px]">
+              <div className="relative flex-1 md:min-w-[160px]">
                 <select
                   value={selectedCamera}
                   onChange={(e) => setSelectedCamera(e.target.value as 'All' | 'Fujifilm' | 'Lumix')}
@@ -121,7 +167,7 @@ const Photography = () => {
           </div>
         </motion.div>
 
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPhotos.length > 0 ? (
             filteredPhotos.map((photo, index) => (
               <motion.div
@@ -130,7 +176,7 @@ const Photography = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: (index % 12) * 0.1 }}
-                className={`polaroid-frame cursor-pointer mb-8 break-inside-avoid
+                className={`polaroid-frame cursor-pointer mb-2 break-inside-avoid
                     ${index % 3 === 0 ? 'rotate-[-2deg]' : index % 3 === 1 ? 'rotate-[1.5deg]' : 'rotate-[-1deg]'}
                     hover:rotate-0 hover:scale-[1.03] transition-all duration-300
                 `}
@@ -174,8 +220,11 @@ const Photography = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm select-none"
               onClick={() => setSelectedPhotoIndex(null)}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               <button
                 className="absolute top-6 right-6 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50 focus:outline-none"
@@ -185,14 +234,14 @@ const Photography = () => {
               </button>
 
               <button
-                className="absolute left-6 top-1/2 transform -translate-y-1/2 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50"
+                className="absolute left-6 top-1/2 transform -translate-y-1/2 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50 hidden md:block"
                 onClick={handlePrev}
               >
                 <ChevronLeft size={48} />
               </button>
 
               <button
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50"
+                className="absolute right-6 top-1/2 transform -translate-y-1/2 p-2 text-white/70 hover:text-white rounded-full hover:bg-white/5 transition-colors z-50 hidden md:block"
                 onClick={handleNext}
               >
                 <ChevronRight size={48} />
