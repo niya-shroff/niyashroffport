@@ -47,6 +47,36 @@ const photoMetadataMap: Record<string, { location: string; people?: string[]; ta
         tags: ["indoor", "neon", "stars", "reflection", "cozy", "window"],
         vibe: "cozy and intimate night reflection with neon stars"
     },
+    "Brooklyn New York The Woods Disco Ball": {
+        location: "Brooklyn, New York, USA",
+        tags: ["disco ball", "night", "club", "party", "woods"],
+        vibe: "fun, energetic night out"
+    },
+    "New York The Whitney Museum Window": {
+        location: "New York, USA",
+        tags: ["museum", "window", "architecture", "view", "whitney"],
+        vibe: "modern architectural city overlook"
+    },
+    "New Jersey Double Exposure": {
+        location: "New Jersey, USA",
+        tags: ["double exposure", "abstract", "artistic", "creative"],
+        vibe: "dreamy, artistic double exposure"
+    },
+    "Pennsylvania Fire": {
+        location: "Pennsylvania, USA",
+        tags: ["fire", "flames", "night", "warm", "abstract"],
+        vibe: "warm, cozy, and mesmerizing fire"
+    },
+    "New York The Whitney Museum Stairs": {
+        location: "New York, USA",
+        tags: ["museum", "stairs", "architecture", "lines", "whitney"],
+        vibe: "clean, modern architectural stairwell"
+    },
+    "Washington D.C. Club": {
+        location: "Washington D.C., USA",
+        tags: ["club", "night", "lights", "party", "abstract"],
+        vibe: "vibrant and energetic club lights"
+    },
 
     // Animals
     "Berlin Birds Bush": {
@@ -221,6 +251,116 @@ const photoMetadataMap: Record<string, { location: string; people?: string[]; ta
         tags: ["sunset", "crossing", "street scene", "golden hour", "warm"],
         vibe: "warm golden hour light on a bustling street crossing"
     },
+    "Brooklyn Park Sunset People": {
+        location: "Brooklyn, New York, USA",
+        tags: ["sunset", "park", "people", "golden hour", "city"],
+        vibe: "warm, communal sunset at the park"
+    },
+    "Taormina Italy Bam Bar": {
+        location: "Taormina, Italy",
+        tags: ["bam bar", "cafe", "street", "tables", "local"],
+        vibe: "classic Italian cafe street scene"
+    },
+    "Valetta Malta View": {
+        location: "Valletta, Malta",
+        tags: ["valletta", "view", "cityscape", "architecture", "historic"],
+        vibe: "historic Mediterranean city view"
+    },
+    "Palermo Italy Inside Church": {
+        location: "Palermo, Italy",
+        tags: ["church", "interior", "architecture", "historic", "religion"],
+        vibe: "grand and historic church interior"
+    },
+    "Lake Como, Italy": {
+        location: "Lake Como, Italy",
+        tags: ["lake", "mountains", "water", "scenic", "town"],
+        vibe: "luxurious and scenic Italian lakeside"
+    },
+    "Manhattan View Sunset": {
+        location: "Manhattan, NY, USA",
+        tags: ["manhattan", "sunset", "skyline", "cityscape", "golden hour"],
+        vibe: "golden hour overlooking the Manhattan skyline"
+    },
+    "Washington D.C. Lucy Bar": {
+        location: "Washington D.C., USA",
+        tags: ["bar", "lucy", "nightlife", "drinks", "interior"],
+        vibe: "moody, relaxed bar atmosphere"
+    },
+    "Venice Italy": {
+        location: "Venice, Italy",
+        tags: ["venice", "canal", "water", "historic", "boats"],
+        vibe: "classic, romantic Venetian waterways"
+    },
+    "Taormina Italy Mount Etna Sunset": {
+        location: "Taormina, Italy",
+        tags: ["mount etna", "sunset", "volcano", "scenic", "dusk"],
+        vibe: "breathtaking sunset over Mount Etna"
+    },
+    "Catania Italy Umbrellas": {
+        location: "Catania, Italy",
+        tags: ["umbrellas", "street", "colorful", "city", "decor"],
+        vibe: "colorful umbrellas hanging over a lively street"
+    },
+    "New York Little Island Monks": {
+        location: "New York, USA",
+        tags: ["little island", "monks", "park", "city", "peaceful"],
+        vibe: "peaceful moment in the city park"
+    },
+    "Valetta Malta": {
+        location: "Valletta, Malta",
+        tags: ["valletta", "streets", "historic", "architecture", "city"],
+        vibe: "charming historic Mediterranean streets"
+    },
+    "Manhattan Sunset": {
+        location: "Manhattan, NY, USA",
+        tags: ["sunset", "manhattan", "cityscape", "skyline", "golden hour"],
+        vibe: "warm sunset colors over Manhattan"
+    },
+    "Brooklyn Westlight Sunset": {
+        location: "Brooklyn, New York, USA",
+        tags: ["sunset", "westlight", "brooklyn", "view", "skyline"],
+        vibe: "stunning sunset view from Brooklyn"
+    },
+    "Washington D.C. Monument": {
+        location: "Washington D.C., USA",
+        tags: ["monument", "landmark", "architecture", "historic", "d.c."],
+        vibe: "historic and monumental city landmark"
+    },
+    "Verona Italy Adige River": {
+        location: "Verona, Italy",
+        tags: ["adige river", "verona", "water", "scenic", "bridge"],
+        vibe: "romantic, scenic view of the Adige River"
+    },
+    "Palermo Italy Look Up": {
+        location: "Palermo, Italy",
+        tags: ["look up", "architecture", "buildings", "sky", "historic"],
+        vibe: "looking up at grand historic architecture"
+    },
+    "Verona Italy Bridge Shoes": {
+        location: "Verona, Italy",
+        tags: ["bridge", "shoes", "river", "verona", "quirky"],
+        vibe: "quirky urban detail on a historic bridge"
+    },
+    "Taormina Italy Road": {
+        location: "Taormina, Italy",
+        tags: ["road", "street", "town", "hill", "historic"],
+        vibe: "quaint, winding historic town road"
+    },
+    "Palermo Italy Cathedral": {
+        location: "Palermo, Italy",
+        tags: ["cathedral", "architecture", "historic", "grand", "church"],
+        vibe: "majestic, grand historic cathedral"
+    },
+    "Lisbon Portugal Tram": {
+        location: "Lisbon, Portugal",
+        tags: ["tram", "yellow", "street", "lisbon", "transport"],
+        vibe: "classic yellow tram on sunny Lisbon streets"
+    },
+    "Lisbon Portugal Travessa Da Condessa Do Rio": {
+        location: "Lisbon, Portugal",
+        tags: ["street", "alley", "lisbon", "charming", "historic"],
+        vibe: "charming, historic Portuguese alleyway"
+    },
 
     // Nature
     "California Beach Rocks": {
@@ -287,6 +427,31 @@ const photoMetadataMap: Record<string, { location: string; people?: string[]; ta
         location: "Thun, Switzerland",
         tags: ["lake", "mountains", "alps", "reflection", "peaceful"],
         vibe: "picturesque lakefront with reflecting mountain peaks"
+    },
+    "Taormina Italy Cactus View": {
+        location: "Taormina, Italy",
+        tags: ["cactus", "ocean view", "plants", "coastline", "nature"],
+        vibe: "sunny, Mediterranean coastal plants"
+    },
+    "Cold Spring Framed Train Hill": {
+        location: "Cold Spring, NY, USA",
+        tags: ["train", "hill", "framed", "scenic", "landscape"],
+        vibe: "scenic hillside train view"
+    },
+    "Taormina Pigeon Flowers": {
+        location: "Taormina, Italy",
+        tags: ["pigeon", "flowers", "nature", "bird", "garden"],
+        vibe: "peaceful garden bird among flowers"
+    },
+    "Washington D.C. Cherry Blossoms": {
+        location: "Washington D.C., USA",
+        tags: ["cherry blossoms", "flowers", "spring", "pink", "trees"],
+        vibe: "beautiful, blooming spring cherry blossoms"
+    },
+    "Taormina Italy Flower View": {
+        location: "Taormina, Italy",
+        tags: ["flowers", "view", "blooms", "scenic", "nature"],
+        vibe: "vibrant floral view overlooking the scenery"
     },
 
     // People
@@ -361,6 +526,42 @@ const photoMetadataMap: Record<string, { location: string; people?: string[]; ta
         people: ["Kelly"],
         tags: ["kelly", "rock", "cliff", "outdoors", "scenic", "friend"],
         vibe: "scenic outdoor adventure portrait of Kelly standing on a rocky overlook"
+    },
+    "New Jersey Sunset Two Men": {
+        location: "New Jersey, USA",
+        people: ["Two Men"],
+        tags: ["sunset", "men", "silhouettes", "golden hour", "friends"],
+        vibe: "warm, companionable sunset silhouettes"
+    },
+    "Cold Springs Natalie Rocks": {
+        location: "Cold Spring, NY, USA",
+        people: ["Natalie"],
+        tags: ["natalie", "rocks", "nature", "outdoors", "portrait"],
+        vibe: "adventurous portrait among nature's rocks"
+    },
+    "Cold Springs Natalie Hands": {
+        location: "Cold Spring, NY, USA",
+        people: ["Natalie"],
+        tags: ["natalie", "hands", "detail", "candid", "portrait"],
+        vibe: "intimate, candid detail portrait"
+    },
+    "Cold Springs Natalie Mimosa": {
+        location: "Cold Spring, NY, USA",
+        people: ["Natalie"],
+        tags: ["natalie", "mimosa", "drinks", "brunch", "relaxed"],
+        vibe: "relaxed, joyful brunch moment"
+    },
+    "Cold Springs Natalie Campsite": {
+        location: "Cold Spring, NY, USA",
+        people: ["Natalie"],
+        tags: ["natalie", "campsite", "camping", "outdoors", "adventure"],
+        vibe: "cozy, adventurous camping portrait"
+    },
+    "New Jersey Sunset Two Lovers": {
+        location: "New Jersey, USA",
+        people: ["Two Lovers"],
+        tags: ["sunset", "lovers", "couple", "romantic", "golden hour"],
+        vibe: "romantic golden hour couple silhouette"
     }
 };
 
@@ -451,7 +652,13 @@ const locationMappings = [
     { prefix: "Vienna Sunset Crossing", location: "Vienna, Austria" },
     { prefix: "Vienna", location: "Vienna, Austria" },
     { prefix: "Amherst", location: "Amherst, MA, USA (UMass)" },
-    { prefix: "Oregon", location: "Oregon, USA" }
+    { prefix: "Oregon", location: "Oregon, USA" },
+    { prefix: "Cold Spring", location: "Cold Spring, NY, USA" },
+    { prefix: "Cold Springs", location: "Cold Spring, NY, USA" },
+    { prefix: "New Jersey", location: "New Jersey, USA" },
+    { prefix: "Pennsylvania", location: "Pennsylvania, USA" },
+    { prefix: "Manhattan", location: "Manhattan, NY, USA" },
+    { prefix: "Brooklyn", location: "Brooklyn, NY, USA" }
 ];
 
 // Dynamically import all images in the photography assets folder
