@@ -108,18 +108,18 @@ const Photography = () => {
 
       <div className="container mx-auto px-6 relative z-10 w-full">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-12">
-          
+
           <div className="flex items-center gap-3 bg-coral/20 px-5 py-2 rounded-lg border border-coral/10 inline-flex mb-6 mt-4">
-              <Camera className="text-coral" size={18} />
-              <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Film & Digital</h2>
+            <Camera className="text-coral" size={18} />
+            <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Mirrorless</h2>
           </div>
 
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-ink dark:text-white mb-4 tracking-tight">
-              Scrapbook of Moments
+            Scrapbook of Moments
           </h1>
 
           <p className="font-serif italic text-slate-500 text-lg mb-8 max-w-2xl">
-              Capturing moments in time on my Panasonic Lumix G7 and Fujifilm X-T30. Stories told through frames.
+            Capturing moments in time on my Panasonic Lumix G7 and Fujifilm X-T30III. Stories told through frames.
           </p>
 
           {/* Controls - Elegant Card Style */}
@@ -192,7 +192,7 @@ const Photography = () => {
                   />
                   {/* Film leak subtle light flare overlay */}
                   <div className="absolute inset-0 bg-coral/5 mix-blend-color-burn pointer-events-none"></div>
-                  
+
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                     <h3 className="text-lg font-bold font-serif text-white mb-1">{photo.title}</h3>
                     <p className="text-xs font-sans text-coral mb-0.5">{photo.location || photo.category}</p>
@@ -264,7 +264,7 @@ const Photography = () => {
                     className="max-w-full max-h-[70vh] object-contain shadow-md relative z-10"
                   />
                 </div>
-                
+
                 <div className="mt-6 text-center text-white">
                   <h3 className="font-serif text-2xl font-bold mb-1">{filteredPhotos[selectedPhotoIndex].title}</h3>
                   <p className="text-coral font-sans text-sm italic mb-1">{filteredPhotos[selectedPhotoIndex].location || filteredPhotos[selectedPhotoIndex].category}</p>

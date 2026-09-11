@@ -91,7 +91,7 @@ const Writing = () => {
     return (
         <div className="min-h-screen pt-28 pb-16 bg-transparent relative overflow-hidden">
             <div className="container mx-auto px-6 relative z-10 w-full">
-                
+
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -101,7 +101,7 @@ const Writing = () => {
                 >
                     <div className="flex items-center gap-3 bg-lavender/30 dark:bg-lavender/10 px-5 py-2 rounded-lg border border-lavender/20 inline-flex mb-6 mt-4">
                         <Feather className="text-ink dark:text-lavender" size={18} />
-                        <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Stories</h2>
+                        <h2 className="text-xl font-serif text-gray-900 dark:text-white font-semibold tracking-wide">Words</h2>
                     </div>
 
                     <h1 className="text-4xl md:text-5xl font-serif font-bold text-ink dark:text-white mb-4 tracking-tight">
@@ -154,81 +154,81 @@ const Writing = () => {
 
                 {/* Grid */}
                 {!isLoading && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredContent.map((item, index) => (
-                        <motion.div
-                            key={`${item.type}-${item.id}`}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
-                            className={`p-6 cursor-pointer group flex flex-col h-full transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 relative
-                                ${item.type === 'poem' 
-                                    ? 'card-notebook rotate-[-1deg] hover:rotate-0 bg-[#FFFDFB] dark:bg-[#201B24]' 
-                                    : 'card bg-white/70 dark:bg-[#1D1A22]/70'}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredContent.map((item, index) => (
+                            <motion.div
+                                key={`${item.type}-${item.id}`}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                                className={`p-6 cursor-pointer group flex flex-col h-full transform transition-all duration-300 hover:scale-105 hover:-translate-y-1 relative
+                                ${item.type === 'poem'
+                                        ? 'card-notebook rotate-[-1deg] hover:rotate-0 bg-[#FFFDFB] dark:bg-[#201B24]'
+                                        : 'card bg-white/70 dark:bg-[#1D1A22]/70'}
                             `}
-                            onClick={() => {
-                                if (item.type === 'substack' && item.url) {
-                                    window.open(item.url, '_blank', 'noopener,noreferrer');
-                                } else {
-                                    setSelectedPoem(item);
-                                }
-                            }}
-                        >
-                            {/* Tape accent for poem card */}
-                            {item.type === 'poem' && (
-                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-5 bg-pink/20 dark:bg-pink/10 backdrop-blur-[1px] rotate-[-2deg] border border-pink/10 shadow-sm z-20"></div>
-                            )}
-
-                            <div className="flex items-start justify-between mb-4 border-b border-black/5 dark:border-white/5 pb-2">
-                                <Feather
-                                    className={`h-5 w-5 ${item.type === 'poem'
-                                        ? 'text-lavender'
-                                        : 'text-coral'
-                                        }`}
-                                />
-
-                                {item.type === 'substack' && (
-                                    <ExternalLink
-                                        size={14}
-                                        className="text-slate-400 group-hover:text-coral transition-colors"
-                                    />
+                                onClick={() => {
+                                    if (item.type === 'substack' && item.url) {
+                                        window.open(item.url, '_blank', 'noopener,noreferrer');
+                                    } else {
+                                        setSelectedPoem(item);
+                                    }
+                                }}
+                            >
+                                {/* Tape accent for poem card */}
+                                {item.type === 'poem' && (
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-5 bg-pink/20 dark:bg-pink/10 backdrop-blur-[1px] rotate-[-2deg] border border-pink/10 shadow-sm z-20"></div>
                                 )}
-                            </div>
 
-                            <h3 className={`text-xl font-bold mb-3 tracking-tight group-hover:text-coral transition-colors ${item.type === 'poem' ? 'font-handwriting text-2xl text-gray-900 dark:text-slate-100 leading-tight' : 'font-serif text-gray-900 dark:text-white'}`}>
-                                {item.title}
-                            </h3>
+                                <div className="flex items-start justify-between mb-4 border-b border-black/5 dark:border-white/5 pb-2">
+                                    <Feather
+                                        className={`h-5 w-5 ${item.type === 'poem'
+                                            ? 'text-lavender'
+                                            : 'text-coral'
+                                            }`}
+                                    />
 
-                            <p className={`mb-6 flex-grow ${item.type === 'poem' ? 'font-handwriting text-slate-700 dark:text-slate-300 text-lg leading-relaxed' : 'text-slate-600 dark:text-slate-400 font-sans text-sm leading-relaxed'}`}>
-                                "{item.excerpt}"
-                            </p>
-
-                            {/* Metadata Row */}
-                            <div className="pt-4 border-t border-black/5 dark:border-white/5 flex items-center mt-auto justify-between">
-                                <div
-                                    className={`px-2 py-0.5 text-xs font-serif rounded-md ${item.type === 'poem'
-                                        ? 'bg-lavender/30 text-ink dark:text-lavender'
-                                        : 'bg-pink/30 text-ink dark:text-pink'
-                                        }`}
-                                >
-                                    {item.type === 'poem' ? 'Poem' : 'Substack'}
+                                    {item.type === 'substack' && (
+                                        <ExternalLink
+                                            size={14}
+                                            className="text-slate-400 group-hover:text-coral transition-colors"
+                                        />
+                                    )}
                                 </div>
 
-                                {item.date && (
-                                    <span className="text-xs font-sans text-slate-400 dark:text-slate-500">
-                                        {item.date}
-                                    </span>
-                                )}
-                            </div>
-                        </motion.div>
-                    ))}
+                                <h3 className={`text-xl font-bold mb-3 tracking-tight group-hover:text-coral transition-colors ${item.type === 'poem' ? 'font-handwriting text-2xl text-gray-900 dark:text-slate-100 leading-tight' : 'font-serif text-gray-900 dark:text-white'}`}>
+                                    {item.title}
+                                </h3>
 
-                    {filteredContent.length === 0 && (
-                        <div className="col-span-full text-center py-20 text-slate-500 font-serif italic">
-                            <p>No journal entries found matching that query.</p>
-                        </div>
-                    )}
-                </div>
+                                <p className={`mb-6 flex-grow ${item.type === 'poem' ? 'font-handwriting text-slate-700 dark:text-slate-300 text-lg leading-relaxed' : 'text-slate-600 dark:text-slate-400 font-sans text-sm leading-relaxed'}`}>
+                                    "{item.excerpt}"
+                                </p>
+
+                                {/* Metadata Row */}
+                                <div className="pt-4 border-t border-black/5 dark:border-white/5 flex items-center mt-auto justify-between">
+                                    <div
+                                        className={`px-2 py-0.5 text-xs font-serif rounded-md ${item.type === 'poem'
+                                            ? 'bg-lavender/30 text-ink dark:text-lavender'
+                                            : 'bg-pink/30 text-ink dark:text-pink'
+                                            }`}
+                                    >
+                                        {item.type === 'poem' ? 'Poem' : 'Substack'}
+                                    </div>
+
+                                    {item.date && (
+                                        <span className="text-xs font-sans text-slate-400 dark:text-slate-500">
+                                            {item.date}
+                                        </span>
+                                    )}
+                                </div>
+                            </motion.div>
+                        ))}
+
+                        {filteredContent.length === 0 && (
+                            <div className="col-span-full text-center py-20 text-slate-500 font-serif italic">
+                                <p>No journal entries found matching that query.</p>
+                            </div>
+                        )}
+                    </div>
                 )}
 
                 {/* Modal for Poem Reading */}
