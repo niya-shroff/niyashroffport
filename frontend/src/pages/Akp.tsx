@@ -195,13 +195,15 @@ export default function Akp() {
                 )}
               </AnimatePresence>
             </div>
-            <button
-              type="submit"
-              className="w-full opacity-0 h-0 overflow-hidden"
-              tabIndex={-1}
-            >
-              Submit
-            </button>
+            <div className="flex justify-center mt-6">
+              <button
+                type="submit"
+                className="w-full max-w-[200px] py-3 px-6 bg-red-600/10 hover:bg-red-600/20 text-red-500 border border-red-500/30 rounded-xl transition-all duration-300 font-serif tracking-[0.2em] flex items-center justify-center gap-3 group"
+              >
+                <span className="translate-x-2 group-hover:translate-x-0 transition-transform">ENTER</span>
+                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-all" />
+              </button>
+            </div>
           </form>
         </motion.div>
       </div>
