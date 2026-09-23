@@ -17,6 +17,7 @@ const Writing = lazy(() => import('./pages/Writing'));
 const Experience = lazy(() => import('./pages/Experience'));
 const Education = lazy(() => import('./pages/Education'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Akp = lazy(() => import('./pages/Akp'));
 
 
 function AnimatedRoutes() {
@@ -34,25 +35,34 @@ function AnimatedRoutes() {
         <Route path="/experience" element={<Experience />} />
         <Route path="/education" element={<Education />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/akp" element={<Akp />} />
       </Routes>
     </AnimatePresence>
   );
 }
 
 function App() {
+  const location = useLocation();
+  const isAkpRoute = location.pathname === '/akp';
+
   return (
     <div className="min-h-screen bg-background text-gray-900 dark:text-white flex flex-col font-sans selection:bg-primary selection:text-white transition-colors duration-300 relative overflow-hidden">
       
-      {/* Background Visualizations */}
-      <SmileyBackground />
-      <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-primary/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob"></div>
-        <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-accent-crimson/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-[-20%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-accent-emerald/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob" style={{ animationDelay: '4s' }}></div>
-      </div>
+      {/* Background Visualizations - Hide on AKP route */}
+      {!isAkpRoute && (
+        <>
+          <SmileyBackground />
+          <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
+            <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-primary/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob"></div>
+            <div className="absolute top-[20%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-accent-crimson/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob" style={{ animationDelay: '2s' }}></div>
+            <div className="absolute bottom-[-20%] left-[20%] w-[45vw] h-[45vw] rounded-full bg-accent-emerald/10 mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-50 animate-blob" style={{ animationDelay: '4s' }}></div>
+          </div>
+          <div className="film-grain z-0"></div>
+        </>
+      )}
 
-      <div className="film-grain z-0"></div>
-      <Header />
+      {!isAkpRoute && <Header />}
+      
       <main className="flex-grow relative">
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center bg-background">
@@ -62,8 +72,9 @@ function App() {
           <AnimatedRoutes />
         </Suspense>
       </main>
-      <Chatbot />
-      <Footer />
+
+      {!isAkpRoute && <Chatbot />}
+      {!isAkpRoute && <Footer />}
     </div>
   );
 }
