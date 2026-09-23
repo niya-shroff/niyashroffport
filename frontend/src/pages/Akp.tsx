@@ -91,18 +91,30 @@ const slides = [
   {
     type: 'closing',
     content: (
-      <div className="space-y-8 text-center mt-8">
-        <div className="space-y-2 text-2xl md:text-4xl font-serif italic text-red-600">
+      <div className="space-y-12 text-center mt-4">
+        
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8, rotate: -4 }}
+          animate={{ opacity: 1, scale: 1, rotate: 2 }}
+          transition={{ duration: 1.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-64 h-80 md:w-80 md:h-96 rounded-xl overflow-hidden shadow-2xl border-[6px] border-white/90 bg-white"
+        >
+          <img src="/akp.png" alt="Us in Paris" className="w-full h-full object-cover" />
+        </motion.div>
+
+        <div className="space-y-3 text-2xl md:text-4xl font-serif italic text-red-600 drop-shadow-lg">
           <p>I loved you then.</p>
           <p>I love you now.</p>
           <p>And if you let me love you again, I will love you better.</p>
         </div>
-        <div className="pt-12 text-xl font-medium tracking-wide">
+        
+        <div className="pt-6 text-xl font-medium tracking-wide">
           <p>Yours truly,</p>
-          <p className="font-serif text-3xl mt-4">Niya</p>
+          <p className="font-serif text-4xl mt-3 text-red-500">Niya</p>
         </div>
-        <div className="flex justify-center pt-8">
-          <Heart className="w-8 h-8 text-red-600 animate-pulse fill-red-600" />
+        
+        <div className="flex justify-center pt-2 pb-12">
+          <Heart className="w-10 h-10 text-red-600 animate-pulse fill-red-600 drop-shadow-xl" />
         </div>
       </div>
     )
