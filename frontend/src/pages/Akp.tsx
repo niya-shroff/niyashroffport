@@ -115,6 +115,10 @@ export default function Akp() {
   const [error, setError] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Touch tracking
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
   // You can change this password to whatever you'd like it to be.
   const CORRECT_PASSWORD = 'aly';
 
@@ -136,6 +140,29 @@ export default function Akp() {
 
   const prevSlide = () => {
     setCurrentSlide(prev => prev > 0 ? prev - 1 : prev);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
   };
 
   useEffect(() => {
@@ -214,7 +241,12 @@ export default function Akp() {
   const slide = slides[currentSlide];
 
   return (
-    <div className="min-h-screen bg-[#050505] text-gray-100 flex flex-col font-serif selection:bg-red-600/30 relative overflow-hidden">
+    <div 
+      className="min-h-screen bg-[#050505] text-gray-100 flex flex-col font-serif selection:bg-red-600/30 relative overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <SmileyBackground />
 
       {/* Progress indicator */}
